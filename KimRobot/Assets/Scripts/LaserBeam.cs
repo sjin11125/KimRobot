@@ -43,8 +43,6 @@ public class LaserBeam
 
         if(Physics.Raycast(ray, out hit, 30, 1))
         {
-            //CheckHit(hit, dir, laser);
-
             if (thisColor == "Green")
             {
                 CheckHit(hit, dir, laser);
@@ -76,7 +74,7 @@ public class LaserBeam
 
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
-        if(hitInfo.collider.gameObject.tag != null)
+        if(hitInfo.collider.gameObject.tag != "Gun")
         {
             Vector3 pos = hitInfo.point;
             Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
