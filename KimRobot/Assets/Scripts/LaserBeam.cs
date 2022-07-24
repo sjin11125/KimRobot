@@ -31,6 +31,11 @@ public class LaserBeam
             this.laser.startColor = Color.red;
             this.laser.endColor = Color.red;
         }
+        else if (thisColor == "Yellow")
+        {
+            this.laser.startColor = Color.yellow;
+            this.laser.endColor = Color.yellow;
+        }
         CastRay(pos,dir,laser);
     }
 
@@ -46,6 +51,14 @@ public class LaserBeam
             if (thisColor == "Green")
             {
                 CheckHit(hit, dir, laser);
+            }
+            else if (thisColor == "Red")
+            {
+                MonsterHit(hit);
+            }
+            else if (thisColor == "Yellow")
+            {
+                BoxHit(hit);
             }
             else
             {
@@ -72,19 +85,56 @@ public class LaserBeam
         }
     }
 
+    int count = 0;
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
         if(hitInfo.collider.gameObject.tag != "Gun")
         {
             Vector3 pos = hitInfo.point;
             Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
-
-            CastRay(pos, dir, laser);
+            count++;
+            if (count < 5)//다섯번 이상 반사되지 않는다
+            {
+                CastRay(pos, dir, laser);
+            }
+            else
+            {
+                laserIndices.Add(hitInfo.point);
+                UpdateLaser();
+            }
         }
         else
         {
             laserIndices.Add(hitInfo.point);
             UpdateLaser();
         }
+    }
+
+    void MonsterHit(RaycastHit hitInfo)
+    {
+        if (hitInfo.collider.gameObject.tag == "Monster")
+        {
+            //hitInfo.collider.gameObject.GetComponent<MonsterController>().Dance();
+        }
+        laserIndices.Add(hitInfo.point);
+        UpdateLaser();
+    }
+
+    void BoxHit(RaycastHit hitInfo)
+    {
+        if (hitInfo.collider.gameObject.tag == "Box")
+        {
+            /*
+            GameObject Box = hitInfo.collider.gameObject;
+            if (ShootLaser.offset == Vector3.zero)
+            {              
+                ShootLaser.offset = Box.transform.position - GameObject.FindWithTag("Gun").transform.position;
+            }
+            Box.transform.position = GameObject.FindWithTag("Gun").transform.position + ShootLaser.offset;
+            */
+            hitInfo.collider.gameObject.GetComponent<BoxMovement>().enabled = true;
+        }
+        laserIndices.Add(hitInfo.point);
+        UpdateLaser();
     }
 }

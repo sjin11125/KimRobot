@@ -7,11 +7,13 @@ public class ShootLaser : MonoBehaviour
     public Material material;
     public string LaserColor;
     LaserBeam beam;
+    //public static int ycount = 0;
+   // public static Vector3 offset = Vector3.zero;
 
     void Update()
     {
         Destroy(GameObject.Find("Laser Beam"));
-       // if(LaserPointer.ActiveSelf)
+       
         beam = new LaserBeam(gameObject.transform.position, gameObject.transform.right, material, LaserColor);
     }
 }
