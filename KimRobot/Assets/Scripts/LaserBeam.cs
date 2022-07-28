@@ -54,7 +54,7 @@ public class LaserBeam
             }
             else if (thisColor == "Red")
             {
-                MonsterHit(hit);
+                CheckHit(hit, dir, laser);
             }
             else if (thisColor == "Yellow")
             {
@@ -88,7 +88,7 @@ public class LaserBeam
     int count = 0;
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
-        if(hitInfo.collider.gameObject.tag != "Gun")
+        if(hitInfo.collider.gameObject.tag == "Wall" || hitInfo.collider.gameObject.tag == "Box")
         {
             Vector3 pos = hitInfo.point;
             Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
@@ -110,29 +110,11 @@ public class LaserBeam
         }
     }
 
-    void MonsterHit(RaycastHit hitInfo)
-    {
-        if (hitInfo.collider.gameObject.tag == "Monster")
-        {
-            //hitInfo.collider.gameObject.GetComponent<MonsterController>().Dance();
-        }
-        laserIndices.Add(hitInfo.point);
-        UpdateLaser();
-    }
-
     void BoxHit(RaycastHit hitInfo)
     {
         if (hitInfo.collider.gameObject.tag == "Box")
         {
-            /*
-            GameObject Box = hitInfo.collider.gameObject;
-            if (ShootLaser.offset == Vector3.zero)
-            {              
-                ShootLaser.offset = Box.transform.position - GameObject.FindWithTag("Gun").transform.position;
-            }
-            Box.transform.position = GameObject.FindWithTag("Gun").transform.position + ShootLaser.offset;
-            */
-            hitInfo.collider.gameObject.GetComponent<BoxMovement>().enabled = true;
+            hitInfo.collider.transform.parent = GameObject.FindWithTag("Pivot").transform;
         }
         laserIndices.Add(hitInfo.point);
         UpdateLaser();
