@@ -88,7 +88,7 @@ public class LaserBeam
     int count = 0;
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
-        if(hitInfo.collider.gameObject.tag == "Wall" || hitInfo.collider.gameObject.tag == "Box")
+        if(hitInfo.collider.gameObject.tag == "Wall")
         {
             Vector3 pos = hitInfo.point;
             Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
@@ -103,6 +103,34 @@ public class LaserBeam
                 UpdateLaser();
             }
         }
+        else if (hitInfo.collider.gameObject.tag == "Cube")
+        {
+            Vector3 pos = hitInfo.point;
+            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
+            count++;
+
+            hitInfo.collider.GetComponent<BoxCollider>().enabled = false;
+            for (int i = 0; i < hitInfo.transform.childCount; i++)
+            {
+                hitInfo.collider.transform.GetChild(i).GetComponent<BoxCollider>().enabled = true;
+            }
+        }
+        else if (hitInfo.collider.gameObject.name == thisColor)
+        {
+            Vector3 pos = hitInfo.point;
+            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
+            count++;
+            if (count < 5)//다섯번 이상 반사되지 않는다
+            {
+                CastRay(pos, dir, laser);
+            }
+            else
+            {
+                laserIndices.Add(hitInfo.point);
+                UpdateLaser();
+            }
+        }
+
         else
         {
             laserIndices.Add(hitInfo.point);
@@ -112,7 +140,7 @@ public class LaserBeam
 
     void BoxHit(RaycastHit hitInfo)
     {
-        if (hitInfo.collider.gameObject.tag == "Box")
+        if (hitInfo.collider.gameObject.tag == "Cube")
         {
             hitInfo.collider.transform.parent = GameObject.FindWithTag("Pivot").transform;
         }

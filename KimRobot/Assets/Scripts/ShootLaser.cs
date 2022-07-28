@@ -8,6 +8,7 @@ public class ShootLaser : MonoBehaviour
     string LaserColor;
     LaserBeam beam;
 
+    GameObject Cube;
     public GameObject pivot;
     GameObject Red;
     GameObject Green;
@@ -16,6 +17,7 @@ public class ShootLaser : MonoBehaviour
     {
         Red = transform.GetChild(0).gameObject;
         Green = transform.GetChild(1).gameObject;
+        Cube = GameObject.FindWithTag("Cube");
     }
 
     void Update()
@@ -27,6 +29,12 @@ public class ShootLaser : MonoBehaviour
             if(pivot.transform.childCount > 0)
             {
                 pivot.transform.GetChild(0).transform.parent = null;
+            }
+
+            Cube.GetComponent<BoxCollider>().enabled = true;
+            for (int i = 0; i < Cube.transform.childCount; i++)
+            {
+                Cube.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
             }
         }
 

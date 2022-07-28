@@ -5,9 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gun
-  - Box
   - Wall
   - Pivot
+  - Cube
   layers:
   - Default
   - TransparentFX
