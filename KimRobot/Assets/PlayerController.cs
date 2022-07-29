@@ -7,6 +7,9 @@ public class PlayerController : MonoBehaviour
     Transform Tr;
     public int Speed = 3;
     public Camera camera;
+
+    float dirX = 0;
+    float dirZ = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,39 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerMove()
     {
-        
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     //
+        {
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+
+            var absX = Mathf.Abs(pos.x);
+            var absY = Mathf.Abs(pos.y);
+
+            if (absX>absY)
+            {
+                if (pos.x>0)            //오른쪽 이동
+                {
+                    dirX = +1;
+                }
+                else                //왼쪽 이동
+                {
+                    dirX = -1;
+                }
+            }
+            else
+            {
+                if (pos.y>0)            //위로 이동
+                {
+                    dirZ = +1;
+                }
+                else                            //아래로 이동
+                {
+                    dirZ = -1;
+                }
+            }
+        }
+       Vector3 moveDir = new Vector3(dirX * Speed, 0, dirZ * Speed);
+        transform.Translate(moveDir*Time.smoothDeltaTime);
+
     }
     public void PlayerMove_Keyboard()
     {
