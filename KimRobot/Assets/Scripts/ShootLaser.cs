@@ -13,6 +13,8 @@ public class ShootLaser : MonoBehaviour
     GameObject Red;
     GameObject Green;
 
+    public GameObject GunPivot;
+
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
@@ -23,7 +25,7 @@ public class ShootLaser : MonoBehaviour
     void Update()
     {
         Destroy(GameObject.Find("Laser Beam"));
-
+      
         if (Input.GetMouseButtonUp(0))
         {
             if(pivot.transform.childCount > 0)
@@ -42,19 +44,19 @@ public class ShootLaser : MonoBehaviour
         {
             if (Red.activeSelf && Green.activeSelf)
             {
-                pivot.transform.position = this.transform.position;
+                pivot.transform.position = GunPivot.transform.position;
                 pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(gameObject.transform.position, gameObject.transform.forward, material, "Yellow");
+                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
             }
             else
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(gameObject.transform.position, gameObject.transform.forward, material, "Red");
+                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Red");
                 }
                 else if (Green.activeSelf)
                 {
-                    beam = new LaserBeam(gameObject.transform.position, gameObject.transform.forward, material, "Green");
+                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Green");
                 }
             }
         }
