@@ -22,13 +22,6 @@ public class PlayerController : MonoBehaviour
         //PlayerMove();                   //플레이어 이동(컨트롤러)
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
     }
-    public void LaserGun()
-    {
-        if (Input.GetMouseButton(0))
-        {
-
-        }
-    }
     public void PlayerMove()
     {
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     //
@@ -67,8 +60,19 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerMove_Keyboard()
     {
-        transform.Rotate(0f, -Input.GetAxis("Mouse X") * Speed, 0f);
-
+        Vector3 Angle = transform.eulerAngles;
+        Angle.y+= -Input.GetAxis("Mouse X") * 5;
+        Angle.x+= Input.GetAxis("Mouse Y") * 5;
+        Angle.x = (Angle.x <0) ? Angle.x + 360 : Angle.x;
+        Angle.x = (Angle.x <1) ? Angle.x - 360 : Angle.x;
+        Angle.x = Mathf.Clamp(Angle.x,-50f,50f);
+        transform.rotation = Quaternion.Euler(Angle);
+       // float y=0;
+        //y += Input.GetAxis("Mouse Y") * 5;
+       // y = Mathf.Clamp(y, -100f, 100f);
+        //transform.Rotate(Mathf.Clamp(-Input.GetAxis("Mouse Y"), -55f, 55f), Input.GetAxis("Mouse X") * Speed, 0f);
+        //transform.eulerAngles = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X") * Speed, 0f);
+       // transform.rotation=Vector3(-y, Input.GetAxis("Mouse X") * Speed, 0f);
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
