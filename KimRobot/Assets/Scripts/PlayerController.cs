@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     Transform Tr;
     public int Speed = 3;
-    public Camera camera;
+    public int JumpForce = 150;
 
     float dirX = 0;
     float dirZ = 0;
@@ -19,8 +19,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();                   //플레이어 이동(컨트롤러)
+        //PlayerMove();                   //플레이어 이동(컨트롤러)
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+    }
+    public void LaserGun()
+    {
+        if (Input.GetMouseButton(0))
+        {
+
+        }
     }
     public void PlayerMove()
     {
@@ -60,6 +67,8 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerMove_Keyboard()
     {
+        transform.Rotate(0f, -Input.GetAxis("Mouse X") * Speed, 0f);
+
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
@@ -75,6 +84,10 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.D))        //오른쪽이동
         {
             Tr.Translate(Vector3.right * Time.smoothDeltaTime * Speed);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))        //점프
+        {
+            Tr.Translate(Vector3.up* Time.smoothDeltaTime * JumpForce);
         }
     }
 }
