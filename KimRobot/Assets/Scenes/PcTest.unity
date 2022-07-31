@@ -400,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853116851}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.569, z: -0.164}
+  m_LocalPosition: {x: -0.051, y: 1.569, z: -0.164}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3756727897651931238}
@@ -4608,8 +4608,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3756727897651931232}
   m_Enabled: 0
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3443a9693cfcd8a4fbd4cbbee065454d, type: 3}
+  m_Controller: {fileID: 9100000, guid: f6af587a95e6a6c49a27f85438534e95, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4625,7 +4625,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3756727897651931232}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -4727,7 +4727,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   JumpForce: 150
-  camera: {fileID: 0}
 --- !u!54 &3756727897651931236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4742,7 +4741,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 14
   m_CollisionDetection: 0
 --- !u!136 &3756727897651931237
 CapsuleCollider:
