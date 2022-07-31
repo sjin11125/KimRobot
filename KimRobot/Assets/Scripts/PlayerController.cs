@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         Vector3 Angle = transform.eulerAngles;
         Angle.y+= -Input.GetAxis("Mouse X") * 5;
         Angle.x+= Input.GetAxis("Mouse Y") * 5;
-        Angle.x = (Angle.x <0) ? Angle.x + 360 : Angle.x;
+        //Angle.x = (Angle.x <0) ? Angle.x + 360 : Angle.x;
         Angle.x = (Angle.x <1) ? Angle.x - 360 : Angle.x;
         Angle.x = Mathf.Clamp(Angle.x,-50f,50f);
         transform.rotation = Quaternion.Euler(Angle);
