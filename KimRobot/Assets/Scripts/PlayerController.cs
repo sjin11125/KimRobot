@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private float xRotate, yRotate, xRotateMove, yRotateMove;
     public float rotateSpeed = 500.0f;
 
+    bool isJump = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //ÇÃ·¹ÀÌ¾î ÀÌµ¿(ÄÁÆ®·Ñ·¯)
-        PlayerMove_Keyboard();          //ÇÃ·¹ÀÌ¾î ÀÌµ¿(Å°º¸µå·Î)
+        //PlayerMove();                   //í”Œë ˆì´ì–´ ì´ë™(ì»¨íŠ¸ë¡¤ëŸ¬)
+        PlayerMove_Keyboard();          //í”Œë ˆì´ì–´ ì´ë™(í‚¤ë³´ë“œë¡œ)
+
+        
     }
     public void PlayerMove()
     {
@@ -39,22 +43,22 @@ public class PlayerController : MonoBehaviour
 
             if (absX>absY)
             {
-                if (pos.x>0)            //¿À¸¥ÂÊ ÀÌµ¿
+                if (pos.x>0)            //ì˜¤ë¥¸ìª½ ì´ë™
                 {
                     dirX = +1;
                 }
-                else                //¿ŞÂÊ ÀÌµ¿
+                else                //ì™¼ìª½ ì´ë™
                 {
                     dirX = -1;
                 }
             }
             else
             {
-                if (pos.y>0)            //À§·Î ÀÌµ¿
+                if (pos.y>0)            //ìœ„ë¡œ ì´ë™
                 {
                     dirZ = +1;
                 }
-                else                            //¾Æ·¡·Î ÀÌµ¿
+                else                            //ì•„ë˜ë¡œ ì´ë™
                 {
                     dirZ = -1;
                 }
@@ -74,28 +78,41 @@ public class PlayerController : MonoBehaviour
         //xRotate = transform.eulerAngles.x + xRotateMove; 
         xRotate = xRotate + xRotateMove;
 
-        xRotate = Mathf.Clamp(xRotate, -55, 55); // À§, ¾Æ·¡ °íÁ¤
+        xRotate = Mathf.Clamp(xRotate, -40, 40); // ìœ„, ì•„ë˜ ê³ ì •
 
         transform.localEulerAngles = new Vector3(xRotate, yRotate, 0);
-        if (Input.GetKey(KeyCode.A))        //¿ŞÂÊÀÌµ¿
+        if (Input.GetKey(KeyCode.A))        //ì™¼ìª½ì´ë™
         {
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
+           
         }
-        if (Input.GetKey(KeyCode.W))        //¾ÕÀ¸·Î ÀÌµ¿
+        if (Input.GetKey(KeyCode.W))        //ì•ìœ¼ë¡œ ì´ë™
         {
             Tr.Translate(Vector3.forward * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKey(KeyCode.S))        //µÚ·ÎÀÌµ¿
+        if (Input.GetKey(KeyCode.S))        //ë’¤ë¡œì´ë™
         {
             Tr.Translate(Vector3.back * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKey(KeyCode.D))        //¿À¸¥ÂÊÀÌµ¿
+        if (Input.GetKey(KeyCode.D))        //ì˜¤ë¥¸ìª½ì´ë™
         {
             Tr.Translate(Vector3.right * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKeyDown(KeyCode.Space))        //Á¡ÇÁ
+        if (Input.GetKeyDown(KeyCode.Space)&&isJump==false)        //ì í”„
         {
-            Tr.Translate(Vector3.up* Time.smoothDeltaTime * JumpForce);
+            isJump = true;
+            Rigidbody rigi=transform.GetComponent<Rigidbody>();
+            rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {        //ë°”ë‹¥ì—Â ë‹¿ìœ¼ë©´Â Â Â Â Â Â Â Â 
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            isJump=false;
+
+        }
+    }
+       
 }
