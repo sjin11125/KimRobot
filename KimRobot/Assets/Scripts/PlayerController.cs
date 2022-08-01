@@ -10,6 +10,12 @@ public class PlayerController : MonoBehaviour
 
     float dirX = 0;
     float dirZ = 0;
+
+    float z = 0;
+
+    private float xRotate, yRotate, xRotateMove, yRotateMove;
+    public float rotateSpeed = 500.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,19 +66,17 @@ public class PlayerController : MonoBehaviour
     }
     public void PlayerMove_Keyboard()
     {
-        Vector3 Angle = transform.eulerAngles;
-        Angle.y+= -Input.GetAxis("Mouse X") * 5;
-        Angle.x+= Input.GetAxis("Mouse Y") * 5;
-        Angle.x = (Angle.x <0) ? Angle.x + 360 : Angle.x;
-        Angle.x = (Angle.x <1) ? Angle.x - 360 : Angle.x;
-        Angle.x = Mathf.Clamp(Angle.x,-50f,50f);
-        transform.rotation = Quaternion.Euler(Angle);
-       // float y=0;
-        //y += Input.GetAxis("Mouse Y") * 5;
-       // y = Mathf.Clamp(y, -100f, 100f);
-        //transform.Rotate(Mathf.Clamp(-Input.GetAxis("Mouse Y"), -55f, 55f), Input.GetAxis("Mouse X") * Speed, 0f);
-        //transform.eulerAngles = new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X") * Speed, 0f);
-       // transform.rotation=Vector3(-y, Input.GetAxis("Mouse X") * Speed, 0f);
+
+        xRotateMove = -Input.GetAxis("Mouse Y") * Time.deltaTime * rotateSpeed;
+        yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
+
+        yRotate = transform.eulerAngles.y + yRotateMove;
+        //xRotate = transform.eulerAngles.x + xRotateMove; 
+        xRotate = xRotate + xRotateMove;
+
+        xRotate = Mathf.Clamp(xRotate, -55, 55); // 위, 아래 고정
+
+        transform.localEulerAngles = new Vector3(xRotate, yRotate, 0);
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
