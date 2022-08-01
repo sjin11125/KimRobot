@@ -103,6 +103,22 @@ public class LaserBeam
                 UpdateLaser();
             }
         }
+        else if (hitInfo.collider.gameObject.tag == "Letter")
+        {
+            Vector3 pos = hitInfo.point;
+            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
+            hitInfo.collider.gameObject.GetComponent<Item>().TouchingBox();
+            count++;
+            if (count < 5)//다섯번 이상 반사되지 않는다
+            {
+                CastRay(pos, dir, laser);
+            }
+            else
+            {
+                laserIndices.Add(hitInfo.point);
+                UpdateLaser();
+            }
+        }
         else if (hitInfo.collider.gameObject.tag == "Cube")
         {
             Vector3 pos = hitInfo.point;
@@ -130,7 +146,6 @@ public class LaserBeam
                 UpdateLaser();
             }
         }
-
         else
         {
             laserIndices.Add(hitInfo.point);

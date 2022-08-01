@@ -61,7 +61,7 @@ public class ShootLaser : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown("z"))
         {
             if(Red.activeSelf)
             {
@@ -73,7 +73,7 @@ public class ShootLaser : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown("x"))
         {
             if (Green.activeSelf)
             {
@@ -84,7 +84,7 @@ public class ShootLaser : MonoBehaviour
                 Green.SetActive(true);
             }
         }
-        RotateGun();
+        //RotateGun();
     }
 
     void RotateGun()
