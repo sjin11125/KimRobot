@@ -9,6 +9,7 @@ TagManager:
   - Cube
   - Letter
   - Clue
+  - R_Hand
   layers:
   - Default
   - TransparentFX

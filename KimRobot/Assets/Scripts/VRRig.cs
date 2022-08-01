@@ -26,9 +26,14 @@ public class VRRig : MonoBehaviour
     public Transform headConstraint;
     public Vector3 headBodyOffset;
 
+    PlayerController playerController;
+    Animator animator;
+
     private void Start()
     {
         headBodyOffset = transform.position - headConstraint.position;
+        playerController = transform.parent.GetComponent<PlayerController>();
+        animator = GetComponent<Animator>();
     }
 
     private void LateUpdate()
@@ -39,5 +44,10 @@ public class VRRig : MonoBehaviour
         head.Map();
         leftHand.Map();
         rightHand.Map();
+
+        if (playerController.isWalk)                    //°È°íÀÖ³Ä
+        {
+            animator.SetBool("isWalk",true);
+        }
     }
 }
