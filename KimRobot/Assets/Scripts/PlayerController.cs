@@ -18,19 +18,56 @@ public class PlayerController : MonoBehaviour
 
     bool isJump = false;
 
+    public Camera Camera;
+    RaycastHit hit=new RaycastHit();
+    Ray ray;
+    private Vector3 ScreenCenter;
+    public GameObject rayEnd;
     // Start is called before the first frame update
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
+        ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
+
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
         //PlayerMove();                   //플레이어 이동(컨트롤러)
+
+        //---------------PC버전---------------------------------
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+        Grab();                         //우클릭 잡기
+
+        ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
+        //hit=;
+        
 
         
+    }
+    public void Grab()
+    {
+        if (Input.GetMouseButton(1))            //우클릭 잡기
+        {
+            
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.DrawLine(hit.point,hit.normal, Color.green);
+                Debug.Log("충돌함");
+                if (hit.transform.tag == "Clue")
+                {
+                    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
+                }
+            }
+        }
+        if (Input.GetMouseButtonUp(1))
+        {
+            Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
+
+        }
     }
     public void PlayerMove()
     {
@@ -75,7 +112,6 @@ public class PlayerController : MonoBehaviour
         yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
 
         yRotate = transform.eulerAngles.y + yRotateMove;
-        //xRotate = transform.eulerAngles.x + xRotateMove; 
         xRotate = xRotate + xRotateMove;
 
         xRotate = Mathf.Clamp(xRotate, -40, 40); // 위, 아래 고정

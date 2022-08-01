@@ -8,6 +8,7 @@ TagManager:
   - Pivot
   - Cube
   - Letter
+  - Clue
   layers:
   - Default
   - TransparentFX
