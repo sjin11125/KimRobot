@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
     {
         if(movePos == MovePos.z)
         {
-            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 4);
+            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.5f);
             transform.localPosition = pos;
             gameObject.GetComponent<Renderer>().material = blue;
         }
@@ -29,7 +29,7 @@ public class Item : MonoBehaviour
     {
         if (movePos == MovePos.z)
         {
-            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
             transform.localPosition = pos;
             gameObject.GetComponent<Renderer>().material = material;
         }

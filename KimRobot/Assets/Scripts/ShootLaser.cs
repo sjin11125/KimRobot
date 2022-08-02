@@ -52,35 +52,35 @@ public class ShootLaser : MonoBehaviour
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Red");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
                 }
                 else if (Green.activeSelf)
                 {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Green");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
                 }
             }
         }
         //------------------¿ÀÅ§¿ë----------------------
-      /*  if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
-        {
-            if (Red.activeSelf && Green.activeSelf)
-            {
-                pivot.transform.position = GunPivot.transform.position;
-                pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
-            }
-            else
-            {
-                if (Red.activeSelf)
-                {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Red");
-                }
-                else if (Green.activeSelf)
-                {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Green");
-                }
-            }
-        }*/
+        /*  if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
+          {
+              if (Red.activeSelf && Green.activeSelf)
+              {
+                  pivot.transform.position = GunPivot.transform.position;
+                  pivot.transform.rotation = this.transform.rotation;
+                  beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
+              }
+              else
+              {
+                  if (Red.activeSelf)
+                  {
+                      beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
+                  }
+                  else if (Green.activeSelf)
+                  {
+                      beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
+                  }
+              }
+          }*/
 
 
 
