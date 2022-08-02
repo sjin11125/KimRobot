@@ -8,6 +8,10 @@ TagManager:
   - Pivot
   - Cube
   - Letter
+  - Clue
+  - R_Hand
+  - Gun
+  - Cylinder
   layers:
   - Default
   - TransparentFX
