@@ -136,7 +136,7 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = new Vector3(dirX * Speed, 0, dirZ * Speed);
             transform.Translate(moveDir * Time.smoothDeltaTime);
         }
-        else
+        if (OVRInput.GetUp(OVRInput.Touch.PrimaryThumbstick))               //이동 멈춤
         {
             isWalk = false;
         }
@@ -200,6 +200,11 @@ public class PlayerController : MonoBehaviour
             isJump = true;
             Rigidbody rigi=transform.GetComponent<Rigidbody>();
             rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyUp(KeyCode.A)|| Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.S)|| Input.GetKeyUp(KeyCode.D))
+        {
+            isWalk = false;
         }
     }
 
