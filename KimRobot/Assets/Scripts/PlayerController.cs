@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public bool isGun = false;      //총을 쥐었는가?
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
-
+    List<string> Inventory = new List<string>(); 
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
