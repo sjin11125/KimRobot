@@ -13,7 +13,13 @@ public class VRMap
     public void Map()
     {
         rigTarget.position = vrTarget.TransformPoint(trackingPositionOffset);
+
+        
         rigTarget.rotation = vrTarget.rotation * Quaternion.Euler(trackingRotationOffset);
+    }
+    public void PrintPosition()
+    {
+        Debug.Log("오른손 위치: " + rigTarget.rotation);
     }
 }
 
@@ -44,10 +50,14 @@ public class VRRig : MonoBehaviour
         head.Map();
         leftHand.Map();
         rightHand.Map();
-
+       // rightHand.PrintPosition();
         if (playerController.isWalk)                    //걷고있냐
         {
-            animator.SetBool("isWalk",true);
+            animator.SetBool("IsWalk",true);
+        }
+        else
+        {
+            animator.SetBool("IsWalk", false);
         }
     }
 }

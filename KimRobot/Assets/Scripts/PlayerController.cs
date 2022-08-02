@@ -26,7 +26,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody rigi;
 
     public bool isWalk = false;
-    // Start is called before the first frame update
+    public bool isGun = false;      //총을 쥐었는가?
+    public GameObject Hand;         //손 오브젝트
+    public Transform Gun;
+
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
@@ -53,6 +56,8 @@ public class PlayerController : MonoBehaviour
     }
     public void Grab()
     {
+        Debug.DrawLine(ray.origin, ray.GetPoint(10f), Color.green);
+        
         if (Input.GetMouseButton(1))            //우클릭 잡기
         {
             
@@ -71,7 +76,21 @@ public class PlayerController : MonoBehaviour
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
 
         }
-    }
+        if (Input.GetMouseButtonDown(0)&&isGun==false)              //총을 아직 획득 안했을 때
+        {
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.DrawLine(hit.point, hit.normal, Color.green);
+                if (hit.transform.tag == "Gun")                 //총을 집으면
+                {
+                    Debug.Log("총집음");
+                    isGun = true;
+                    //hit.transform.localPosition = new Vector3(0, 0, 0);
+                    Gun.transform.gameObject.SetActive(true);
+                }
+            }
+        }
+        }
     public void PlayerMove()
     {
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
@@ -108,6 +127,10 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = new Vector3(dirX * Speed, 0, dirZ * Speed);
             transform.Translate(moveDir * Time.smoothDeltaTime);
         }
+        else
+        {
+            isWalk = false;
+        }
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))                   //점프
         {
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
@@ -140,7 +163,7 @@ public class PlayerController : MonoBehaviour
         yRotate = transform.eulerAngles.y + yRotateMove;
         xRotate = xRotate + xRotateMove;
 
-        xRotate = Mathf.Clamp(xRotate, -40, 40); // 위, 아래 고정
+        xRotate = Mathf.Clamp(xRotate, -50, 50); // 위, 아래 고정
 
         transform.localEulerAngles = new Vector3(xRotate, yRotate, 0);
         if (Input.GetKey(KeyCode.A))        //왼쪽이동

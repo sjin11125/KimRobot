@@ -10,6 +10,7 @@ TagManager:
   - Letter
   - Clue
   - R_Hand
+  - Gun
   layers:
   - Default
   - TransparentFX

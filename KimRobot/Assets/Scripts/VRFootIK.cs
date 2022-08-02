@@ -26,11 +26,15 @@ public class VRFootIK : MonoBehaviour
         RaycastHit hit;
 
         bool hasHit = Physics.Raycast(rightFootPos+Vector3.up,Vector3.down,out hit);
-        if (hasHit)
+
+        Debug.DrawLine(hit.normal, hit.normal* 10, Color.red);
+       
+            if (hasHit&&hit.transform.gameObject.name!= "OVRCameraRig")
         {
             animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, rightFootPosWeight);
             animator.SetIKPosition(AvatarIKGoal.RightFoot, hit.point+footOffset);
 
+            Debug.Log("hit: "+hit.transform.gameObject.name);
             Quaternion rightFootRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), hit.normal);
             animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, rightFootRotWeight);
             animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootRotation);
@@ -43,7 +47,8 @@ public class VRFootIK : MonoBehaviour
         Vector3 leftFootPos = animator.GetIKPosition(AvatarIKGoal.LeftFoot);
 
         hasHit = Physics.Raycast(leftFootPos + Vector3.up, Vector3.down, out hit);
-        if (hasHit)
+     
+        if (hasHit && hit.transform.gameObject.name != "OVRCameraRig")
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, leftFootPosWeight);
             animator.SetIKPosition(AvatarIKGoal.LeftFoot, hit.point+footOffset);
