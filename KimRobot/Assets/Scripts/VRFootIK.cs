@@ -34,7 +34,6 @@ public class VRFootIK : MonoBehaviour
             animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, rightFootPosWeight);
             animator.SetIKPosition(AvatarIKGoal.RightFoot, hit.point+footOffset);
 
-            Debug.Log("hit: "+hit.transform.gameObject.name);
             Quaternion rightFootRotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(transform.forward, hit.normal), hit.normal);
             animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, rightFootRotWeight);
             animator.SetIKRotation(AvatarIKGoal.RightFoot, rightFootRotation);

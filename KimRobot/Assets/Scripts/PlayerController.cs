@@ -54,7 +54,16 @@ public class PlayerController : MonoBehaviour
 
         
     }
-    public void Grab()
+    void OnCollisionEnter(Collision collision)
+    {
+       
+        if (collision.gameObject.CompareTag("Wall"))
+        {
+            isJump = false;
+
+        }
+    }
+        public void Grab()
     {
         Debug.DrawLine(ray.origin, ray.GetPoint(10f), Color.green);
         
@@ -194,13 +203,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {        //바닥에 닿으면        
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            isJump=false;
 
-        }
-    }
        
 }
