@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isWalk = false;
     public bool isGun = false;      //총을 쥐었는가?
+    public bool[] Prism =new bool[3] {false,false,false};               //프리즘 (R,G,Y)
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
     List<string> Inventory = new List<string>(); 
@@ -166,15 +167,7 @@ public class PlayerController : MonoBehaviour
     public void PlayerMove_Keyboard()
     {
 
-        xRotateMove = -Input.GetAxis("Mouse Y") * Time.deltaTime * rotateSpeed;
-        yRotateMove = Input.GetAxis("Mouse X") * Time.deltaTime * rotateSpeed;
-
-        yRotate = transform.eulerAngles.y + yRotateMove;
-        xRotate = xRotate + xRotateMove;
-
-        xRotate = Mathf.Clamp(xRotate, -50, 50); // 위, 아래 고정
-
-        transform.localEulerAngles = new Vector3(xRotate, yRotate, 0);
+        
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);

@@ -12,6 +12,9 @@ TagManager:
   - R_Hand
   - Gun
   - Cylinder
+  - L_Hand
+  - RedPrism
+  - BluePrism
   layers:
   - Default
   - TransparentFX
