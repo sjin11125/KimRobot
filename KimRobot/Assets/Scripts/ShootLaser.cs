@@ -141,7 +141,7 @@ public class ShootLaser : MonoBehaviour
         //RotateGun();
     }
 
-    void RotateGun()
+   /* void RotateGun()
     {
         Vector3 pos = Input.mousePosition;
 
@@ -152,5 +152,5 @@ public class ShootLaser : MonoBehaviour
         Vector3 view = Camera.main.ScreenToViewportPoint(pos);
 
         transform.LookAt(view);
-    }
+    }*/
 }

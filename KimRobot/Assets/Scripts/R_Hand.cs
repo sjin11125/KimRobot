@@ -57,6 +57,12 @@ public class R_Hand : MonoBehaviour
         {
             other.transform.GetComponent<Break>().isBreak = true;
         }
+        if (other.transform.tag == "Photo1"||
+            other.transform.tag == "Photo2"|| 
+            other.transform.tag == "Photo3")
+        {
+            other.transform.GetComponent<Screen>().OpenDoor();          //¹®¿­¾î
+        }
        
         
     }
