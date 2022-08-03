@@ -15,6 +15,9 @@ TagManager:
   - L_Hand
   - RedPrism
   - BluePrism
+  - Photo1
+  - Photo2
+  - Photo3
   layers:
   - Default
   - TransparentFX

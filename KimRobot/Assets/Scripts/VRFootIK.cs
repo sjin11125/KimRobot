@@ -29,7 +29,7 @@ public class VRFootIK : MonoBehaviour
 
         Debug.DrawLine(hit.normal, hit.normal* 10, Color.red);
        
-            if (hasHit&&hit.transform.gameObject.name!= "OVRCameraRig")
+            if (hasHit&&hit.transform.gameObject.name!= "Gun")
         {
             animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, rightFootPosWeight);
             animator.SetIKPosition(AvatarIKGoal.RightFoot, hit.point+footOffset);
@@ -47,7 +47,7 @@ public class VRFootIK : MonoBehaviour
 
         hasHit = Physics.Raycast(leftFootPos + Vector3.up, Vector3.down, out hit);
      
-        if (hasHit && hit.transform.gameObject.name != "OVRCameraRig")
+        if (hasHit && hit.transform.gameObject.name != "Gun")
         {
             animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, leftFootPosWeight);
             animator.SetIKPosition(AvatarIKGoal.LeftFoot, hit.point+footOffset);
