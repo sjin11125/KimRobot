@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
     public bool[] Prism =new bool[3] {false,false,false};               //프리즘 (R,G,Y)
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
+
+    public AudioSource walkAudio;
     List<string> Inventory = new List<string>(); 
     void Start()
     {
@@ -51,7 +53,15 @@ public class PlayerController : MonoBehaviour
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
         //hit=;
-        
+        if (isWalk)
+        {
+            walkAudio.Play();
+         
+        }
+        else
+        {
+            walkAudio.Pause();
+        }
 
         
     }
