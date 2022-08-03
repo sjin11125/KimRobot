@@ -52,16 +52,39 @@ public class ShootLaser : MonoBehaviour
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Red");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
                 }
                 else if (Green.activeSelf)
                 {
-                    beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Green");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
                 }
             }
         }
+        //------------------¿ÀÅ§¿ë----------------------
+        /*  if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
+          {
+              if (Red.activeSelf && Green.activeSelf)
+              {
+                  pivot.transform.position = GunPivot.transform.position;
+                  pivot.transform.rotation = this.transform.rotation;
+                  beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
+              }
+              else
+              {
+                  if (Red.activeSelf)
+                  {
+                      beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
+                  }
+                  else if (Green.activeSelf)
+                  {
+                      beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
+                  }
+              }
+          }*/
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+
+
+        if (Input.GetKeyDown("z"))
         {
             if(Red.activeSelf)
             {
@@ -73,7 +96,7 @@ public class ShootLaser : MonoBehaviour
             }
 
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown("x"))
         {
             if (Green.activeSelf)
             {
@@ -84,7 +107,38 @@ public class ShootLaser : MonoBehaviour
                 Green.SetActive(true);
             }
         }
-        RotateGun();
+
+
+
+        //-------------------------¿ÀÅ§¿ë------------------------
+        /*
+        if (OVRInput.GetDown(OVRInput.Button.Four))
+        {
+            if(Red.activeSelf)
+            {
+                Red.SetActive(false);
+            }
+            else
+            {
+                Red.SetActive(true);
+            }
+
+        }
+        if (OVRInput.GetDown(OVRInput.Button.Three))
+        {
+            if (Green.activeSelf)
+            {
+                Green.SetActive(false);
+            }
+            else
+            {
+                Green.SetActive(true);
+            }
+        }*/
+
+
+
+        //RotateGun();
     }
 
     void RotateGun()

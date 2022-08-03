@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/ControllerAvataTest.unity
+    guid: a1ff331195da0c4439ae95b985ef0a81
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6b466ecb828fa0341a229ec2a6488d00, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 806eece2e04656c46a844ae472e3953a, type: 2}
