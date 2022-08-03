@@ -18,6 +18,7 @@ TagManager:
   - Photo1
   - Photo2
   - Photo3
+  - ScreenWall
   layers:
   - Default
   - TransparentFX

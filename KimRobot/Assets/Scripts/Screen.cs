@@ -6,6 +6,10 @@ public class Screen : MonoBehaviour
 {
     public Animator Door;
     public GameObject[] Rooms;
+    public GameObject Player;
+    public GameObject ScreenWall;
+
+    bool isIn = false;
    public void OpenDoor()
     {
         if (transform.tag=="Photo1")
@@ -32,5 +36,15 @@ public class Screen : MonoBehaviour
     {
         Door.SetBool("isOpen",false);
     }
+    private void Update()
+    {
 
+        if (isIn&&(Player.transform.position.x > ScreenWall.transform.position.x))      //밖으로 나왓나
+        {
+            isIn = false;
+            CloseDoor();
+        }
+         if (!isIn && (Player.transform.position.x < ScreenWall.transform.position.x))      //안에 들어갔나
+            isIn = true;
+    }
 }
