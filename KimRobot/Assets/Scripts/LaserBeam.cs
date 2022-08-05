@@ -7,16 +7,19 @@ public class LaserBeam
     GameObject laserObj;
     LineRenderer laser;
     List<Vector3> laserIndices = new List<Vector3>();
+    MeshCollider meshCollider;
 
     string thisColor;
 
-    public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor)
+    public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor, GameObject empty)
     {
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();
         this.laserObj.name = "Laser Beam";
 
         this.laser = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
+        meshCollider = this.laserObj.AddComponent<MeshCollider>();
+
         this.laser.startWidth = 0.1f;
         this.laser.endWidth = 0.1f;
         this.laser.material = material;
@@ -36,7 +39,31 @@ public class LaserBeam
             this.laser.startColor = Color.yellow;
             this.laser.endColor = Color.yellow;
         }
-        CastRay(pos,dir,laser);
+        CastRay(pos, dir, laser);
+        GenerateMeshCollider(laser);
+    }
+
+    public void GenerateMeshCollider(LineRenderer laser)
+    {
+        Mesh mesh = new Mesh();
+        laser.BakeMesh(mesh, true);
+
+        // if you need collisions on both sides of the line, simply duplicate & flip facing the other direction!
+        // This can be optimized to improve performance ;)
+        int[] meshIndices = mesh.GetIndices(0);
+        int[] newIndices = new int[meshIndices.Length * 2];
+
+        int j = meshIndices.Length - 1;
+        for (int i = 0; i < meshIndices.Length; i++)
+        {
+            newIndices[i] = meshIndices[i];
+            newIndices[meshIndices.Length + i] = meshIndices[j];
+        }
+        mesh.SetIndices(newIndices, MeshTopology.Triangles, 0);
+
+        meshCollider.sharedMesh = mesh;
+        //meshCollider.convex = true;
+        //meshCollider.isTrigger = true;
     }
 
     void CastRay(Vector3 pos, Vector3 dir, LineRenderer laser)
@@ -46,7 +73,7 @@ public class LaserBeam
         Ray ray = new Ray(pos, dir);
         RaycastHit hit;
 
-        if(Physics.Raycast(ray, out hit, 30, 1))
+        if (Physics.Raycast(ray, out hit, 30, 1))
         {
             if (hit.collider.tag == "Player")
                 return;
@@ -90,26 +117,10 @@ public class LaserBeam
     int count = 0;
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
-        if(hitInfo.collider.gameObject.tag == "Wall")
+        if (hitInfo.collider.gameObject.tag == "Wall")
         {
             Vector3 pos = hitInfo.point;
             Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
-            count++;
-            if (count < 5)//다섯번 이상 반사되지 않는다
-            {
-                CastRay(pos, dir, laser);
-            }
-            else
-            {
-                laserIndices.Add(hitInfo.point);
-                UpdateLaser();
-            }
-        }
-        else if (hitInfo.collider.gameObject.tag == "Letter")
-        {
-            Vector3 pos = hitInfo.point;
-            Vector3 dir = Vector3.Reflect(direction, hitInfo.normal);
-            hitInfo.collider.gameObject.GetComponent<Item>().TouchingBox();
             count++;
             if (count < 5)//다섯번 이상 반사되지 않는다
             {

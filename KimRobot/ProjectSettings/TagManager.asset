@@ -7,11 +7,11 @@ TagManager:
   - Wall
   - Pivot
   - Cube
-  - Letter
   - Clue
   - R_Hand
   - Gun
   - Cylinder
+  - Letter
   - L_Hand
   - RedPrism
   - BluePrism
