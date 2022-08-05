@@ -67,7 +67,7 @@ public class ShootLaser : MonoBehaviour
                 }
             }
         }
-        //------------------¿ÀÅ§¿ë----------------------
+        //------------------Â¿Ã€Ã…Â§Â¿Ã«----------------------
         /*  if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
           {
               if (Red.activeSelf && Green.activeSelf)
@@ -117,7 +117,7 @@ public class ShootLaser : MonoBehaviour
 
 
 
-        //-------------------------¿ÀÅ§¿ë------------------------
+        //-------------------------Â¿Ã€Ã…Â§Â¿Ã«------------------------
         /*
         if (OVRInput.GetDown(OVRInput.Button.Four))
         {
@@ -148,7 +148,7 @@ public class ShootLaser : MonoBehaviour
         //RotateGun();
     }
 
-    void RotateGun()
+   /* void RotateGun()
     {
         Vector3 pos = Input.mousePosition;
 
@@ -159,5 +159,5 @@ public class ShootLaser : MonoBehaviour
         Vector3 view = Camera.main.ScreenToViewportPoint(pos);
 
         transform.LookAt(view);
-    }
+    }*/
 }

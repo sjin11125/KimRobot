@@ -75,6 +75,8 @@ public class LaserBeam
 
         if (Physics.Raycast(ray, out hit, 30, 1))
         {
+            if (hit.collider.tag == "Player")
+                return;
             if (thisColor == "Green")
             {
                 CheckHit(hit, dir, laser);

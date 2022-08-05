@@ -12,6 +12,13 @@ TagManager:
   - Gun
   - Cylinder
   - Letter
+  - L_Hand
+  - RedPrism
+  - BluePrism
+  - Photo1
+  - Photo2
+  - Photo3
+  - ScreenWall
   layers:
   - Default
   - TransparentFX
