@@ -34,6 +34,7 @@ public class Screen : MonoBehaviour
     }
    public void CloseDoor()
     {
+        Debug.Log("¿­¸²±³È¸ ´ÝÈû");
         Door.SetBool("isOpen",false);
     }
     private void Update()
