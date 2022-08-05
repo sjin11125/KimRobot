@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //PlayerMove();                   //플레이어 이동(컨트롤러)
-
+            Debug.Log(" 이동");
+        
         //---------------PC버전---------------------------------
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
         Grab();                         //우클릭 잡기
@@ -180,6 +181,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
+            Debug.Log(" 이동");
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
             isWalk = true;
         }

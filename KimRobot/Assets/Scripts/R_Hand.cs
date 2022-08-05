@@ -13,8 +13,7 @@ public class R_Hand : MonoBehaviour
     }
     private void FixedUpdate()
     {
-
-        Physics.IgnoreLayerCollision(6,7);
+        
     }
     private void OnCollisionExit(Collision other)
     {
