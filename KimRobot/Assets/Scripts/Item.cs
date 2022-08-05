@@ -9,18 +9,49 @@ public class Item : MonoBehaviour
     public string letter;
     Material material;
     public Material blue;
+    public bool hit;
 
     private void Start()
     {
         material = GetComponent<Renderer>().material;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Laser Beam")
+        {
+            print("enter");
+            if (movePos == MovePos.z)
+            {
+                Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.5f);
+                //transform.localPosition = pos;
+                gameObject.GetComponent<Renderer>().material = blue;
+            }
+        }
+    }
+
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.name == "Laser Beam")
+        {
+            print("exit");
+            if (movePos == MovePos.z)
+            {
+                Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
+                //transform.localPosition = pos;
+                gameObject.GetComponent<Renderer>().material = material;
+            }
+        }
+    }
+
+
     public void TouchingBox()
     {
-        if(movePos == MovePos.z)
+        if (movePos == MovePos.z)
         {
             Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.5f);
-            transform.localPosition = pos;
+            //transform.localPosition = pos;
             gameObject.GetComponent<Renderer>().material = blue;
         }
     }
@@ -30,25 +61,8 @@ public class Item : MonoBehaviour
         if (movePos == MovePos.z)
         {
             Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
-            transform.localPosition = pos;
+            //transform.localPosition = pos;
             gameObject.GetComponent<Renderer>().material = material;
         }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name + "감지 시작!");
-    }
-
-    // Collider 컴포넌트의 is Trigger가 true인 상태로 충돌중일 때
-    private void OnTriggerStay(Collider other)
-    {
-        Debug.Log(other.name + "감지 중!");
-    }
-
-    // Collider 컴포넌트의 is Trigger가 true인 상태로 충돌이 끝났을 때
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log(other.name + "감지 끝!");
     }
 }

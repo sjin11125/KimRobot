@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class ShootLaser : MonoBehaviour
     GameObject Red;
     GameObject Green;
 
+    public GameObject empty;
+
     public GameObject GunPivot;
 
     private void Start()
@@ -25,10 +28,10 @@ public class ShootLaser : MonoBehaviour
     void Update()
     {
         Destroy(GameObject.Find("Laser Beam"));
-      
+
         if (Input.GetMouseButtonUp(0))
         {
-            if(pivot.transform.childCount > 0)
+            if (pivot.transform.childCount > 0)
             {
                 pivot.transform.GetChild(0).transform.parent = null;
             }
@@ -40,23 +43,27 @@ public class ShootLaser : MonoBehaviour
             }
         }
 
+        if (Input.GetMouseButtonDown(0))
+        {
+        }
+
         if (Input.GetMouseButton(0))
         {
             if (Red.activeSelf && Green.activeSelf)
             {
                 pivot.transform.position = GunPivot.transform.position;
                 pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
+                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow", empty);
             }
             else
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red", empty);
                 }
                 else if (Green.activeSelf)
                 {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green", empty);
                 }
             }
         }
@@ -86,7 +93,7 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetKeyDown("z"))
         {
-            if(Red.activeSelf)
+            if (Red.activeSelf)
             {
                 Red.SetActive(false);
             }
