@@ -121,11 +121,13 @@ public class PlayerController : MonoBehaviour
 
             if (pos.x>0)
             {
-                transform.rotation = Quaternion.Slerp(rigidbody.rotation.Vector3.right);
+               // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
+                transform.Rotate(Vector3.right, 10 * Time.deltaTime);
             }
             else
             {
-               // transform.rotation -=  Vector3.right;
+                transform.Rotate(Vector3.left, 10 * Time.deltaTime);
+                // transform.rotation -=  Vector3.right;
             }
         }
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
