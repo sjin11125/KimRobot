@@ -22,7 +22,6 @@ public class R_Hand : MonoBehaviour
             return;
         }
 
-        Debug.Log("Exit 충돌체는 " + other.transform.gameObject.name);
         if (other.transform.tag == "Clue" || other.transform.tag == "RedPrism" || other.transform.tag == "BluePrism")
         {
             other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
@@ -40,7 +39,6 @@ public class R_Hand : MonoBehaviour
             return;
         }
 
-        Debug.Log("Stay 충돌체는 " + other.transform.gameObject.name);
         if (other.transform.tag == "RedPrism")
         {
 
@@ -55,7 +53,6 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "BluePrism")
         {
-            Debug.Log("충돌체는 " + other.transform.gameObject.name);
             Player.GetComponent<PlayerController>().Prism[1] = true;          //파란색 프리즘 얻었다
             Debug.Log(other.transform.GetComponentInChildren<SkinnedMeshRenderer>().gameObject.name);
             other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
@@ -78,7 +75,6 @@ public class R_Hand : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Enter 충돌체는 " + other.transform.gameObject.name);
         if (other.transform.tag == "Player" || other.transform.tag == "Gun")
         {
             // Physics.IgnoreCollision(other.collider,);
@@ -87,10 +83,16 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "GunBefore")
         {
-            other.transform.tag = "Gun";
-            other.transform.parent = gameObject.transform;
-            other.transform.position = new Vector3(0.007f, 0.092f, 0.06f);
-            other.transform.rotation =Quaternion.Euler( new Vector3(310.351f, 53.866f, 96.37f));
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            {
+                Debug.Log("총 닿인다");
+                other.transform.tag = "Gun";
+                
+                other.transform.parent = gameObject.transform;
+                other.transform.position = new Vector3(0.007f, 0.092f, 0.06f);
+                other.transform.rotation = Quaternion.Euler(new Vector3(310.351f, 53.866f, 96.37f));
+
+            }
 
         }
         if (other.transform.tag == "Cylinder")

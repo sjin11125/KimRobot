@@ -118,15 +118,15 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.Get(OVRInput.Touch.SecondaryThumbstick))     // 회전
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
-
+            Debug.Log(pos);
             if (pos.x>0)
             {
                // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
-                transform.Rotate(Vector3.up, 10 * Time.deltaTime);
+                transform.Rotate(Vector3.up, 50 * Time.deltaTime);
             }
             else
             {
-                transform.Rotate(Vector3.down, 10 * Time.deltaTime);
+                transform.Rotate(Vector3.down, 50 * Time.deltaTime);
                 // transform.rotation -=  Vector3.right;
             }
         }

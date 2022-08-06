@@ -19,6 +19,7 @@ TagManager:
   - Photo2
   - Photo3
   - ScreenWall
+  - GunBefore
   layers:
   - Default
   - TransparentFX
