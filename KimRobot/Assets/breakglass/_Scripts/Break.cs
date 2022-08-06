@@ -7,6 +7,8 @@ public class Break : MonoBehaviour
 	public float magnitudeCol, radius, power, upwards;
 
 	public bool isBreak=false;
+
+	int num = 3;
 	Vector3 StartPos;
 	void OnCollisionEnter(Collision collision)
     {
@@ -58,8 +60,13 @@ public class Break : MonoBehaviour
         //transform.position = StartPos;
         if (isBreak)
         {
+			
 			isBreak = false;
-			BreakGlass();
+			num--;
+            if (num==0)
+            {
+				BreakGlass();
+			}
 
 		}
     }

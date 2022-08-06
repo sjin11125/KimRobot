@@ -87,7 +87,7 @@ public class R_Hand : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
             {
                 Debug.Log("총 닿인다");
-
+                Destroy(other.transform.gameObject);
                 /*other.gameObject.layer = LayerMask.NameToLayer("Hand");         //충돌되지않게 레이어 바꾸기
                 other.transform.tag = "Gun";
                 other.transform.parent = gameObject.transform;
