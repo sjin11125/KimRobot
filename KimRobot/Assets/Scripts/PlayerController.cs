@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();                   //플레이어 이동(컨트롤러)
+        //PlayerMove();                   //플레이어 이동(컨트롤러)
         
         //---------------PC버전---------------------------------
-       // PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+        PlayerMove_Keyboard();          //플레이어 이동(키보드로)
         Grab();                         //우클릭 잡기
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
