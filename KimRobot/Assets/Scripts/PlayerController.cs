@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
        // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
        // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.Touch))     // 회전
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick, OVRInput.Controller.Touch))     // 회전
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
             Debug.Log(pos);
