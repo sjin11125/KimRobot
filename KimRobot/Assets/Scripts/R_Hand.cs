@@ -98,7 +98,15 @@ public class R_Hand : MonoBehaviour
             other.transform.GetComponent<Screen>().OpenDoor();          //문열어
         }
 
+          if(  other.transform.tag == "Clue")
+            {
+                if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))          //단서보기
+                {
+                    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
 
+                }
+            }
+            }
     }
     private void OnTriggerEnter(Collider other)
     {

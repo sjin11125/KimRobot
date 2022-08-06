@@ -156,19 +156,7 @@ public class PlayerController : MonoBehaviour
         {
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)  )          //단서보기
-        {
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.DrawLine(hit.point, hit.normal, Color.green);
-                Debug.Log("충돌함");
-                if (hit.transform.tag == "Clue")
-                {
-                    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
-                }
-            }
-        }
+       
         if (Input.GetMouseButtonUp(1))
         {
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
