@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch)!=new Vector2(0,0))     // 회전
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
-            Debug.Log(pos);
+           // Debug.Log(pos);
             if (pos.x>0)
             {
                // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
@@ -133,9 +133,9 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // 이동
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
-
-            var absX =(int) Mathf.Abs(pos.x);
-            var absY = (int)Mathf.Abs(pos.y);
+            Debug.Log(pos);
+            var absX =Mathf.Abs(pos.x);
+            var absY = Mathf.Abs(pos.y);
 
            // isWalk = true;
 
