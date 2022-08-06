@@ -10,6 +10,7 @@ public class R_Hand : MonoBehaviour
     {
         Physics.IgnoreLayerCollision(6, 7);
         Physics.IgnoreLayerCollision(7, 7);
+        Physics.IgnoreLayerCollision(7, 8);
         Debug.Log("현재 레이어는 " + this.transform.gameObject.layer);
     }
     private void FixedUpdate()
