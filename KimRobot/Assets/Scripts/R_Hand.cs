@@ -9,11 +9,11 @@ public class R_Hand : MonoBehaviour
     {
         Physics.IgnoreLayerCollision(6, 7);
         Physics.IgnoreLayerCollision(7, 7);
-        Debug.Log("현재 레이어는 "+this.transform.gameObject.layer);
+        Debug.Log("현재 레이어는 " + this.transform.gameObject.layer);
     }
     private void FixedUpdate()
     {
-        
+
     }
     private void OnCollisionExit(Collision other)
     {
@@ -75,13 +75,13 @@ public class R_Hand : MonoBehaviour
        
 
     }*/
-   
+
     void OnCollisionEnter(Collision other)
     {
-        Debug.Log("Enter 충돌체는 "+other.transform.gameObject.name);
+        Debug.Log("Enter 충돌체는 " + other.transform.gameObject.name);
         if (other.transform.tag == "Player" || other.transform.tag == "Gun")
         {
-           // Physics.IgnoreCollision(other.collider,);
+            // Physics.IgnoreCollision(other.collider,);
             return;
         }
 
@@ -98,18 +98,14 @@ public class R_Hand : MonoBehaviour
             other.transform.GetComponent<Screen>().OpenDoor();          //문열어
         }
 
-          if(  other.transform.tag == "Clue")
+        if (other.transform.tag == "Clue")
+        {
+            if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))          //단서보기
             {
-                if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger))          //단서보기
-                {
-                    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
+                //Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
 
-                }
             }
-            }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-
+        }
     }
 }
+
