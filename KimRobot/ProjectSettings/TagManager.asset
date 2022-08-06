@@ -19,6 +19,7 @@ TagManager:
   - Photo2
   - Photo3
   - ScreenWall
+  - GunBefore
   layers:
   - Default
   - TransparentFX
@@ -26,8 +27,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Body
+  - Hand
   - 
   - 
   - 

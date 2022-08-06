@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //플레이어 이동(컨트롤러)
-
+        PlayerMove();                   //플레이어 이동(컨트롤러)
+        
         //---------------PC버전---------------------------------
-        PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+       // PlayerMove_Keyboard();          //플레이어 이동(키보드로)
         Grab();                         //우클릭 잡기
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
@@ -113,14 +113,31 @@ public class PlayerController : MonoBehaviour
         }
     public void PlayerMove()
     {
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
+       // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+       // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch)!=new Vector2(0,0))     // 회전
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-
-            var absX = Mathf.Abs(pos.x);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
+           // Debug.Log(pos);
+            if (pos.x>0)
+            {
+               // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
+                transform.Rotate(Vector3.up, 50 * Time.deltaTime);
+            }
+            else
+            {
+                transform.Rotate(Vector3.down, 50 * Time.deltaTime);
+                // transform.rotation -=  Vector3.right;
+            }
+        }
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // 이동
+        {
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
+            Debug.Log(pos);
+            var absX =Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 
-            isWalk = true;
+           // isWalk = true;
 
             if (absX>absY)
             {
@@ -155,19 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
-        if (OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)  )          //단서보기
-        {
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                Debug.DrawLine(hit.point, hit.normal, Color.green);
-                Debug.Log("충돌함");
-                if (hit.transform.tag == "Clue")
-                {
-                    Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
-                }
-            }
-        }
+       
         if (Input.GetMouseButtonUp(1))
         {
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
@@ -180,6 +185,7 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
+            Debug.Log(" 이동");
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
             isWalk = true;
         }

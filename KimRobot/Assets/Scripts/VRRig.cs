@@ -45,7 +45,7 @@ public class VRRig : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = headConstraint.position + headBodyOffset;
-        transform.forward =Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized,Time.deltaTime*5); //머리 회전을 y축으로만 하도록 허용
+       // transform.forward =Vector3.Lerp(transform.forward, Vector3.ProjectOnPlane(headConstraint.up, Vector3.up).normalized,Time.deltaTime*5); //머리 회전을 y축으로만 하도록 허용
 
         head.Map();
         leftHand.Map();
