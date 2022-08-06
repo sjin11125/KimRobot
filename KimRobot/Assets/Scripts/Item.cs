@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public enum MovePos { x, y, z };
-    public MovePos movePos;
+    //public enum MovePos { x, y, z };
+    //public MovePos movePos;
+    public enum Type { Letter, Number, Shape};
+    public Type type;
     public string letter;
     Material material;
     public Material blue;
-    public bool hit;
+    //public bool hit;
 
     private void Start()
     {
@@ -21,10 +23,8 @@ public class Item : MonoBehaviour
         if (other.name == "Laser Beam")
         {
             print("enter");
-            if (movePos == MovePos.z)
+            if (type == Type.Letter)
             {
-                Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.5f);
-                //transform.localPosition = pos;
                 gameObject.GetComponent<Renderer>().material = blue;
             }
         }
@@ -36,16 +36,13 @@ public class Item : MonoBehaviour
         if(other.name == "Laser Beam")
         {
             print("exit");
-            if (movePos == MovePos.z)
+            if (type == Type.Letter)
             {
-                Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
-                //transform.localPosition = pos;
                 gameObject.GetComponent<Renderer>().material = material;
             }
         }
     }
-
-
+    /*
     public void TouchingBox()
     {
         if (movePos == MovePos.z)
@@ -64,5 +61,5 @@ public class Item : MonoBehaviour
             //transform.localPosition = pos;
             gameObject.GetComponent<Renderer>().material = material;
         }
-    }
+    }*/
 }
