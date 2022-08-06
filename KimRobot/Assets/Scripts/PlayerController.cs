@@ -132,10 +132,11 @@ public class PlayerController : MonoBehaviour
         }
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
         {
+            Debug.Log("이동한다");
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
 
-            var absX = Mathf.Abs(pos.x);
-            var absY = Mathf.Abs(pos.y);
+            var absX = (int)Mathf.Abs(pos.x);
+            var absY = (int)Mathf.Abs(pos.y);
 
            // isWalk = true;
 
@@ -143,10 +144,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (pos.x>0)            //오른쪽 이동
                 {
+                    Debug.Log("오른쪽 이동한다");
                     dirX = +1;
                 }
                 else                //왼쪽 이동
                 {
+                    Debug.Log("왼쪽 이동한다");
                     dirX = -1;
                 }
             }
@@ -154,10 +157,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (pos.y>0)            //위로 이동
                 {
+                    Debug.Log("위 이동한다");
                     dirZ = +1;
                 }
                 else                            //아래로 이동
                 {
+                    Debug.Log("아래 이동한다");
                     dirZ = -1;
                 }
             }
