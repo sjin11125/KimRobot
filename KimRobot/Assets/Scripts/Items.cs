@@ -23,13 +23,13 @@ public class Items : MonoBehaviour
             if (curLetters[curLetters.Count-1] != letter)
             {
                 curLetters.Add(letter);
-                letter.GetComponent<Item>().TouchingBox();
+                //letter.GetComponent<Item>().TouchingBox();
             }
         }
         else
         {
             curLetters.Add(letter);
-            letter.GetComponent<Item>().TouchingBox();
+            //letter.GetComponent<Item>().TouchingBox();
         }
 
         /*
