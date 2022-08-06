@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
             var absX = Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 
-            isWalk = true;
+           // isWalk = true;
 
             if (absX>absY)
             {
