@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
     {
        // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
        // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))     // 회전
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch))     // 회전
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
             Debug.Log(pos);
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
                 // transform.rotation -=  Vector3.right;
             }
         }
-        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick,OVRInput.Controller.Touch)   )     // 이동
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
 
