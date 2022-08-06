@@ -35,6 +35,22 @@ public class R_Hand : MonoBehaviour
     }*/
     private void OnCollisionStay(Collision other)
     {
+        if (other.transform.tag == "GunBefore")
+        {
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            {
+                Debug.Log("총 닿인다");
+                Destroy(other.transform.gameObject);
+                /*other.gameObject.layer = LayerMask.NameToLayer("Hand");         //충돌되지않게 레이어 바꾸기
+                other.transform.tag = "Gun";
+                other.transform.parent = gameObject.transform;
+                other.transform.position = new Vector3(0.007f, 0.092f, 0.06f);
+                other.transform.rotation = Quaternion.Euler(new Vector3(310.351f, 53.866f, 96.37f));
+                */
+                Gun.SetActive(true);
+            }
+
+        }
         if (other.transform.tag == "Player" || other.transform.tag == "Gun")
         {
             return;

@@ -11,7 +11,7 @@ public class LaserBeam
 
     string thisColor;
 
-    public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor, GameObject empty)
+    public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor)
     {
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();

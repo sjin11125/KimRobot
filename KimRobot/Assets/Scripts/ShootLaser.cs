@@ -14,8 +14,6 @@ public class ShootLaser : MonoBehaviour
     GameObject Red;
     GameObject Green;
 
-    public GameObject empty;
-
     public GameObject GunPivot;
 
     private void Start()
@@ -53,17 +51,17 @@ public class ShootLaser : MonoBehaviour
             {
                 pivot.transform.position = GunPivot.transform.position;
                 pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow", empty);
+                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
             }
             else
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red", empty);
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
                 }
                 else if (Green.activeSelf)
                 {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green", empty);
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
                 }
             }
         }
