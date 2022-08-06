@@ -87,7 +87,7 @@ public class R_Hand : MonoBehaviour
             {
                 Debug.Log("총 닿인다");
                 other.transform.tag = "Gun";
-                
+                other.gameObject.layer = LayerMask.NameToLayer("Hand");         //충돌되지않게 레이어 바꾸기
                 other.transform.parent = gameObject.transform;
                 other.transform.position = new Vector3(0.007f, 0.092f, 0.06f);
                 other.transform.rotation = Quaternion.Euler(new Vector3(310.351f, 53.866f, 96.37f));
