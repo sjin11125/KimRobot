@@ -9,7 +9,7 @@ public class NumScreen : MonoBehaviour
     string CurPassword = "";
 
     public Text PasswordText;   
-
+    
 
     // Update is called once per frame
     void Update()

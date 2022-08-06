@@ -45,11 +45,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //플레이어 이동(컨트롤러)
-            Debug.Log(" 이동");
+        PlayerMove();                   //플레이어 이동(컨트롤러)
         
         //---------------PC버전---------------------------------
-        PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+       // PlayerMove_Keyboard();          //플레이어 이동(키보드로)
         Grab();                         //우클릭 잡기
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
@@ -114,6 +113,21 @@ public class PlayerController : MonoBehaviour
         }
     public void PlayerMove()
     {
+        Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
+        if (OVRInput.Get(OVRInput.Touch.SecondaryThumbstick))     // 회전
+        {
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+
+            if (pos.x>0)
+            {
+                transform.rotation = Quaternion.Slerp(rigidbody.rotation.Vector3.right);
+            }
+            else
+            {
+               // transform.rotation -=  Vector3.right;
+            }
+        }
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
