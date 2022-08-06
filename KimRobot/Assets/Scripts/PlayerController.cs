@@ -113,11 +113,11 @@ public class PlayerController : MonoBehaviour
         }
     public void PlayerMove()
     {
-        Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-        Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
-        if (OVRInput.Get(OVRInput.Touch.SecondaryThumbstick))     // 회전
+       // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+       // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))     // 회전
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
             Debug.Log(pos);
             if (pos.x>0)
             {
@@ -132,10 +132,10 @@ public class PlayerController : MonoBehaviour
         }
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
 
-            var absX = Mathf.Abs(pos.x);
-            var absY = Mathf.Abs(pos.y);
+            var absX =(int) Mathf.Abs(pos.x);
+            var absY = (int)Mathf.Abs(pos.y);
 
            // isWalk = true;
 
