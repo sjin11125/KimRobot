@@ -113,11 +113,11 @@ public class PlayerController : MonoBehaviour
         }
     public void PlayerMove()
     {
-        Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-        Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
-        if (OVRInput.Get(OVRInput.Touch.SecondaryThumbstick))     // 회전
+       // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+       // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
+        if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick))     // 회전
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
             Debug.Log(pos);
             if (pos.x>0)
             {
@@ -132,10 +132,9 @@ public class PlayerController : MonoBehaviour
         }
         if (OVRInput.Get(OVRInput.Touch.PrimaryThumbstick)   )     // 이동
         {
-            Debug.Log("이동한다");
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
 
-            var absX = (int)Mathf.Abs(pos.x);
+            var absX =(int) Mathf.Abs(pos.x);
             var absY = (int)Mathf.Abs(pos.y);
 
            // isWalk = true;
@@ -144,12 +143,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (pos.x>0)            //오른쪽 이동
                 {
-                    Debug.Log("오른쪽 이동한다");
                     dirX = +1;
                 }
                 else                //왼쪽 이동
                 {
-                    Debug.Log("왼쪽 이동한다");
                     dirX = -1;
                 }
             }
@@ -157,12 +154,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (pos.y>0)            //위로 이동
                 {
-                    Debug.Log("위 이동한다");
                     dirZ = +1;
                 }
                 else                            //아래로 이동
                 {
-                    Debug.Log("아래 이동한다");
                     dirZ = -1;
                 }
             }
