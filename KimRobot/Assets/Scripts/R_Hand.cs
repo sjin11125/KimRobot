@@ -81,6 +81,13 @@ public class R_Hand : MonoBehaviour
                 Destroy(other.transform.gameObject);
             }
         }
+        if (other.transform.tag == "Photo1" ||
+            other.transform.tag == "Photo2" ||
+            other.transform.tag == "Photo3")
+        {
+            Debug.Log("문이열리네여");
+            other.transform.GetComponent<Screen>().OpenDoor();          //문열어
+        }
     }
     /*private void OnTriggerStay(Collider other)              //닿인 상태에서
     {
@@ -119,13 +126,7 @@ public class R_Hand : MonoBehaviour
         {
             other.transform.GetComponent<Break>().isBreak = true;
         }
-        if (other.transform.tag == "Photo1" ||
-            other.transform.tag == "Photo2" ||
-            other.transform.tag == "Photo3")
-        {
-            Debug.Log("문이열리네여");
-            other.transform.GetComponent<Screen>().OpenDoor();          //문열어
-        }
+        
 
         if (other.transform.tag == "Clue")
         {

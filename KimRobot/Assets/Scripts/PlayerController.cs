@@ -161,14 +161,14 @@ public class PlayerController : MonoBehaviour
                     dirZ = -1;
                 }
             }
-            Vector3 moveDir = new Vector3(dirX * Speed, 0, dirZ * Speed);
+            Vector3 moveDir = new Vector3(pos.x * Speed, 0, pos.y * Speed);
             transform.Translate(moveDir * Time.smoothDeltaTime);
         }
         if (OVRInput.GetUp(OVRInput.Touch.PrimaryThumbstick))               //이동 멈춤
         {
             isWalk = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))                   //점프
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //점프
         {
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
