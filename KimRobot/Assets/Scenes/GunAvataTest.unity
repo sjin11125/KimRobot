@@ -6368,7 +6368,7 @@ PrefabInstance:
       objectReference: {fileID: 824900655}
     - target: {fileID: 4715573175236125352, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
       propertyPath: m_UseGravity
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4715573175236125357, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
       propertyPath: m_Enabled
@@ -6382,9 +6382,17 @@ PrefabInstance:
       propertyPath: walkAudio
       value: 
       objectReference: {fileID: 1554204383}
+    - target: {fileID: 4715573175826835120, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 4715573176201791998, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
       propertyPath: m_RenderPostProcessing
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4715573176429981620, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 4715573176610605616, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
       propertyPath: m_Enabled
