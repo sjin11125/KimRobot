@@ -15,6 +15,7 @@ public class LaserBeam
     {
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();
+        this.laserObj.layer = 9;
         this.laserObj.name = "Laser Beam";
 
         this.laser = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
@@ -75,6 +76,7 @@ public class LaserBeam
 
         if (Physics.Raycast(ray, out hit, 30, 1))
         {
+            Debug.Log("현재 충돌 오브젝트: "+hit.transform.gameObject.name);
             if (hit.collider.tag == "Player")
                 return;
             if (thisColor == "Green")
