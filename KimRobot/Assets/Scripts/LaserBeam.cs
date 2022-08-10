@@ -76,7 +76,6 @@ public class LaserBeam
 
         if (Physics.Raycast(ray, out hit, 30, 1))
         {
-            Debug.Log("현재 충돌 오브젝트: "+hit.transform.gameObject.name);
             if (hit.collider.tag == "Player")
                 return;
             if (thisColor == "Green")
