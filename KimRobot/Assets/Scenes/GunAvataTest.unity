@@ -1303,7 +1303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 159787817}
   m_Layer: 0
-  m_Name: video (2)
+  m_Name: Home
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4978,7 +4978,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612047319}
   m_Layer: 0
-  m_Name: video (1)
+  m_Name: Star
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11929,12 +11929,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1394590840}
   m_Layer: 0
-  m_Name: video (0)
+  m_Name: TattooShop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1394590840
 Transform:
   m_ObjectHideFlags: 0
