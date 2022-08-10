@@ -15,6 +15,7 @@ public class LaserBeam
     {
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();
+        this.laserObj.layer = 9;
         this.laserObj.name = "Laser Beam";
 
         this.laser = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
