@@ -31,7 +31,14 @@ public class PlayerController : MonoBehaviour
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
 
+
+    //오디오
     public AudioSource walkAudio;
+    public AudioSource GunColor;
+    public AudioSource Jump;
+    public AudioSource TimerSound;
+    public AudioSource TimerSound2;
+
     List<string> Inventory = new List<string>(); 
     void Start()
     {
@@ -49,12 +56,13 @@ public class PlayerController : MonoBehaviour
         
         //---------------PC버전---------------------------------
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
-        Grab();                         //우클릭 잡기
+        //Grab();                         //우클릭 잡기
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
         //hit=;
-        if (isWalk)
+        if (isWalk&&!walkAudio.isPlaying)
         {
+          
             walkAudio.Play();
          
         }
@@ -170,6 +178,7 @@ public class PlayerController : MonoBehaviour
         }
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //점프
         {
+            Jump.Play();
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
        
@@ -206,6 +215,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space)&&isJump==false)        //점프
         {
+            Jump.Play();
             isJump = true;
             Rigidbody rigi=transform.GetComponent<Rigidbody>();
             rigi.AddForce(Vector3.up*5,ForceMode.Impulse);

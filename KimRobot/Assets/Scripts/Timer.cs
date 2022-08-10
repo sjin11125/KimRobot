@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public int minute = 10;
-    public int second = 10;
+    public int minute = 3;
+    public int second = 1;
 
     public TextMesh TimerText;
+    public GameObject Player;
+    PlayerController PlayerController;
     // Start is called before the first frame update
     void Start()
     {
+        PlayerController = Player.GetComponent<PlayerController>();
         StartCoroutine(Time());
     }
 
@@ -29,7 +32,11 @@ public class Timer : MonoBehaviour
             second = 59;
             TimerText.text = minute + ":" + second;
         }
-
+        if (minute<=3&&second==0)
+        {
+            PlayerController.TimerSound.Play();
+            PlayerController.TimerSound2.Play();
+        }
     }
     IEnumerator Time()
     {
