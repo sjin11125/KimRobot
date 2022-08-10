@@ -33,11 +33,19 @@ public class PlayerController : MonoBehaviour
 
 
     //오디오
-    public AudioSource walkAudio;
-    public AudioSource GunColor;
-    public AudioSource Jump;
-    public AudioSource TimerSound;
-    public AudioSource TimerSound2;
+    public AudioSource walkAudio;           //발사운드
+    public AudioSource GunColor;           //총 온오프 사운드
+    public AudioSource Jump;           //점프 사운드
+    public AudioSource TimerSound;           //시간 경고 사운드
+    public AudioSource TimerSound2;           //시간 경고 사운드2
+    public AudioSource BeamBounce;          //광선 튕기는 사운드
+    public AudioSource Clue;          //단서획득 사운드 (초록색 프리즘 떨어지는 사운드)
+    public AudioSource Book;          //책 넘기는 사운드
+    public AudioSource Door;          //문열리는 사운드
+    public AudioSource Screen;          //스크린 활성화 사운드
+    public AudioSource GunShoot;          //총발사 사운드
+    public AudioSource Neon;          //네온 켜지는 사운드
+
 
     List<string> Inventory = new List<string>(); 
     void Start()
