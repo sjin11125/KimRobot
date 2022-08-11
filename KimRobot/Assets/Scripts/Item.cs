@@ -11,7 +11,6 @@ public class Item : MonoBehaviour
     public string letter;
     Material material;
     public Material blue;
-    //public bool hit;
 
     private void Start()
     {
@@ -23,6 +22,18 @@ public class Item : MonoBehaviour
         if (other.name == "Laser Beam")
         {
             print("enter");
+            if (type == Type.Letter)
+            {
+                gameObject.GetComponent<Renderer>().material = blue;
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.name == "Laser Beam")
+        {         
+            print("stay");
             if (type == Type.Letter)
             {
                 gameObject.GetComponent<Renderer>().material = blue;
