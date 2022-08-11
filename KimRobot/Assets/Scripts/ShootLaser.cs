@@ -16,11 +16,15 @@ public class ShootLaser : MonoBehaviour
 
     public GameObject GunPivot;
 
+    public GameObject Player;
+    PlayerController PlayerController;
+
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
         Green = transform.GetChild(1).gameObject;
         Cube = GameObject.FindWithTag("Cube");
+        PlayerController = Player.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -91,25 +95,34 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetKeyDown("z"))
         {
-            if (Red.activeSelf)
+            if (PlayerController.Prism[0]==true)            //레드 프리즘을 얻었는가
             {
-                Red.SetActive(false);
+                PlayerController.GunColor.Play();               //효과음 재생
+                if (Red.activeSelf)
+                {
+                    Red.SetActive(false);
+                }
+                else
+                {
+                    Red.SetActive(true);
+                }
             }
-            else
-            {
-                Red.SetActive(true);
-            }
+            
 
         }
         if (Input.GetKeyDown("x"))
         {
-            if (Green.activeSelf)
+            if (PlayerController.Prism[1] == true)            //초록 프리즘을 얻었는가
             {
-                Green.SetActive(false);
-            }
-            else
-            {
-                Green.SetActive(true);
+                PlayerController.GunColor.Play();               //효과음 재생
+                if (Green.activeSelf)
+                {
+                    Green.SetActive(false);
+                }
+                else
+                {
+                    Green.SetActive(true);
+                }
             }
         }
 
