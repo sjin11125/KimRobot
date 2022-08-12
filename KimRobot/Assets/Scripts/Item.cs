@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     public Type type;
     public string letter;
     Material material;
-    public Material blue;
+    public Material redMat;
 
     private void Start()
     {
@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
             print("enter");
             if (type == Type.Letter)
             {
-                gameObject.GetComponent<Renderer>().material = blue;
+                gameObject.GetComponent<Renderer>().material = redMat;
             }
         }
     }
@@ -36,7 +36,7 @@ public class Item : MonoBehaviour
             print("stay");
             if (type == Type.Letter)
             {
-                gameObject.GetComponent<Renderer>().material = blue;
+                gameObject.GetComponent<Renderer>().material = redMat;
             }
         }
     }
