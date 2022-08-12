@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
             walkAudio.Play();
          
         }
-        else
+        else if(!isWalk)
         {
             walkAudio.Pause();
         }
@@ -202,7 +202,6 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
-            Debug.Log(" 이동");
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
             isWalk = true;
         }
