@@ -9,6 +9,8 @@ public class Screen : MonoBehaviour
     public GameObject Player;
     public GameObject ScreenWall;
 
+    public AudioSource DoorSound;
+
     bool isIn = false;
    public void OpenDoor()
     {
@@ -31,6 +33,7 @@ public class Screen : MonoBehaviour
             Rooms[2].SetActive(true);
         }
         Door.SetBool("isOpen",true);
+        DoorSound.Play();
     }
    public void CloseDoor()
     {

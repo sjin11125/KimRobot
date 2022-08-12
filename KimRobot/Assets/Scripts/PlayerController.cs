@@ -31,7 +31,22 @@ public class PlayerController : MonoBehaviour
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
 
-    public AudioSource walkAudio;
+
+    //오디오
+    public AudioSource walkAudio;           //발사운드
+    public AudioSource GunColor;           //총 온오프 사운드
+    public AudioSource Jump;           //점프 사운드
+    public AudioSource TimerSound;           //시간 경고 사운드
+    public AudioSource TimerSound2;           //시간 경고 사운드2
+    public AudioSource BeamBounce;          //광선 튕기는 사운드
+    public AudioSource Clue;          //단서획득 사운드 (초록색 프리즘 떨어지는 사운드)
+    public AudioSource Book;          //책 넘기는 사운드
+    public AudioSource Door;          //문열리는 사운드
+    public AudioSource Screen;          //스크린 활성화 사운드
+    public AudioSource GunShoot;          //총발사 사운드
+    public AudioSource Neon;          //네온 켜지는 사운드
+
+
     List<string> Inventory = new List<string>(); 
     void Start()
     {
@@ -49,16 +64,17 @@ public class PlayerController : MonoBehaviour
         
         //---------------PC버전---------------------------------
         PlayerMove_Keyboard();          //플레이어 이동(키보드로)
-        Grab();                         //우클릭 잡기
+        //Grab();                         //우클릭 잡기
 
         ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
         //hit=;
-        if (isWalk)
+        if (isWalk&&!walkAudio.isPlaying)
         {
+          
             walkAudio.Play();
          
         }
-        else
+        else if(!isWalk)
         {
             walkAudio.Pause();
         }
@@ -161,15 +177,16 @@ public class PlayerController : MonoBehaviour
                     dirZ = -1;
                 }
             }
-            Vector3 moveDir = new Vector3(dirX * Speed, 0, dirZ * Speed);
+            Vector3 moveDir = new Vector3(pos.x * Speed, 0, pos.y * Speed);
             transform.Translate(moveDir * Time.smoothDeltaTime);
         }
         if (OVRInput.GetUp(OVRInput.Touch.PrimaryThumbstick))               //이동 멈춤
         {
             isWalk = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))                   //점프
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //점프
         {
+            Jump.Play();
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
        
@@ -185,7 +202,6 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.A))        //왼쪽이동
         {
-            Debug.Log(" 이동");
             Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
             isWalk = true;
         }
@@ -206,6 +222,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space)&&isJump==false)        //점프
         {
+            Jump.Play();
             isJump = true;
             Rigidbody rigi=transform.GetComponent<Rigidbody>();
             rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
