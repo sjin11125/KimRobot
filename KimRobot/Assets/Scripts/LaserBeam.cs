@@ -7,20 +7,17 @@ public class LaserBeam
     GameObject laserObj;
     LineRenderer laser;
     List<Vector3> laserIndices = new List<Vector3>();
-    MeshCollider meshCollider;
 
     string thisColor;
-
+    int count = 0;
     public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor)
     {
-        Debug.Log(".");
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();
         this.laserObj.layer = 9;
         this.laserObj.name = "Laser Beam";
 
         this.laser = this.laserObj.AddComponent(typeof(LineRenderer)) as LineRenderer;
-        meshCollider = this.laserObj.AddComponent<MeshCollider>();
 
         this.laser.startWidth = 0.1f;
         this.laser.endWidth = 0.1f;
@@ -42,30 +39,6 @@ public class LaserBeam
             this.laser.endColor = Color.yellow;
         }
         CastRay(pos, dir, laser);
-        GenerateMeshCollider(laser);
-    }
-
-    public void GenerateMeshCollider(LineRenderer laser)
-    {
-        Mesh mesh = new Mesh();
-        laser.BakeMesh(mesh, true);
-
-        // if you need collisions on both sides of the line, simply duplicate & flip facing the other direction!
-        // This can be optimized to improve performance ;)
-        int[] meshIndices = mesh.GetIndices(0);
-        int[] newIndices = new int[meshIndices.Length * 2];
-
-        int j = meshIndices.Length - 1;
-        for (int i = 0; i < meshIndices.Length; i++)
-        {
-            newIndices[i] = meshIndices[i];
-            newIndices[meshIndices.Length + i] = meshIndices[j];
-        }
-        mesh.SetIndices(newIndices, MeshTopology.Triangles, 0);
-
-        meshCollider.sharedMesh = mesh;
-        //meshCollider.convex = true;
-        //meshCollider.isTrigger = true;
     }
 
     void CastRay(Vector3 pos, Vector3 dir, LineRenderer laser)
@@ -116,7 +89,6 @@ public class LaserBeam
         }
     }
 
-    int count = 0;
     void CheckHit(RaycastHit hitInfo, Vector3 direction, LineRenderer laser)
     {
         if (hitInfo.collider.gameObject.tag == "Wall")
@@ -126,7 +98,7 @@ public class LaserBeam
             count++;
             if (count < 5)//다섯번 이상 반사되지 않는다
             {
-                CastRay(pos, dir, laser);
+                CastRay(pos, dir, laser);               
             }
             else
             {

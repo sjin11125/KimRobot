@@ -19,6 +19,7 @@ TagManager:
   - Photo3
   - ScreenWall
   - GunBefore
+  - LineCollider
   layers:
   - Default
   - TransparentFX

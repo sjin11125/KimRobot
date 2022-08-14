@@ -19,6 +19,8 @@ public class ShootLaser : MonoBehaviour
     public GameObject Player;
     PlayerController PlayerController;
 
+    public static bool colliderExit;
+
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
@@ -29,10 +31,12 @@ public class ShootLaser : MonoBehaviour
 
     void Update()
     {
+        //TestScript.colliderPos[0] = GunPivot.transform.position;
         Destroy(GameObject.Find("Laser Beam"));
 
         if (Input.GetMouseButtonUp(0))
         {
+            colliderExit = true;
             if (pivot.transform.childCount > 0)
             {
                 pivot.transform.GetChild(0).transform.parent = null;
@@ -47,25 +51,9 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (Red.activeSelf && Green.activeSelf)
-            {
-                pivot.transform.position = GunPivot.transform.position;
-                pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
-            }
-            else
-            {
-                if (Red.activeSelf)
-                {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
-                }
-                else if (Green.activeSelf)
-                {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Green");
-                }
-            }
+           
         }
-        /*
+
         if (Input.GetMouseButton(0))
         {
             if (Red.activeSelf && Green.activeSelf)
@@ -78,7 +66,7 @@ public class ShootLaser : MonoBehaviour
             {
                 if (Red.activeSelf)
                 {
-                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");
+                    beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");                  
                 }
                 else if (Green.activeSelf)
                 {
@@ -87,7 +75,6 @@ public class ShootLaser : MonoBehaviour
             }
         }
 
-        */
         //------------------¿ÀÅ§¿ë----------------------
         /*  if (OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
           {
