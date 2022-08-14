@@ -13,6 +13,7 @@ public class LaserBeam
 
     public LaserBeam(Vector3 pos, Vector3 dir, Material material, string LaserColor)
     {
+        Debug.Log(".");
         this.laser = new LineRenderer();
         this.laserObj = new GameObject();
         this.laserObj.layer = 9;
