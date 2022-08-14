@@ -21,6 +21,8 @@ public class Items : MonoBehaviour
     public GameObject gameExit;
     public GameObject gameRestart;
 
+    public bool doorOpen;
+
     //스크린 문 닫혀있을때 복도 꺼지도록 해야됨
     public void LetterInput(string letter1, string letter2)
     {
@@ -36,11 +38,7 @@ public class Items : MonoBehaviour
         if (number1 ==  "1" && number2 == "1")
         {
             //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
-            room.GetComponent<Renderer>().material = transparent;
-            ground.GetComponent<Renderer>().material = transparent;
-            roof.GetComponent<Renderer>().material = transparent;
-            doorFrame.GetComponent<Renderer>().material = glow;
-            door.SetActive(false);
+            doorOpen = true;
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -59,6 +57,15 @@ public class Items : MonoBehaviour
         if( timer.GetComponent<Timer>().minute==0 && timer.GetComponent<Timer>().second == 0)
         {
             gameRestart.SetActive(true);
+        }
+
+        if (doorOpen)
+        {
+            room.GetComponent<Renderer>().material = transparent;
+            ground.GetComponent<Renderer>().material = transparent;
+            roof.GetComponent<Renderer>().material = transparent;
+            doorFrame.GetComponent<Renderer>().material = glow;
+            door.SetActive(false);
         }
     }
 
