@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isWalk = false;
     public bool isGun = false;      //총을 쥐었는가?
-    public bool[] Prism =new bool[3] {false,false,false};               //프리즘 (R,G,Y)
+    public bool[] Prism =new bool[3] {true,true,true};               //프리즘 (R,G,Y)
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
 
