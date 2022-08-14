@@ -1,9 +1,84 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Items : MonoBehaviour
 {
+    public GameObject lockImg;
+    public GameObject picture;
+
+    public GameObject door;
+    public GameObject doorFrame;
+
+    public GameObject room;
+    public GameObject ground;
+    public GameObject roof;
+    public Material transparent;
+    public Material glow;
+
+    public GameObject timer;
+    public GameObject gameExit;
+    public GameObject gameRestart;
+
+    public bool doorOpen;
+
+    //스크린 문 닫혀있을때 복도 꺼지도록 해야됨
+    public void LetterInput(string letter1, string letter2)
+    {
+        if(letter1 == "연" && letter2 == "인")
+        {
+            lockImg.SetActive(false);
+            picture.SetActive(true);
+        }
+    }
+
+    public void NumberInput(string number1, string number2)
+    {
+        if (number1 ==  "1" && number2 == "1")
+        {
+            //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
+            doorOpen = true;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (door.activeSelf == false)
+        {
+            if (collision.gameObject.name == "doorFrame")
+            {
+                gameExit.SetActive(true);
+            }
+        }
+    }
+
+    public void Update()
+    {
+        if( timer.GetComponent<Timer>().minute==0 && timer.GetComponent<Timer>().second == 0)
+        {
+            gameRestart.SetActive(true);
+        }
+
+        if (doorOpen)
+        {
+            room.GetComponent<Renderer>().material = transparent;
+            ground.GetComponent<Renderer>().material = transparent;
+            roof.GetComponent<Renderer>().material = transparent;
+            doorFrame.GetComponent<Renderer>().material = glow;
+            door.SetActive(false);
+        }
+    }
+
+    public void OnReTry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void OnQuit()
+    {
+        Application.Quit();
+    }
+    /*
     GameObject[] letters = new GameObject[10];
     List<GameObject> curLetters;
 
@@ -48,6 +123,6 @@ public class Items : MonoBehaviour
                     print(letters[j]);
                 }
             }
-        }*/
-    }
+        }
+    }*/
 }
