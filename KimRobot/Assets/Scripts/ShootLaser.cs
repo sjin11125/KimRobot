@@ -51,7 +51,14 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-           
+            if (Red.activeSelf || Green.activeSelf)
+            {
+                PlayerController.GunShoot.Play();
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            PlayerController.GunShoot.Pause();
         }
 
         if (Input.GetMouseButton(0))
