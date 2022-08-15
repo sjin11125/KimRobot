@@ -15,7 +15,10 @@ public class Tatoo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerController.isTatoo)
+        {
+            PrismOn();
+        }
     }
    /* private void OnTriggerEnter(Collision collision)
     {
