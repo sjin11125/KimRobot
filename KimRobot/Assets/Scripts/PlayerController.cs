@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource GunShoot;          //총발사 사운드
     public AudioSource Neon;          //네온 켜지는 사운드
 
+    public GameObject gameExit;
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -53,8 +54,6 @@ public class PlayerController : MonoBehaviour
         Tr = gameObject.GetComponent<Transform>();
         ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         rigi = GetComponent<Rigidbody>();
-
-
     }
 
     // Update is called once per frame
@@ -83,11 +82,15 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-       
         if (collision.gameObject.CompareTag("Wall"))
         {
             isJump = false;
 
+        }
+
+        if (collision.gameObject.name == "doorFrame")
+        {
+            gameExit.SetActive(true);
         }
     }
         public void Grab()

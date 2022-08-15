@@ -12,7 +12,7 @@ public class Items : MonoBehaviour
     GameObject[] numbers;
 
     public GameObject lockImg;
-    public GameObject picture;
+    public GameObject picture;//사진있는 스크린 오브젝트 넣기
 
     public GameObject door;
     public GameObject doorFrame;
@@ -22,7 +22,6 @@ public class Items : MonoBehaviour
     public Material glow;
 
     public GameObject timer;
-    public GameObject gameExit;
     public GameObject gameRestart;
 
     public bool doorOpen;
@@ -40,6 +39,7 @@ public class Items : MonoBehaviour
         {
             numbers[i] = numberItemParents.transform.GetChild(i).gameObject;
         }
+        doorFrame.GetComponent<BoxCollider>().enabled = false;
     }
     public void Update()
     {
@@ -63,6 +63,7 @@ public class Items : MonoBehaviour
                     room[i].GetComponent<Renderer>().material = transparent;
                 }
                 doorFrame.GetComponent<Renderer>().material = glow;
+                doorFrame.GetComponent<BoxCollider>().enabled = true;
                 door.SetActive(false);
                 //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
             }
@@ -103,24 +104,12 @@ public class Items : MonoBehaviour
 
         if (number.Count == 2)
         {
-            print(number[0]);
             if (number[1] == "2" && number[0] == "1")
             {
                 doorOpen = true;
             }
         }
     } 
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (door.activeSelf == false)
-        {
-            if (collision.gameObject.name == "doorFrame")
-            {
-                gameExit.SetActive(true);
-            }
-        }
-    }
 
     public void OnReTry()
     {
