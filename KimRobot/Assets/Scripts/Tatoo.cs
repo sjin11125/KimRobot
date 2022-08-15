@@ -17,12 +17,17 @@ public class Tatoo : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collision collision)
+   /* private void OnTriggerEnter(Collision collision)
     {
         if (collision.transform.gameObject.name== "Laser Beam")
         {
-            GreenPrism.SetActive(true);
-            PlayerController.Clue.Play();
+            
         }
+    }*/
+
+    public void PrismOn()
+    {
+        GreenPrism.SetActive(true);
+        PlayerController.Clue.Play();
     }
 }
