@@ -78,11 +78,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //PlayerMove();                   //플레이어 이동(컨트롤러)
-        
-        //---------------PC버전---------------------------------
-       
-        //Grab();                         //우클릭 잡기
 
+        //---------------PC버전---------------------------------
+
+        //Grab();                         //우클릭 잡기
+        PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;

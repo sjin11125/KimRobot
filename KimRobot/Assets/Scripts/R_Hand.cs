@@ -16,6 +16,9 @@ public class R_Hand : MonoBehaviour
         Physics.IgnoreLayerCollision(6, 7);
         Physics.IgnoreLayerCollision(7, 7);
         Physics.IgnoreLayerCollision(7, 8);
+        Physics.IgnoreLayerCollision(7, 9);
+        Physics.IgnoreLayerCollision(6, 9);
+        Physics.IgnoreLayerCollision(8, 9);
     }
     private void FixedUpdate()
     {
