@@ -5,69 +5,111 @@ using UnityEngine.SceneManagement;
 
 public class Items : MonoBehaviour
 {
+    public GameObject letterItemParents;
+    GameObject[] letters;
+
+    public GameObject numberItemParents;
+    GameObject[] numbers;
+
     public GameObject lockImg;
-    public GameObject picture;
+    public GameObject picture;//사진있는 스크린 오브젝트 넣기
 
     public GameObject door;
     public GameObject doorFrame;
 
-    public GameObject room;
-    public GameObject ground;
-    public GameObject roof;
+    public GameObject[] room;
     public Material transparent;
     public Material glow;
 
     public GameObject timer;
-    public GameObject gameExit;
     public GameObject gameRestart;
 
     public bool doorOpen;
 
-    //스크린 문 닫혀있을때 복도 꺼지도록 해야됨
-    public void LetterInput(string letter1, string letter2)
+    private void Start()
     {
-        if(letter1 == "연" && letter2 == "인")
+        letters = new GameObject[letterItemParents.transform.childCount];
+        for (int i = 0; i < letters.Length; i++)
         {
-            lockImg.SetActive(false);
-            picture.SetActive(true);
+            letters[i] = letterItemParents.transform.GetChild(i).gameObject;
         }
-    }
 
-    public void NumberInput(string number1, string number2)
-    {
-        if (number1 ==  "1" && number2 == "1")
+        numbers = new GameObject[numberItemParents.transform.childCount];
+        for (int i = 0; i < numbers.Length; i++)
         {
-            //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
-            doorOpen = true;
+            numbers[i] = numberItemParents.transform.GetChild(i).gameObject;
         }
+        doorFrame.GetComponent<BoxCollider>().enabled = false;
     }
-    private void OnCollisionEnter(Collision collision)
+    public void Update()
     {
-        if (door.activeSelf == false)
+        if (timer.GetComponent<Timer>().minute == 0 && timer.GetComponent<Timer>().second == 0)
         {
-            if (collision.gameObject.name == "doorFrame")
+            gameRestart.SetActive(true);
+        }      
+
+        if (lockImg.activeSelf)//스크린이 잠겨있을때
+        {
+            LetterInput();
+        }
+        else//스크린 잠금 해제일때
+        {
+            NumberInput();
+
+            if (doorOpen)//번호를 맞춘 후
             {
-                gameExit.SetActive(true);
+                for (int i = 0; i < room.Length; i++)
+                {
+                    room[i].GetComponent<Renderer>().material = transparent;
+                }
+                doorFrame.GetComponent<Renderer>().material = glow;
+                doorFrame.GetComponent<BoxCollider>().enabled = true;
+                door.SetActive(false);
+                //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
             }
         }
     }
 
-    public void Update()
+    public void LetterInput()
     {
-        if( timer.GetComponent<Timer>().minute==0 && timer.GetComponent<Timer>().second == 0)
+        List<string> letter = new List<string>();
+        for (int i = 0; i < letters.Length; i++)
         {
-            gameRestart.SetActive(true);
+            if(letters[i].GetComponent<Item>().isRed)
+            {
+                letter.Add(letters[i].GetComponent<Item>().letter);
+            }
         }
 
-        if (doorOpen)
+        if (letter.Count == 2)
         {
-            room.GetComponent<Renderer>().material = transparent;
-            ground.GetComponent<Renderer>().material = transparent;
-            roof.GetComponent<Renderer>().material = transparent;
-            doorFrame.GetComponent<Renderer>().material = glow;
-            door.SetActive(false);
+            if(letter[1] == "연" && letter[0] == "인")
+            {
+                lockImg.SetActive(false);
+                picture.SetActive(true);
+            }
         }
     }
+
+    public void NumberInput()
+    {
+        List<string> number = new List<string>();
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            if (numbers[i].GetComponent<Item>().isRed)
+            {
+                number.Add(numbers[i].GetComponent<Item>().letter);
+            }
+        }
+
+        if (number.Count == 2)
+        {
+            if (number[1] == "2" && number[0] == "1")
+            {
+                doorOpen = true;
+            }
+        }
+    } 
 
     public void OnReTry()
     {
@@ -78,51 +120,4 @@ public class Items : MonoBehaviour
     {
         Application.Quit();
     }
-    /*
-    GameObject[] letters = new GameObject[10];
-    List<GameObject> curLetters;
-
-    void Start()
-    {
-        curLetters = new List<GameObject>();
-        for (int i = 0; i < letters.Length; i++)
-        {
-            letters[i] = transform.GetChild(i).gameObject;
-        }
-    }
-
-    public void GetLetters(GameObject letter)
-    {
-        if (curLetters.Count > 0)
-        {
-            if (curLetters[curLetters.Count-1] != letter)
-            {
-                curLetters.Add(letter);
-                //letter.GetComponent<Item>().TouchingBox();
-            }
-        }
-        else
-        {
-            curLetters.Add(letter);
-            //letter.GetComponent<Item>().TouchingBox();
-        }
-
-        /*
-        for (int i = 0; i < letters.Length; i++)
-        {
-            letters[i].GetComponent<Item>().hit = false;
-        }
-
-        for (int i = 0; i < letters.Length; i++)
-        {
-            for (int j = 0; j < curLetters.Count; j++)
-            {
-                if (letters[i] == curLetters[j])
-                {
-                    letters[j].GetComponent<Item>().hit = true;
-                    print(letters[j]);
-                }
-            }
-        }
-    }*/
 }

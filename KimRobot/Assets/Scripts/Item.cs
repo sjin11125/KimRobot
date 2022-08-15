@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
     public string letter;
     Material material;
     public Material redMat;
+    public bool isRed;
 
     private void Start()
     {
@@ -19,58 +20,30 @@ public class Item : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Laser Beam")
+        if (other.gameObject.tag == "LineCollider")
         {
-            print("enter");
-            if (type == Type.Letter)
-            {
+            //if (type == Type.Letter)
                 gameObject.GetComponent<Renderer>().material = redMat;
-            }
+                isRed = true;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.name == "Laser Beam")
-        {         
-            print("stay");
-            if (type == Type.Letter)
-            {
+        if (other.gameObject.tag == "LineCollider")
+        {
                 gameObject.GetComponent<Renderer>().material = redMat;
-            }
+                isRed = true;
         }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        if(other.name == "Laser Beam")
+        if (other.gameObject.tag == "LineCollider")
         {
-            print("exit");
-            if (type == Type.Letter)
-            {
                 gameObject.GetComponent<Renderer>().material = material;
-            }
+                isRed = false;
         }
     }
-    /*
-    public void TouchingBox()
-    {
-        if (movePos == MovePos.z)
-        {
-            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 1.5f);
-            //transform.localPosition = pos;
-            gameObject.GetComponent<Renderer>().material = blue;
-        }
-    }
-
-    public void ExitBox()
-    {
-        if (movePos == MovePos.z)
-        {
-            Vector3 pos = new Vector3(transform.localPosition.x, transform.localPosition.y, 0f);
-            //transform.localPosition = pos;
-            gameObject.GetComponent<Renderer>().material = material;
-        }
-    }*/
 }
