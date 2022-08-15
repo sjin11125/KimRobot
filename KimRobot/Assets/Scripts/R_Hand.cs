@@ -128,6 +128,7 @@ public class R_Hand : MonoBehaviour
                 else
                 {
                     UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
+                    Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
                     isClue = true;
                 }
 

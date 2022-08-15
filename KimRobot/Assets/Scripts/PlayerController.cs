@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
     public bool isWalk = false;
     public bool isGun = false;      //총을 쥐었는가?
     public bool[] Prism =new bool[3] {true,true,true};               //프리즘 (R,G,Y)
-    public bool isQuiz = false;
+    public bool isQuiz = false;             //퀴즈 맞혔나
+    public bool isTatoo = false;            //타투도안 맞혔나
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
     public bool isStart = false;
@@ -92,6 +93,10 @@ public class PlayerController : MonoBehaviour
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
+        }
+        if (isTatoo)
+        {
+            isTatoo = false;
         }
         if (isStartDone)
         {
