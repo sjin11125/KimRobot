@@ -133,6 +133,12 @@ public class LaserBeam
                 UpdateLaser();
             }
         }
+        else if(hitInfo.collider.gameObject.tag == "Tatoo")
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isTatoo = true;
+            laserIndices.Add(hitInfo.point);
+            UpdateLaser();
+        }
         else
         {
             laserIndices.Add(hitInfo.point);
