@@ -62,12 +62,9 @@ public class Break : MonoBehaviour
         {
 			
 			isBreak = false;
-			num--;
-			Debug.Log(num);
-            if (num==0)
-            {
+		
 				BreakGlass();
-			}
+			
 
 		}
     }

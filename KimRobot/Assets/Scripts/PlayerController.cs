@@ -28,9 +28,10 @@ public class PlayerController : MonoBehaviour
     public bool isWalk = false;
     public bool isGun = false;      //총을 쥐었는가?
     public bool[] Prism =new bool[3] {true,true,true};               //프리즘 (R,G,Y)
+    public bool isQuiz = false;
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
-
+    public bool isStart = false;
 
     //오디오
     public AudioSource walkAudio;           //발사운드
@@ -45,7 +46,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource Screen;          //스크린 활성화 사운드
     public AudioSource GunShoot;          //총발사 사운드
     public AudioSource Neon;          //네온 켜지는 사운드
-
+    public AudioSource GlassBroken;          //실린더 깨지는 사운드
+    public AudioSource CylinderWarning;          //실린더 경고 사운드
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -53,7 +55,7 @@ public class PlayerController : MonoBehaviour
         Tr = gameObject.GetComponent<Transform>();
         ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         rigi = GetComponent<Rigidbody>();
-
+        isStart = false;
 
     }
 
@@ -63,10 +65,19 @@ public class PlayerController : MonoBehaviour
         //PlayerMove();                   //플레이어 이동(컨트롤러)
         
         //---------------PC버전---------------------------------
-        PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+       
         //Grab();                         //우클릭 잡기
 
-        ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
+        if (isQuiz)
+        {
+            isQuiz = false;
+
+        }
+        if (isStart)
+        {
+            PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+
+        }
         //hit=;
         if (isWalk&&!walkAudio.isPlaying)
         {

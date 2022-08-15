@@ -19,6 +19,8 @@ TagManager:
   - Photo3
   - ScreenWall
   - GunBefore
+  - Letter
+  - Screen
   layers:
   - Default
   - TransparentFX
@@ -30,7 +32,7 @@ TagManager:
   - Hand
   - Gun
   - Laser
-  - 
+  - Map
   - 
   - 
   - 
