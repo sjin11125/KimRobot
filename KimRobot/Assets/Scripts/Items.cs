@@ -26,6 +26,8 @@ public class Items : MonoBehaviour
 
     public bool doorOpen;
 
+    public PlayerController PlayerController;
+
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -58,10 +60,12 @@ public class Items : MonoBehaviour
 
             if (doorOpen)//번호를 맞춘 후
             {
+                doorOpen = false;
                 for (int i = 0; i < room.Length; i++)
                 {
                     room[i].GetComponent<Renderer>().material = transparent;
                 }
+                PlayerController.Neon.Play();
                 doorFrame.GetComponent<Renderer>().material = glow;
                 doorFrame.GetComponent<BoxCollider>().enabled = true;
                 door.SetActive(false);
