@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
     public bool isStart = false;
+    public bool isStartDone = false;
+    public GameObject StartPos;         //시작지점
+    Animator StartAnimation;            //시작 애니메이션
+    Transform[] Trs;
 
     //오디오
     public AudioSource walkAudio;           //발사운드
@@ -53,12 +57,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
+        Trs = gameObject.GetComponentsInChildren<Transform>();
         ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         rigi = GetComponent<Rigidbody>();
         isStart = false;
-
+        StartAnimation = GetComponent<Animator>();
+       
     }
+    IEnumerator StartAnimationCo()
+    {
+        Trs[3].gameObject.SetActive(false);
+        StartAnimation.SetTrigger("WakeUp");
+        yield return new WaitForSeconds(6f);
+        transform.position = StartPos.transform.position;
 
+        isStartDone = true;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -68,15 +82,28 @@ public class PlayerController : MonoBehaviour
        
         //Grab();                         //우클릭 잡기
 
-        if (isQuiz)
+        if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;
 
         }
         if (isStart)
         {
-            PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+            isStart = false;
+            StartCoroutine(StartAnimationCo());
 
+        }
+        if (isStartDone)
+        {
+            StopCoroutine(StartAnimationCo());
+            //Trs[3].gameObject.SetActive(true);
+            if (GetComponent<StartScript>()!=null)
+            {
+
+                GetComponent<StartScript>().StartPos();
+            }
+            
+            PlayerMove_Keyboard();          //플레이어 이동(키보드로)
         }
         //hit=;
         if (isWalk&&!walkAudio.isPlaying)
