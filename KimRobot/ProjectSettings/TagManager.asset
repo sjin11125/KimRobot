@@ -21,6 +21,7 @@ TagManager:
   - GunBefore
   - Letter
   - Screen
+  - LineCollider
   layers:
   - Default
   - TransparentFX

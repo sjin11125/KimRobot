@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource Neon;          //네온 켜지는 사운드
     public AudioSource GlassBroken;          //실린더 깨지는 사운드
     public AudioSource CylinderWarning;          //실린더 경고 사운드
+    public GameObject gameExit;
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -61,9 +62,11 @@ public class PlayerController : MonoBehaviour
         Trs = gameObject.GetComponentsInChildren<Transform>();
         ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         rigi = GetComponent<Rigidbody>();
+
         isStart = false;
         StartAnimation = GetComponent<Animator>();
        
+
     }
     IEnumerator StartAnimationCo()
     {
@@ -126,11 +129,15 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-       
         if (collision.gameObject.CompareTag("Wall"))
         {
             isJump = false;
 
+        }
+
+        if (collision.gameObject.name == "doorFrame")
+        {
+            gameExit.SetActive(true);
         }
     }
         public void Grab()
