@@ -51,7 +51,14 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-           
+            if (Red.activeSelf || Green.activeSelf)
+            {
+                PlayerController.GunShoot.Play();
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            PlayerController.GunShoot.Pause();
         }
 
         if (Input.GetMouseButton(0))
@@ -101,7 +108,7 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetKeyDown("z"))
         {
-            if (PlayerController.Prism[0]==true)            //레드 프리즘을 얻었는가
+            if (PlayerController.Prism[1]==true)            //레드 프리즘을 얻었는가
             {
                 PlayerController.GunColor.Play();               //효과음 재생
                 if (Red.activeSelf)
@@ -118,7 +125,7 @@ public class ShootLaser : MonoBehaviour
         }
         if (Input.GetKeyDown("x"))
         {
-            if (PlayerController.Prism[1] == true)            //초록 프리즘을 얻었는가
+            if (PlayerController.Prism[0] == true)            //초록 프리즘을 얻었는가
             {
                 PlayerController.GunColor.Play();               //효과음 재생
                 if (Green.activeSelf)

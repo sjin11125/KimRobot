@@ -10,13 +10,6 @@ public class Items : MonoBehaviour
 
     public GameObject numberItemParents;
     GameObject[] numbers;
-    public GameObject StarZero;
-    public GameObject numberZero;
-    public GameObject StarOne;
-    public GameObject numberOne;
-    public GameObject StarTwo;
-    public GameObject numberTwo;
-    public Material redMat;
 
     public GameObject lockImg;
     public GameObject picture;//사진있는 스크린 오브젝트 넣기
@@ -33,6 +26,8 @@ public class Items : MonoBehaviour
 
     public bool doorOpen;
 
+    public PlayerController PlayerController;
+
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -47,7 +42,6 @@ public class Items : MonoBehaviour
             numbers[i] = numberItemParents.transform.GetChild(i).gameObject;
         }
         doorFrame.GetComponent<BoxCollider>().enabled = false;
-        numberItemParents.SetActive(false);
     }
     public void Update()
     {
@@ -62,43 +56,21 @@ public class Items : MonoBehaviour
         }
         else//스크린 잠금 해제일때
         {
-            if (!numberZero.activeSelf)
+            NumberInput();
+
+            if (doorOpen)//번호를 맞춘 후
             {
-                NumberZeroInput();
-            }
-            else
-            {
-                if (!numberOne.activeSelf)
+                doorOpen = false;
+                for (int i = 0; i < room.Length; i++)
                 {
-                    NumberOneInput();
+                    room[i].GetComponent<Renderer>().material = transparent;
                 }
-                else
-                {
-                    if (!numberTwo.activeSelf)
-                    {
-                        NumberTwoInput();
-                    }
-                    else
-                    {
-                        if (!doorOpen)
-                        {
-                            NumberInput();
-                        }
-                        else
-                        {
-                            for (int i = 0; i < room.Length; i++)
-                            {
-                                room[i].GetComponent<Renderer>().material = transparent;
-                            }
-                            doorFrame.GetComponent<Renderer>().material = glow;
-                            doorFrame.GetComponent<BoxCollider>().enabled = true;
-                            door.SetActive(false);
-                            //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
-                        }
-                    }
-                }
+                PlayerController.Neon.Play();
+                doorFrame.GetComponent<Renderer>().material = glow;
+                doorFrame.GetComponent<BoxCollider>().enabled = true;
+                door.SetActive(false);
+                //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
             }
-           
         }
     }
 
@@ -119,66 +91,7 @@ public class Items : MonoBehaviour
             {
                 lockImg.SetActive(false);
                 picture.SetActive(true);
-                letterItemParents.SetActive(false);
-                numberItemParents.SetActive(true);
-                StarZero.GetComponent<Renderer>().material = redMat;
             }
-        }
-    }
-
-    public void NumberZeroInput()
-    {
-        string number = "";
-        for (int i = 0; i < numbers.Length; i++)
-        {
-            if (numbers[i].GetComponent<Item>().isRed)
-            {
-                number = numbers[i].GetComponent<Item>().letter;
-            }
-        }
-
-        if (number == "4")
-        {
-            StarZero.SetActive(false);
-            numberZero.SetActive(true);
-            StarOne.GetComponent<Renderer>().material = redMat;
-        }
-    }
-
-    public void NumberOneInput()
-    {
-        string number = "";
-        for (int i = 0; i < numbers.Length; i++)
-        {
-            if (numbers[i].GetComponent<Item>().isRed)
-            {
-                number = numbers[i].GetComponent<Item>().letter;
-            }
-        }
-
-        if (number == "3")
-        {
-            StarOne.SetActive(false);
-            numberOne.SetActive(true);
-            StarTwo.GetComponent<Renderer>().material = redMat;
-        }
-    }
-
-    public void NumberTwoInput()
-    {
-        string number = "";
-        for (int i = 0; i < numbers.Length; i++)
-        {
-            if (numbers[i].GetComponent<Item>().isRed)
-            {
-                number = numbers[i].GetComponent<Item>().letter;
-            }
-        }
-
-        if (number == "2")
-        {
-            StarTwo.SetActive(false);
-            numberTwo.SetActive(true);
         }
     }
 

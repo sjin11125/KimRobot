@@ -55,7 +55,7 @@ public class Break : MonoBehaviour
     {
 		StartPos = transform.position;
 
-        StartCoroutine(Warning());
+       // StartCoroutine(Warning());
     }
     private void Update()
     {
