@@ -22,22 +22,22 @@ public class R_Hand : MonoBehaviour
     }
     private void FixedUpdate()
     {
-    }
-    private void Update()
-    {
-
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Debug.Log(isClue);
         }
         if (isClue)
         {
-           
+            UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
+            Player.GetComponentsInChildren<Camera>()[1].enabled = false;
+            Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
 
         }
         else
         {
-          
+            //UICamera.GetComponentsInChildren<Camera>()[1].enabled = false;
+            Player.GetComponentsInChildren<Camera>()[1].enabled = true;
+            Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
         }
     }
     private void OnCollisionExit(Collision other)
@@ -62,7 +62,7 @@ public class R_Hand : MonoBehaviour
     {
         if (other.transform.tag == "GunBefore")
         {
-            if (Input.GetMouseButtonDown(1))       //우클릭 혹은 오른쪽 컨트롤러 
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger)||Input.GetMouseButtonDown(1))       //우클릭 혹은 오른쪽 컨트롤러 
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
@@ -86,7 +86,7 @@ public class R_Hand : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
-                Player.GetComponent<PlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[0] = true;          //빨간색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("빨간색 프리즘 얻음");
@@ -97,7 +97,7 @@ public class R_Hand : MonoBehaviour
             }
             if (other.transform.tag == "BluePrism")
             {
-                Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[1] = true;          //초록색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("초록색 프리즘 얻음");
@@ -119,45 +119,40 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Clue")
         {
-            /*if (Input.GetKeyDown(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
+            if (Input.GetKeyDown(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
             {
 
 
+                if (isClue)
+                {
+                   // UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
+                    isClue = false;
+                }
+                else
+                {
                     UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
+                    Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
                     isClue = true;
-                
+                }
 
             
 
             }
-            if (Input.GetKey(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
+            /*if (Input.GetKey(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
             {
-                
                 isClue = true;
+
+                UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
+                //Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
+                Debug.Log("우클릭");
           
-            }*/
+            }
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 Debug.Log("땜");
-                if (isClue)
-                {
-                    isClue = false;
-                    UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
-                    Player.GetComponentsInChildren<Camera>()[1].enabled = false;
-                    Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
-                    Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
-                    
-                }
-                else
-                {
-                    isClue = true;
-                    UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
-                    //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
-                    Player.GetComponentsInChildren<Camera>()[1].enabled = true;
-                    Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
-                }
-
-            }
+                isClue = false;
+            
+            }*/
         }
     }
     /*private void OnTriggerStay(Collider other)              //닿인 상태에서
