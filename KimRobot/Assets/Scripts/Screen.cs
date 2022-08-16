@@ -45,7 +45,6 @@ public class Screen : MonoBehaviour
    public void CloseDoor()
     {
         Debug.Log("열림교회 닫힘");
-        PlayerController.Screen.Play();
         Door[0].SetBool("isOpen",false);
         Door[1].SetBool("isOpen",false);
     }
@@ -63,12 +62,12 @@ public class Screen : MonoBehaviour
                 PhotoObj.SetActive(true);
             //스크린 활성화
         }
-        if (isIn&&(Player.transform.position.x > -9f))      //밖으로 나왓나
+        if (isIn&&(Player.transform.position.x > ScreenWall[0].transform.position.x))      //밖으로 나왓나
         {
             isIn = false;
             CloseDoor();
         }
-         if (!isIn && (Player.transform.position.x < -10f))      //안에 들어갔나
+         if (!isIn && (Player.transform.position.x < ScreenWall[0].transform.position.x))      //안에 들어갔나
             isIn = true;
     }
 }
