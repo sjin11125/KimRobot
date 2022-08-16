@@ -45,6 +45,7 @@ public class Screen : MonoBehaviour
    public void CloseDoor()
     {
         Debug.Log("¿­¸²±³È¸ ´ÝÈû");
+        PlayerController.Screen.Play();
         Door[0].SetBool("isOpen",false);
         Door[1].SetBool("isOpen",false);
     }
