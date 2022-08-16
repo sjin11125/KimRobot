@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Screen : MonoBehaviour
 {
-    public Animator Door;
+    public Animator[] Door;
     public GameObject[] Rooms;
     public GameObject Player;
-    public GameObject ScreenWall;
+    public GameObject[] ScreenWall;
 
-    public AudioSource DoorSound;
+    public GameObject[] LockObj;
+    public GameObject PhotoObj;
+
+    PlayerController PlayerController;
+    private void Start()
+    {
+        PlayerController = Player.GetComponent<PlayerController>();
+    }
 
     bool isIn = false;
    public void OpenDoor()
@@ -32,23 +39,35 @@ public class Screen : MonoBehaviour
             Rooms[1].SetActive(false);
             Rooms[2].SetActive(true);
         }
-        Door.SetBool("isOpen",true);
-        DoorSound.Play();
+        Door[0].SetBool("isOpen",true);
+        Door[1].SetBool("isOpen",true);
     }
    public void CloseDoor()
     {
         Debug.Log("열림교회 닫힘");
-        Door.SetBool("isOpen",false);
+        Door[0].SetBool("isOpen",false);
+        Door[1].SetBool("isOpen",false);
     }
     private void Update()
     {
+        if (transform.tag.Equals("Screen")&& PlayerController.isQuiz)            //퀴즈 맞혔니?네
+        {
+            PlayerController.Screen.Play();
+            for (int i = 0; i < LockObj.Length; i++)
+            {
+                LockObj[i].SetActive(false);
+            } //잠금 비활성화
 
-        if (isIn&&(Player.transform.position.x > ScreenWall.transform.position.x))      //밖으로 나왓나
+           
+                PhotoObj.SetActive(true);
+            //스크린 활성화
+        }
+        if (isIn&&(Player.transform.position.x > ScreenWall[0].transform.position.x))      //밖으로 나왓나
         {
             isIn = false;
             CloseDoor();
         }
-         if (!isIn && (Player.transform.position.x < ScreenWall.transform.position.x))      //안에 들어갔나
+         if (!isIn && (Player.transform.position.x < ScreenWall[0].transform.position.x))      //안에 들어갔나
             isIn = true;
     }
 }

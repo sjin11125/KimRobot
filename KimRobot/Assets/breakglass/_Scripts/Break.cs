@@ -10,6 +10,8 @@ public class Break : MonoBehaviour
 
 	int num = 3;
 	Vector3 StartPos;
+
+    public GameObject WarningPannel;
 	void OnCollisionEnter(Collision collision)
     {
 		
@@ -53,22 +55,36 @@ public class Break : MonoBehaviour
     {
 		StartPos = transform.position;
 
-
-	}
+        StartCoroutine(Warning());
+    }
     private void Update()
     {
         //transform.position = StartPos;
         if (isBreak)
         {
-			
+            StopCoroutine(Warning());
 			isBreak = false;
-			num--;
-			Debug.Log(num);
-            if (num==0)
-            {
+		
 				BreakGlass();
-			}
+			
 
 		}
+            
+    }
+
+    IEnumerator Warning()
+    {
+        if (WarningPannel!=null)
+        {
+            while (!isBreak)
+            {
+                yield return new WaitForSeconds(0.6f);
+                WarningPannel.SetActive(true);
+                yield return new WaitForSeconds(0.6f);
+                WarningPannel.SetActive(false);
+            }
+         
+        }
+   
     }
 }

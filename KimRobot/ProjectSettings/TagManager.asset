@@ -19,7 +19,10 @@ TagManager:
   - Photo3
   - ScreenWall
   - GunBefore
+  - Letter
+  - Screen
   - LineCollider
+  - Tatoo
   layers:
   - Default
   - TransparentFX
@@ -31,7 +34,7 @@ TagManager:
   - Hand
   - Gun
   - Laser
-  - 
+  - Map
   - 
   - 
   - 

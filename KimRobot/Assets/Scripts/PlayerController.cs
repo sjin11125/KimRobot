@@ -28,9 +28,15 @@ public class PlayerController : MonoBehaviour
     public bool isWalk = false;
     public bool isGun = false;      //총을 쥐었는가?
     public bool[] Prism =new bool[3] {true,true,true};               //프리즘 (R,G,Y)
+    public bool isQuiz = false;             //퀴즈 맞혔나
+    public bool isTatoo = false;            //타투도안 맞혔나
     public GameObject Hand;         //손 오브젝트
     public Transform Gun;
-
+    public bool isStart = false;
+    public bool isStartDone = false;
+    public GameObject StartPos;         //시작지점
+    Animator StartAnimation;            //시작 애니메이션
+    Transform[] Trs;
 
     //오디오
     public AudioSource walkAudio;           //발사운드
@@ -45,27 +51,69 @@ public class PlayerController : MonoBehaviour
     public AudioSource Screen;          //스크린 활성화 사운드
     public AudioSource GunShoot;          //총발사 사운드
     public AudioSource Neon;          //네온 켜지는 사운드
-
+    public AudioSource GlassBroken;          //실린더 깨지는 사운드
+    public AudioSource CylinderWarning;          //실린더 경고 사운드
     public GameObject gameExit;
 
     List<string> Inventory = new List<string>(); 
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
+        Trs = gameObject.GetComponentsInChildren<Transform>();
         ScreenCenter = new Vector3(Camera.main.pixelWidth / 2, Camera.main.pixelHeight / 2);
         rigi = GetComponent<Rigidbody>();
-    }
 
+        isStart = false;
+        StartAnimation = GetComponent<Animator>();
+       
+
+    }
+    IEnumerator StartAnimationCo()
+    {
+        Trs[3].gameObject.SetActive(false);
+        StartAnimation.SetTrigger("WakeUp");
+        yield return new WaitForSeconds(6f);
+        transform.position = StartPos.transform.position;
+
+        isStartDone = true;
+    }
     // Update is called once per frame
     void Update()
     {
         //PlayerMove();                   //플레이어 이동(컨트롤러)
-        
-        //---------------PC버전---------------------------------
-        PlayerMove_Keyboard();          //플레이어 이동(키보드로)
-        //Grab();                         //우클릭 잡기
 
-        ray = Camera.ScreenPointToRay(ScreenCenter);            //레이 쏘기
+        //---------------PC버전---------------------------------
+
+        //Grab();                         //우클릭 잡기
+        isStartDone = true;
+        PlayerMove_Keyboard();
+        if (isQuiz)                     //퀴즈 풀었을 때
+        {
+            isQuiz = false;
+
+        }
+        /*if (isStart)
+        {
+            isStart = false;
+            StartCoroutine(StartAnimationCo());
+
+        }*/
+       /* if (isTatoo)
+        {
+            isTatoo = false;
+        }*/
+        if (isStartDone)
+        {
+            StopCoroutine(StartAnimationCo());
+            //Trs[3].gameObject.SetActive(true);
+            if (GetComponent<StartScript>()!=null)
+            {
+
+                GetComponent<StartScript>().StartPos();
+            }
+            
+            PlayerMove_Keyboard();          //플레이어 이동(키보드로)
+        }
         //hit=;
         if (isWalk&&!walkAudio.isPlaying)
         {
