@@ -44,7 +44,8 @@ public class R_Hand : MonoBehaviour
 
                 Player.GetComponentsInChildren<Camera>()[1].enabled = true;
                 Player.GetComponent<VRPlayerController>().enabled = true;        //플레이어 움직일수잇게
-                UICamera.transform.SetParent(UICameraParent.transform);
+                UICamera.transform.SetParent(UICameraParent.transform);         //카메라 부모 다시 설정
+                UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
 
                 CenterCamera.SetActive(true);
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
@@ -66,10 +67,11 @@ public class R_Hand : MonoBehaviour
 
                // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
 
-                UICameraParent = UICamera.transform.parent.gameObject;
-                UICamera.transform.SetParent(TrackingCamera.transform);
+                UICameraParent = UICamera.transform.parent.gameObject;      //카메라 부모 받아옴
+                UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
+                UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(true);
 
-                CenterCamera.SetActive(false);
+                CenterCamera.SetActive(false);                      //CentereyeAnchor 비활성화 
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
                 //Clue.SetActive(true);               //단서 글 뜨게
                 //Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
