@@ -92,12 +92,12 @@ public class PlayerController : MonoBehaviour
             isQuiz = false;
 
         }
-        if (isStart)
+        /*if (isStart)
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
-        }
+        }*/
        /* if (isTatoo)
         {
             isTatoo = false;
