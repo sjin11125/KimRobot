@@ -46,7 +46,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4247336800429106903}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
@@ -242,7 +242,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 440e99598766dbd40a4d8bc01445b5ca, type: 3}
+    m_Font: {fileID: 12800000, guid: e2e84e66f1b4e664e96bfb7b902b03b2, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
@@ -255,4 +255,4 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\uD3C9\uBC94\uD55C \uB2EC\uB825\uC774\uB2E4. \uAE30\uC5B5\uC18D\uC758
-    \uC2DC\uAC04\uC5D0\uC11C \uBA48\uCD98 \uAC83 \uAC19\uB2E4.rre"
+    \uC2DC\uAC04\uC5D0\uC11C \uBA48\uCD98 \uAC83 \uAC19\uB2E4.\n"

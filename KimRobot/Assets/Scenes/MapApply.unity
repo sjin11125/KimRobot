@@ -11164,6 +11164,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4715573176610605619, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4715573176610605620, guid: c0d2eb40a40ef05478a19b7bd2a0c40c, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -15042,9 +15046,9 @@ Transform:
   - {fileID: 402304675}
   - {fileID: 949059351}
   - {fileID: 898802074}
-  - {fileID: 1539831358}
   - {fileID: 1931880490}
   - {fileID: 609125172}
+  - {fileID: 1539831358}
   - {fileID: 724107778}
   - {fileID: 1981234001}
   m_Father: {fileID: 2101608504}
@@ -18462,7 +18466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1539831358}
   m_Layer: 0
-  m_Name: Tube
+  m_Name: Cylinder2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18489,7 +18493,7 @@ Transform:
   - {fileID: 883184419}
   - {fileID: 1512358981}
   m_Father: {fileID: 1158363506}
-  m_RootOrder: 14
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541537761
 GameObject:
@@ -23092,6 +23096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterItemParents: {fileID: 0}
   numberItemParents: {fileID: 0}
+  Quiz: {fileID: 0}
   StarZero: {fileID: 0}
   numberZero: {fileID: 0}
   StarOne: {fileID: 0}
@@ -23103,6 +23108,7 @@ MonoBehaviour:
   picture: {fileID: 258433010}
   door: {fileID: 1931880491}
   doorFrame: {fileID: 609125173}
+  star: {fileID: 0}
   room:
   - {fileID: 0}
   transparent: {fileID: 2100000, guid: e23acebd8d6ee1845b24e76e3f91eb9c, type: 2}
@@ -23110,6 +23116,7 @@ MonoBehaviour:
   timer: {fileID: 882061587}
   gameRestart: {fileID: 327141923}
   doorOpen: 0
+  switchDown: {fileID: 0}
 --- !u!1 &1947974963
 GameObject:
   m_ObjectHideFlags: 0
