@@ -135,7 +135,7 @@ public class R_Hand : MonoBehaviour
             if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
-                Player.GetComponent<PlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
+                Player.GetComponent<VRPlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("빨간색 프리즘 얻음");
@@ -148,12 +148,12 @@ public class R_Hand : MonoBehaviour
                 if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
                 {
 
-                    Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+                    Player.GetComponent<VRPlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
 
                     //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                     Debug.Log("초록색 프리즘 얻음");
                    
-                        Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
+                        Player.GetComponent<VRPlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
                         Destroy(other.transform.gameObject);
                     
                 }
@@ -165,7 +165,7 @@ public class R_Hand : MonoBehaviour
             other.transform.tag == "Photo3")
         {
             Debug.Log("문이열리네여");
-            Player.GetComponent<PlayerController>().Door.Play();            //효과음 재생
+            Player.GetComponent<VRPlayerController>().Door.Play();            //효과음 재생
             other.transform.GetComponent<Screen>().OpenDoor();          //문열어
         }
 
@@ -212,9 +212,9 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Cylinder")
         {
-            Player.GetComponent<PlayerController>().GlassBroken.Play();
-            Player.GetComponent<PlayerController>().isStart = true;
-            Player.GetComponent<PlayerController>().CylinderWarning.Pause();
+            Player.GetComponent<VRPlayerController>().GlassBroken.Play();
+            Player.GetComponent<VRPlayerController>().isStart = true;
+            Player.GetComponent<VRPlayerController>().CylinderWarning.Pause();
             other.transform.GetComponent<Break>().isBreak = true;
         }
 

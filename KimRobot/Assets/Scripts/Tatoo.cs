@@ -5,7 +5,7 @@ using UnityEngine;
 public class Tatoo : MonoBehaviour
 {
     public GameObject GreenPrism;
-    public PlayerController PlayerController;
+    public VRPlayerController PlayerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +17,7 @@ public class Tatoo : MonoBehaviour
     {
         if (PlayerController.isTatoo)
         {
+            PlayerController.isTatoo = false;
             PrismOn();
         }
     }

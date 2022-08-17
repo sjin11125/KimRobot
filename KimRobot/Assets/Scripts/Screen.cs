@@ -12,10 +12,10 @@ public class Screen : MonoBehaviour
     public GameObject[] LockObj;
     public GameObject PhotoObj;
 
-    PlayerController PlayerController;
+    VRPlayerController PlayerController;
     private void Start()
     {
-        PlayerController = Player.GetComponent<PlayerController>();
+        PlayerController = Player.GetComponent<VRPlayerController>();
     }
 
     bool isIn = false;

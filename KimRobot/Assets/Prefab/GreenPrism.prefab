@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6729557841349072652}
   m_Layer: 0
   m_Name: GreenPrism
-  m_TagString: RedPrism
+  m_TagString: BluePrism
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -113,5 +113,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.031298418, y: 0.016232269, z: 0.027933663}
-  m_Center: {x: 0.0010418429, y: -0.004412131, z: 0.00000589082}
+  m_Size: {x: 0.031298418, y: 0.015867893, z: 0.027933663}
+  m_Center: {x: 0.0010418429, y: -0.0042299237, z: 0.0000058908204}

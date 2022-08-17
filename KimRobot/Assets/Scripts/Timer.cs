@@ -10,11 +10,11 @@ public class Timer : MonoBehaviour
 
     public TextMesh TimerText;
     public GameObject Player;
-    PlayerController PlayerController;
+    VRPlayerController PlayerController;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController = Player.GetComponent<PlayerController>();
+        PlayerController = Player.GetComponent<VRPlayerController>();
         StartCoroutine(Time());
     }
 

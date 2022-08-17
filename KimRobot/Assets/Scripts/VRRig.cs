@@ -32,13 +32,13 @@ public class VRRig : MonoBehaviour
     public Transform headConstraint;
     public Vector3 headBodyOffset;
 
-    PlayerController playerController;
+    VRPlayerController playerController;
     Animator animator;
 
     private void Start()
     {
         headBodyOffset = transform.position - headConstraint.position;
-        playerController = transform.parent.GetComponent<PlayerController>();
+        playerController = transform.parent.GetComponent<VRPlayerController>();
         animator = GetComponent<Animator>();
     }
 
