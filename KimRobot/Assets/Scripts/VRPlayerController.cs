@@ -1,8 +1,8 @@
-ï»¿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class VRPlayerController : MonoBehaviour
 {
     Transform Tr;
     public int Speed = 3;
@@ -19,43 +19,44 @@ public class PlayerController : MonoBehaviour
     bool isJump = false;
 
     public Camera Camera;
-    RaycastHit hit=new RaycastHit();
+    RaycastHit hit = new RaycastHit();
     Ray ray;
     private Vector3 ScreenCenter;
     public GameObject rayEnd;
     Rigidbody rigi;
 
     public bool isWalk = false;
-    public bool isGun = false;      //ì´ì„ ì¥ì—ˆëŠ”ê°€?
-    public bool[] Prism =new bool[3] {true,true,true};               //í”„ë¦¬ì¦˜ (R,G,Y)
-    public bool isQuiz = false;             //í€´ì¦ˆ ë§í˜”ë‚˜
-    public bool isTatoo = false;            //íƒ€íˆ¬ë„ì•ˆ ë§í˜”ë‚˜
-    public GameObject Hand;         //ì† ì˜¤ë¸Œì íŠ¸
+    public bool isGun = false;      //ÃÑÀ» Áã¾ú´Â°¡?
+    public bool[] Prism = new bool[3] { true, true, true };               //ÇÁ¸®Áò (R,G,Y)
+    public bool isQuiz = false;             //ÄûÁî ¸ÂÇû³ª
+    public bool isTatoo = false;            //Å¸Åõµµ¾È ¸ÂÇû³ª
+    public GameObject Hand;         //¼Õ ¿ÀºêÁ§Æ®
     public Transform Gun;
     public bool isStart = false;
     public bool isStartDone = false;
-    public GameObject StartPos;         //ì‹œì‘ì§€ì 
-    Animator StartAnimation;            //ì‹œì‘ ì• ë‹ˆë©”ì´ì…˜
+    public GameObject StartPos;         //½ÃÀÛÁöÁ¡
+    Animator StartAnimation;            //½ÃÀÛ ¾Ö´Ï¸ŞÀÌ¼Ç
     Transform[] Trs;
 
-    //ì˜¤ë””ì˜¤
-    public AudioSource walkAudio;           //ë°œì‚¬ìš´ë“œ
-    public AudioSource GunColor;           //ì´ ì˜¨ì˜¤í”„ ì‚¬ìš´ë“œ
-    public AudioSource Jump;           //ì í”„ ì‚¬ìš´ë“œ
-    public AudioSource TimerSound;           //ì‹œê°„ ê²½ê³  ì‚¬ìš´ë“œ
-    public AudioSource TimerSound2;           //ì‹œê°„ ê²½ê³  ì‚¬ìš´ë“œ2
-    public AudioSource BeamBounce;          //ê´‘ì„  íŠ•ê¸°ëŠ” ì‚¬ìš´ë“œ
-    public AudioSource Clue;          //ë‹¨ì„œíšë“ ì‚¬ìš´ë“œ (ì´ˆë¡ìƒ‰ í”„ë¦¬ì¦˜ ë–¨ì–´ì§€ëŠ” ì‚¬ìš´ë“œ)
-    public AudioSource Book;          //ì±… ë„˜ê¸°ëŠ” ì‚¬ìš´ë“œ
-    public AudioSource Door;          //ë¬¸ì—´ë¦¬ëŠ” ì‚¬ìš´ë“œ
-    public AudioSource Screen;          //ìŠ¤í¬ë¦° í™œì„±í™” ì‚¬ìš´ë“œ
-    public AudioSource GunShoot;          //ì´ë°œì‚¬ ì‚¬ìš´ë“œ
-    public AudioSource Neon;          //ë„¤ì˜¨ ì¼œì§€ëŠ” ì‚¬ìš´ë“œ
-    public AudioSource GlassBroken;          //ì‹¤ë¦°ë” ê¹¨ì§€ëŠ” ì‚¬ìš´ë“œ
-    public AudioSource CylinderWarning;          //ì‹¤ë¦°ë” ê²½ê³  ì‚¬ìš´ë“œ
+    //¿Àµğ¿À
+    public AudioSource walkAudio;           //¹ß»ç¿îµå
+    public AudioSource GunColor;           //ÃÑ ¿Â¿ÀÇÁ »ç¿îµå
+    public AudioSource Jump;           //Á¡ÇÁ »ç¿îµå
+    public AudioSource TimerSound;           //½Ã°£ °æ°í »ç¿îµå
+    public AudioSource TimerSound2;           //½Ã°£ °æ°í »ç¿îµå2
+    public AudioSource BeamBounce;          //±¤¼± Æ¨±â´Â »ç¿îµå
+    public AudioSource Clue;          //´Ü¼­È¹µæ »ç¿îµå (ÃÊ·Ï»ö ÇÁ¸®Áò ¶³¾îÁö´Â »ç¿îµå)
+    public AudioSource Book;          //Ã¥ ³Ñ±â´Â »ç¿îµå
+    public AudioSource Door;          //¹®¿­¸®´Â »ç¿îµå
+    public AudioSource Screen;          //½ºÅ©¸° È°¼ºÈ­ »ç¿îµå
+    public AudioSource GunShoot;          //ÃÑ¹ß»ç »ç¿îµå
+    public AudioSource Neon;          //³×¿Â ÄÑÁö´Â »ç¿îµå
+    public AudioSource GlassBroken;          //½Ç¸°´õ ±úÁö´Â »ç¿îµå
+    public AudioSource CylinderWarning;          //½Ç¸°´õ °æ°í »ç¿îµå
     public GameObject gameExit;
 
-    List<string> Inventory = new List<string>(); 
+    List<string> Inventory = new List<string>();
+    // Start is called before the first frame update
     void Start()
     {
         Tr = gameObject.GetComponent<Transform>();
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
 
         isStart = false;
         StartAnimation = GetComponent<Animator>();
-       
+
 
     }
     IEnumerator StartAnimationCo()
@@ -80,53 +81,53 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //í”Œë ˆì´ì–´ ì´ë™(ì»¨íŠ¸ë¡¤ëŸ¬)
 
-        //---------------PCë²„ì „---------------------------------
+        //---------------PC¹öÀü---------------------------------
 
-        Grab();                         //ìš°í´ë¦­ ì¡ê¸°
+       // Grab();                         //¿ìÅ¬¸¯ Àâ±â
         isStartDone = true;
-        PlayerMove_Keyboard();
-        if (isQuiz)                     //í€´ì¦ˆ í’€ì—ˆì„ ë•Œ
+        //PlayerMove_Keyboard();
+        if (isQuiz)                     //ÄûÁî Ç®¾úÀ» ¶§
         {
             isQuiz = false;
 
         }
-        /*if (isStart)
+        /*if (isStart)              //¸ÇÃ³À½ ½ÃÀÛ¿¬Ãâ ÁÖ¼®Ç®±â
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
         }*/
-       /* if (isTatoo)
-        {
-            isTatoo = false;
-        }*/
+        /* if (isTatoo)
+         {
+             isTatoo = false;
+         }*/
         if (isStartDone)
         {
             StopCoroutine(StartAnimationCo());
             //Trs[3].gameObject.SetActive(true);
-            if (GetComponent<StartScript>()!=null)
+            if (GetComponent<StartScript>() != null)
             {
 
                 GetComponent<StartScript>().StartPos();
             }
-            
-            PlayerMove_Keyboard();          //í”Œë ˆì´ì–´ ì´ë™(í‚¤ë³´ë“œë¡œ)
+
+            PlayerMove_Keyboard();          //ÇÃ·¹ÀÌ¾î ÀÌµ¿(Å°º¸µå·Î)
+            PlayerMove();                   //ÇÃ·¹ÀÌ¾î ÀÌµ¿(ÄÁÆ®·Ñ·¯)
         }
         //hit=;
-        if (isWalk&&!walkAudio.isPlaying)
+        if (isWalk && !walkAudio.isPlaying)
         {
-          
+
             walkAudio.Play();
-         
+
         }
-        else if(!isWalk)
+        else if (!isWalk)
         {
             walkAudio.Pause();
         }
 
-        
+
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -141,17 +142,17 @@ public class PlayerController : MonoBehaviour
             gameExit.SetActive(true);
         }
     }
-        public void Grab()
+    public void Grab()
     {
         Debug.DrawLine(ray.origin, ray.GetPoint(10f), Color.green);
-        
-        if (Input.GetMouseButton(1))            //ìš°í´ë¦­ ì¡ê¸°
+
+        if (Input.GetMouseButton(1))            //¿ìÅ¬¸¯ Àâ±â
         {
-            
+
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.DrawLine(hit.point,hit.normal, Color.green);
-                Debug.Log("ì¶©ëŒí•¨");
+                Debug.DrawLine(hit.point, hit.normal, Color.green);
+                Debug.Log("Ãæµ¹ÇÔ");
                 if (hit.transform.tag == "Clue")
                 {
                     Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, 0.3f);
@@ -163,32 +164,32 @@ public class PlayerController : MonoBehaviour
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
 
         }
-        if (Input.GetMouseButtonDown(0)&&isGun==false)              //ì´ì„ ì•„ì§ íšë“ ì•ˆí–ˆì„ ë•Œ
+        if (Input.GetMouseButtonDown(0) && isGun == false)              //ÃÑÀ» ¾ÆÁ÷ È¹µæ ¾ÈÇßÀ» ¶§
         {
             if (Physics.Raycast(ray, out hit))
             {
                 Debug.DrawLine(hit.point, hit.normal, Color.green);
-                if (hit.transform.tag == "Gun")                 //ì´ì„ ì§‘ìœ¼ë©´
+                if (hit.transform.tag == "Gun")                 //ÃÑÀ» ÁıÀ¸¸é
                 {
-                    Debug.Log("ì´ì§‘ìŒ");
+                    Debug.Log("ÃÑÁıÀ½");
                     isGun = true;
                     //hit.transform.localPosition = new Vector3(0, 0, 0);
                     Gun.transform.gameObject.SetActive(true);
                 }
             }
         }
-        }
+    }
     public void PlayerMove()
     {
-       // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
-       // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch)!=new Vector2(0,0))     // íšŒì „
+        // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        // Vector3 mov = new Vector3(mov2d.x * Time.deltaTime * Speed, 0f, mov2d.y * Time.deltaTime * Speed);
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch) != new Vector2(0, 0))     // È¸Àü
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.RTouch);
-           // Debug.Log(pos);
-            if (pos.x>0)
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch);
+            // Debug.Log(pos);
+            if (pos.x > 0)
             {
-               // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
+                // transform.rotation = Quaternion.Slerp(rigi.rotation,Vector3.right,10*Time.deltaTime);
                 transform.Rotate(Vector3.up, 50 * Time.deltaTime);
             }
             else
@@ -197,33 +198,33 @@ public class PlayerController : MonoBehaviour
                 // transform.rotation -=  Vector3.right;
             }
         }
-        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // ì´ë™
+        if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // ÀÌµ¿
         {
-            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
+            Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch);
             Debug.Log(pos);
-            var absX =Mathf.Abs(pos.x);
+            var absX = Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 
-           // isWalk = true;
+            // isWalk = true;
 
-            if (absX>absY)
+            if (absX > absY)
             {
-                if (pos.x>0)            //ì˜¤ë¥¸ìª½ ì´ë™
+                if (pos.x > 0)            //¿À¸¥ÂÊ ÀÌµ¿
                 {
                     dirX = +1;
                 }
-                else                //ì™¼ìª½ ì´ë™
+                else                //¿ŞÂÊ ÀÌµ¿
                 {
                     dirX = -1;
                 }
             }
             else
             {
-                if (pos.y>0)            //ìœ„ë¡œ ì´ë™
+                if (pos.y > 0)            //À§·Î ÀÌµ¿
                 {
                     dirZ = +1;
                 }
-                else                            //ì•„ë˜ë¡œ ì´ë™
+                else                            //¾Æ·¡·Î ÀÌµ¿
                 {
                     dirZ = -1;
                 }
@@ -231,16 +232,16 @@ public class PlayerController : MonoBehaviour
             Vector3 moveDir = new Vector3(pos.x * Speed, 0, pos.y * Speed);
             transform.Translate(moveDir * Time.smoothDeltaTime);
         }
-        if (OVRInput.GetUp(OVRInput.Touch.PrimaryThumbstick))               //ì´ë™ ë©ˆì¶¤
+        if (OVRInput.GetUp(OVRInput.Touch.PrimaryThumbstick))               //ÀÌµ¿ ¸ØÃã
         {
             isWalk = false;
         }
-        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //ì í”„
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //Á¡ÇÁ
         {
             Jump.Play();
             rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
-       
+
         if (Input.GetMouseButtonUp(1))
         {
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
@@ -250,41 +251,40 @@ public class PlayerController : MonoBehaviour
     public void PlayerMove_Keyboard()
     {
 
-        
-        if (Input.GetKey(KeyCode.A))        //ì™¼ìª½ì´ë™
+
+        if (Input.GetKey(KeyCode.A))        //¿ŞÂÊÀÌµ¿
         {
-            Tr.Translate(Vector3.left*Time.smoothDeltaTime* Speed);
+            Tr.Translate(Vector3.left * Time.smoothDeltaTime * Speed);
             isWalk = true;
         }
-        if (Input.GetKey(KeyCode.W))        //ì•ìœ¼ë¡œ ì´ë™
+        if (Input.GetKey(KeyCode.W))        //¾ÕÀ¸·Î ÀÌµ¿
         {
             isWalk = true;
             Tr.Translate(Vector3.forward * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKey(KeyCode.S))        //ë’¤ë¡œì´ë™
+        if (Input.GetKey(KeyCode.S))        //µÚ·ÎÀÌµ¿
         {
             isWalk = true;
             Tr.Translate(Vector3.back * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKey(KeyCode.D))        //ì˜¤ë¥¸ìª½ì´ë™
+        if (Input.GetKey(KeyCode.D))        //¿À¸¥ÂÊÀÌµ¿
         {
             isWalk = true;
             Tr.Translate(Vector3.right * Time.smoothDeltaTime * Speed);
         }
-        if (Input.GetKeyDown(KeyCode.Space)&&isJump==false)        //ì í”„
+        if (Input.GetKeyDown(KeyCode.Space) && isJump == false)        //Á¡ÇÁ
         {
             Jump.Play();
             isJump = true;
-            Rigidbody rigi=transform.GetComponent<Rigidbody>();
-            rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
+            Rigidbody rigi = transform.GetComponent<Rigidbody>();
+            rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
 
-        if (Input.GetKeyUp(KeyCode.A)|| Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.S)|| Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             isWalk = false;
         }
     }
 
 
-       
 }

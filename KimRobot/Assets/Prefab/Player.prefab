@@ -111,6 +111,7 @@ MonoBehaviour:
   minute: 10
   second: 60
   TimerText: {fileID: 1269192014}
+  Player: {fileID: 0}
 --- !u!1 &4715573175079826320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1486,6 +1487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 6349626870234933736}
   Gun: {fileID: 788340250378685870}
+  UICamera: {fileID: 0}
+  ClueCanvas: {fileID: 0}
 --- !u!1 &6349626869679423484
 GameObject:
   m_ObjectHideFlags: 0
@@ -5093,9 +5096,28 @@ MonoBehaviour:
   isWalk: 0
   isGun: 0
   Prism: 000000
+  isQuiz: 0
+  isTatoo: 0
   Hand: {fileID: 7799376803374656751}
   Gun: {fileID: 6349626871115628316}
+  isStart: 0
+  isStartDone: 0
+  StartPos: {fileID: 0}
   walkAudio: {fileID: 0}
+  GunColor: {fileID: 0}
+  Jump: {fileID: 0}
+  TimerSound: {fileID: 0}
+  TimerSound2: {fileID: 0}
+  BeamBounce: {fileID: 0}
+  Clue: {fileID: 0}
+  Book: {fileID: 0}
+  Door: {fileID: 0}
+  Screen: {fileID: 0}
+  GunShoot: {fileID: 0}
+  Neon: {fileID: 0}
+  GlassBroken: {fileID: 0}
+  CylinderWarning: {fileID: 0}
+  gameExit: {fileID: 0}
 --- !u!1 &6349626870237961130
 GameObject:
   m_ObjectHideFlags: 0
@@ -8532,6 +8554,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Gun: {fileID: 0}
+  UICamera: {fileID: 0}
+  ClueCanvas: {fileID: 0}
 --- !u!1 &6349626870946403018
 GameObject:
   m_ObjectHideFlags: 0
@@ -10073,6 +10097,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 6349626870234933736}
   Gun: {fileID: 0}
+  UICamera: {fileID: 0}
+  ClueCanvas: {fileID: 0}
 --- !u!1 &6349626871229846351
 GameObject:
   m_ObjectHideFlags: 0
@@ -12085,6 +12111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Gun: {fileID: 0}
+  UICamera: {fileID: 0}
+  ClueCanvas: {fileID: 0}
 --- !u!1001 &1980340254
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -197,8 +197,14 @@ public class R_Hand : MonoBehaviour
         if (other.transform.tag == "Clue")
         {
             col = other;
-
-
+        }
+        if (other.transform.tag == "Next")
+        {
+            other.transform.parent.GetComponent<TutorialScreen>().NextText();
+        }
+        if (other.transform.tag == "Undo")
+        {
+            other.transform.parent.GetComponent<TutorialScreen>().UndoText();
         }
 
     }
