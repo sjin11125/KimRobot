@@ -25,6 +25,8 @@ TagManager:
   - Tatoo
   - Next
   - Undo
+  - ScreenDoor
+  - Star
   layers:
   - Default
   - TransparentFX
