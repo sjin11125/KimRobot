@@ -30,7 +30,8 @@ public class R_Hand : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.Q)&&col!=null)
+        if ((Input.GetKeyUp(KeyCode.Q)&&col!=null)|| 
+            ((OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger) || OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger)) && col != null))
         {
             if (isClue)
             {
@@ -89,7 +90,7 @@ public class R_Hand : MonoBehaviour
     {
         if (other.transform.tag == "GunBefore")
         {
-            if (Input.GetMouseButtonDown(1))       //우클릭 혹은 오른쪽 컨트롤러 
+            if (Input.GetMouseButtonDown(1)|| OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger)|| OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
@@ -110,28 +111,30 @@ public class R_Hand : MonoBehaviour
       
             if (other.transform.tag == "RedPrism")
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
                 Player.GetComponent<PlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("빨간색 프리즘 얻음");
-                if (Input.GetMouseButton(0))//OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))      오큘에서
-                {
+            
                     Destroy(other.transform.gameObject);
-                }
+                
             }
             if (other.transform.tag == "BluePrism")
             {
-                Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
-
-                //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-                Debug.Log("초록색 프리즘 얻음");
-                if (Input.GetMouseButton(0))//OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))      오큘에서
+                if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
                 {
-                    Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
-                    Destroy(other.transform.gameObject);
+
+                    Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+
+                    //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                    Debug.Log("초록색 프리즘 얻음");
+                   
+                        Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
+                        Destroy(other.transform.gameObject);
+                    
                 }
             }
         }
@@ -172,7 +175,7 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "GunBefore")
         {
-            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger)|| OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);

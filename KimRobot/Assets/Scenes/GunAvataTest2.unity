@@ -11956,8 +11956,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 93.49603, y: 107.443855, z: 37.11616}
-  m_Center: {x: -0.8578933, y: 0.25060177, z: -18.058123}
+  m_Size: {x: 31.906158, y: 107.443855, z: 8.002554}
+  m_Center: {x: -31.652836, y: 0.25060272, z: -32.614925}
 --- !u!1 &1024326994
 GameObject:
   m_ObjectHideFlags: 0
@@ -26358,7 +26358,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.31
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -26366,7 +26366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.14
+      value: -7.365
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26413,6 +26413,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6145665789828665550, guid: 24f200938e37069418db0a899e22104c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145665791166168141, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
