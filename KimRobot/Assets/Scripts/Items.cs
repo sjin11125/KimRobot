@@ -23,6 +23,7 @@ public class Items : MonoBehaviour
 
     public GameObject door;
     public GameObject doorFrame;
+    public GameObject star;
 
     public GameObject[] room;
     public Material transparent;
@@ -33,6 +34,7 @@ public class Items : MonoBehaviour
 
     public bool doorOpen;
 
+    public AudioSource switchDown;
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -93,7 +95,11 @@ public class Items : MonoBehaviour
                             doorFrame.GetComponent<Renderer>().material = glow;
                             doorFrame.GetComponent<BoxCollider>().enabled = true;
                             door.SetActive(false);
+                            star.SetActive(true); //별 켜기
                             //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
+
+                            switchDown.Play();
+                            //여기에 차단기 내려가는듯한 효과음넣기
                         }
                     }
                 }
