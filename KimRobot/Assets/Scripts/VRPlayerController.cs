@@ -113,7 +113,6 @@ public class VRPlayerController : MonoBehaviour
             }
 
             PlayerMove_Keyboard();          //플레이어 이동(키보드로)
-            PlayerMove();                   //플레이어 이동(컨트롤러)
         }
         //hit=;
         if (isWalk && !walkAudio.isPlaying)

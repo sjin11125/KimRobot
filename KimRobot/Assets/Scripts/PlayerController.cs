@@ -86,18 +86,18 @@ public class PlayerController : MonoBehaviour
 
         //Grab();                         //우클릭 잡기
         isStartDone = true;
-        //PlayerMove_Keyboard();
+        PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;
 
         }
-        /*if (isStart)
+        if (isStart)
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
-        }*/
+        }
        /* if (isTatoo)
         {
             isTatoo = false;
