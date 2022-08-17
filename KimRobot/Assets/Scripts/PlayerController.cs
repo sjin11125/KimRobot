@@ -140,6 +140,11 @@ public class PlayerController : MonoBehaviour
         {
             gameExit.SetActive(true);
         }
+
+        if (collision.gameObject.CompareTag("Star"))
+        {
+            //크리스탈 효과음 넣기
+        }
     }
         public void Grab()
     {

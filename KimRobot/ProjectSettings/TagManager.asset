@@ -23,6 +23,7 @@ TagManager:
   - Screen
   - LineCollider
   - Tatoo
+  - Star
   layers:
   - Default
   - TransparentFX
