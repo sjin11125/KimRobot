@@ -83,13 +83,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();                   //플레이어 이동(컨트롤러)
+        //PlayerMove();                   //플레이어 이동(컨트롤러)
 
         //---------------PC버전---------------------------------
 
         //Grab();                         //우클릭 잡기
         //isStartDone = true;
-        PlayerMove_Keyboard();
+        //PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class StartScript : MonoBehaviour
 {
     public GameObject PlayerObj;
-    public PlayerController Player;
+    public VRPlayerController Player;
     public GameObject StartPlayer;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class StartScript : MonoBehaviour
     public void StartPos()
     {
         PlayerObj.SetActive(true);
-        Player.isStartDone = true;
+        //Player.isStartDone = true;
         StartPlayer.SetActive(false);
     }
 }

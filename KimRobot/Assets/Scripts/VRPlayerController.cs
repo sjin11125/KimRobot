@@ -92,12 +92,12 @@ public class VRPlayerController : MonoBehaviour
             isQuiz = false;
 
         }
-        if (isStart)              //맨처음 시작연출 주석풀기
+       /* if (isStart)              //맨처음 시작연출 주석풀기
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
-        }
+        }*/
         /* if (isTatoo)
          {
              isTatoo = false;
