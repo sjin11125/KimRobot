@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: 
     guid: 00000000000000000000000000000000
   - enabled: 1
+    path: Assets/Scenes/intro.unity
+    guid: 67657a605c2c6e5429c50b5ceb911343
+  - enabled: 1
     path: Assets/Scenes/GunAvataTest.unity
     guid: b2a4b718e8dda3b468be3c1a4b59513a
   m_configObjects:

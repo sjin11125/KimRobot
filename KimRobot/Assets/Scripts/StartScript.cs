@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartScript : MonoBehaviour
 {
@@ -20,8 +21,10 @@ public class StartScript : MonoBehaviour
     }
     public void StartPos()
     {
-        PlayerObj.SetActive(true);
+        // PlayerObj.SetActive(true);
+        //Instantiate(PlayerObj);
         //Player.isStartDone = true;
-        StartPlayer.SetActive(false);
+        //StartPlayer.SetActive(false);
+        SceneManager.LoadScene("GunAvataTest");
     }
 }
