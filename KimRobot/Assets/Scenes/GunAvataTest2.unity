@@ -25614,6 +25614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   letterItemParents: {fileID: 1423475394}
   numberItemParents: {fileID: 1934643039}
+  Quiz: {fileID: 0}
   StarZero: {fileID: 8831601656716603774}
   numberZero: {fileID: 501823991057011225}
   StarOne: {fileID: 1961332162}
@@ -25625,6 +25626,7 @@ MonoBehaviour:
   picture: {fileID: 258433010}
   door: {fileID: 1555213663}
   doorFrame: {fileID: 609125173}
+  star: {fileID: 0}
   room:
   - {fileID: 1763560163}
   - {fileID: 1777324947}
@@ -25634,6 +25636,7 @@ MonoBehaviour:
   timer: {fileID: 2134205534}
   gameRestart: {fileID: 327141923}
   doorOpen: 0
+  switchDown: {fileID: 0}
 --- !u!1001 &2102486214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26906,15 +26909,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25.66
+      value: -24.621
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.02
+      value: 0.286
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.71
+      value: -2.074
       objectReference: {fileID: 0}
     - target: {fileID: 5487276980512404232, guid: 24f200938e37069418db0a899e22104c, type: 3}
       propertyPath: m_LocalRotation.w
