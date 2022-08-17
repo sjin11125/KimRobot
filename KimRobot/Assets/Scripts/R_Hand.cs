@@ -64,15 +64,15 @@ public class R_Hand : MonoBehaviour
                 Player.GetComponent<VRPlayerController>().Book.Play();            //효과음 재생
                 Player.GetComponent<VRPlayerController>().enabled = false;        //플레이어 못 움직이게
 
-                Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+               // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
 
                 UICameraParent = UICamera.transform.parent.gameObject;
                 UICamera.transform.SetParent(TrackingCamera.transform);
 
                 CenterCamera.SetActive(false);
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
-                Clue.SetActive(true);               //단서 글 뜨게
-                Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
+                //Clue.SetActive(true);               //단서 글 뜨게
+                //Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
 
             }
 
