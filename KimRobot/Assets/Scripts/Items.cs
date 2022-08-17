@@ -10,6 +10,8 @@ public class Items : MonoBehaviour
 
     public GameObject numberItemParents;
     GameObject[] numbers;
+
+    public GameObject Quiz;
     public GameObject StarZero;
     public GameObject numberZero;
     public GameObject StarOne;
@@ -23,6 +25,7 @@ public class Items : MonoBehaviour
 
     public GameObject door;
     public GameObject doorFrame;
+    public GameObject star;
 
     public GameObject[] room;
     public Material transparent;
@@ -33,6 +36,7 @@ public class Items : MonoBehaviour
 
     public bool doorOpen;
 
+    public AudioSource switchDown;
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -48,6 +52,7 @@ public class Items : MonoBehaviour
         }
         doorFrame.GetComponent<BoxCollider>().enabled = false;
         numberItemParents.SetActive(false);
+        Quiz.SetActive(false);
     }
     public void Update()
     {
@@ -93,7 +98,11 @@ public class Items : MonoBehaviour
                             doorFrame.GetComponent<Renderer>().material = glow;
                             doorFrame.GetComponent<BoxCollider>().enabled = true;
                             door.SetActive(false);
+                            star.SetActive(true); //별 켜기
                             //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
+
+                            switchDown.Play();
+                            //여기에 차단기 내려가는듯한 효과음넣기
                         }
                     }
                 }
@@ -121,6 +130,16 @@ public class Items : MonoBehaviour
                 picture.SetActive(true);
                 letterItemParents.SetActive(false);
                 numberItemParents.SetActive(true);
+                Quiz.SetActive(true);
+                StarZero.GetComponent<Renderer>().material = redMat;
+            }
+            else if (letter[0] == "연" && letter[1] == "인")
+            {
+                lockImg.SetActive(false);
+                picture.SetActive(true);
+                letterItemParents.SetActive(false);
+                numberItemParents.SetActive(true);
+                Quiz.SetActive(true);
                 StarZero.GetComponent<Renderer>().material = redMat;
             }
         }
@@ -196,6 +215,10 @@ public class Items : MonoBehaviour
         if (number.Count == 2)
         {
             if (number[1] == "2" && number[0] == "1")
+            {
+                doorOpen = true;
+            }
+            else if(number[0] == "2" && number[1] == "1")
             {
                 doorOpen = true;
             }
