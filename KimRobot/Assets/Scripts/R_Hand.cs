@@ -12,6 +12,7 @@ public class R_Hand : MonoBehaviour
     public GameObject ClueCanvas;
     public GameObject TrackingCamera;
     public GameObject CenterCamera;
+    public Transform PosReset;
 
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
@@ -45,7 +46,9 @@ public class R_Hand : MonoBehaviour
                 Player.GetComponentsInChildren<Camera>()[1].enabled = true;
                 Player.GetComponent<VRPlayerController>().enabled = true;        //플레이어 움직일수잇게
                 UICamera.transform.SetParent(UICameraParent.transform);         //카메라 부모 다시 설정
-                UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
+                //UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
+
+                UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = false;
 
                 CenterCamera.SetActive(true);
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
@@ -58,6 +61,7 @@ public class R_Hand : MonoBehaviour
                 Debug.Log("isClue는 false");
                 isClue = true;
                 UICamera = col.transform.GetComponentInChildren<Camera>().gameObject;
+                //Player.transform.position = PosReset.position;
                 //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
 
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
@@ -69,7 +73,8 @@ public class R_Hand : MonoBehaviour
 
                 UICameraParent = UICamera.transform.parent.gameObject;      //카메라 부모 받아옴
                 UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
-                UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(true);
+                UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = true;
+                
 
                 CenterCamera.SetActive(false);                      //CentereyeAnchor 비활성화 
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
@@ -89,7 +94,11 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "Clue")
         {
-            col = null;
+            if (isClue==false)
+            {
+
+                col = null;
+            }
             //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         }
     }
