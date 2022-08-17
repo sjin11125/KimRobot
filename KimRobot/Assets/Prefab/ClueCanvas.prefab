@@ -159,7 +159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0.38798168, b: 0.8113208, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -189,10 +189,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  ClueString: "\uD769\uB0A0\uB9AC\uB294 \uBC9A\uAF43\uC78E\uC744 \uC7A1\uC544 \uCC45\uC0C1\uC5D0
-    \uB454 \uB4EF \uD558\uB2E4. \uBC9A\uAF43\uC78E\uC744 \uC7A1\uC73C\uBA74 \uC6D0\uD558\uB294
-    \uC0AC\uB791\uC774 \uC774\uB8E8\uC5B4\uC9C4\uB2E4\uACE0 \uD558\uB294\uB370..
-    \uB098\uB3C4 \uADF8\uB7AC\uC744\uAE4C?  "
+  ClueString: "\uAE40\uAD11\uC12D\uC758 \uC800\uB141\uC5D0 \uB77C\uB294 \uC2DC\uC774\uB2E4.
+    \uB0B4\uAC00 \uD558\uB098\uC758 \uBCC4\uAC19\uC740 \uC874\uC7AC\uB97C \uB9CC\uB0A0
+    \uC218 \uC788\uC744\uAE4C..?"
 --- !u!1 &729025775174670681
 GameObject:
   m_ObjectHideFlags: 0

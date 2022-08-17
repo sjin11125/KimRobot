@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         //---------------PC버전---------------------------------
 
         //Grab();                         //우클릭 잡기
-        isStartDone = true;
+        //isStartDone = true;
         PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {

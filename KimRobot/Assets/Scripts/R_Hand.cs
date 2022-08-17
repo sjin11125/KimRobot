@@ -8,7 +8,10 @@ public class R_Hand : MonoBehaviour
     public GameObject Player;
     public GameObject Gun;
     public GameObject UICamera;
+    public GameObject UICameraParent;
     public GameObject ClueCanvas;
+    public GameObject TrackingCamera;
+    public GameObject CenterCamera;
 
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
@@ -30,8 +33,8 @@ public class R_Hand : MonoBehaviour
     private void Update()
     {
 
-        if ((Input.GetKeyUp(KeyCode.Q)&&col!=null)|| 
-            ((OVRInput.GetUp(OVRInput.Button.PrimaryHandTrigger) || OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger)) && col != null))
+        if ((Input.GetKeyUp(KeyCode.Q) && col != null) ||
+            ((OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch)) && col != null))
         {
             if (isClue)
             {
@@ -40,8 +43,10 @@ public class R_Hand : MonoBehaviour
                 isClue = false;
 
                 Player.GetComponentsInChildren<Camera>()[1].enabled = true;
-                Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
+                Player.GetComponent<VRPlayerController>().enabled = true;        //플레이어 움직일수잇게
+                UICamera.transform.SetParent(UICameraParent.transform);
 
+                CenterCamera.SetActive(true);
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
                 
                 Destroy(Clue);
@@ -55,11 +60,16 @@ public class R_Hand : MonoBehaviour
                 //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
 
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
-                Player.GetComponentsInChildren<Camera>()[1].enabled = false;
-                Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
-                Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
+
+                Player.GetComponent<VRPlayerController>().Book.Play();            //효과음 재생
+                Player.GetComponent<VRPlayerController>().enabled = false;        //플레이어 못 움직이게
 
                 Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+
+                UICameraParent = UICamera.transform.parent.gameObject;
+                UICamera.transform.SetParent(TrackingCamera.transform);
+
+                CenterCamera.SetActive(false);
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
                 Clue.SetActive(true);               //단서 글 뜨게
                 Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;

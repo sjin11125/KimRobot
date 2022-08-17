@@ -81,10 +81,10 @@ public class VRPlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        PlayerMove();
         //---------------PC버전---------------------------------
 
-       // Grab();                         //우클릭 잡기
+        // Grab();                         //우클릭 잡기
         isStartDone = true;
         //PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
@@ -92,12 +92,12 @@ public class VRPlayerController : MonoBehaviour
             isQuiz = false;
 
         }
-        /*if (isStart)              //맨처음 시작연출 주석풀기
+        if (isStart)              //맨처음 시작연출 주석풀기
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
-        }*/
+        }
         /* if (isTatoo)
          {
              isTatoo = false;
