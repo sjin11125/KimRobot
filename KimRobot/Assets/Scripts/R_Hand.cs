@@ -12,6 +12,7 @@ public class R_Hand : MonoBehaviour
 
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
+    Collision col;
 
 
     private void Start()
@@ -29,15 +30,41 @@ public class R_Hand : MonoBehaviour
     private void Update()
     {
 
-  
-        if (isClue)
+        if (Input.GetKeyUp(KeyCode.Q)&&col!=null)
         {
-           
+            if (isClue)
+            {
+                col = null;
+                Debug.Log("isClue는 true");
+                isClue = false;
 
-        }
-        else
-        {
-          
+                Player.GetComponentsInChildren<Camera>()[1].enabled = true;
+                Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
+
+                UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
+                
+                Destroy(Clue);
+
+            }
+            else
+            {
+                Debug.Log("isClue는 false");
+                isClue = true;
+                UICamera = col.transform.GetComponentInChildren<Camera>().gameObject;
+                //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
+
+                UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
+                Player.GetComponentsInChildren<Camera>()[1].enabled = false;
+                Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
+                Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
+
+                Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+                //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
+                Clue.SetActive(true);               //단서 글 뜨게
+                Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
+
+            }
+
         }
     }
     private void OnCollisionExit(Collision other)
@@ -49,7 +76,7 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "Clue")
         {
-           
+            col = null;
             //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         }
     }
@@ -117,54 +144,11 @@ public class R_Hand : MonoBehaviour
             Player.GetComponent<PlayerController>().Door.Play();            //효과음 재생
             other.transform.GetComponent<Screen>().OpenDoor();          //문열어
         }
-        if (other.transform.tag == "Clue")
+
+        if (other.transform.tag == "Clue"&&col==null)
         {
-            /*if (Input.GetKeyDown(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
-            {
+            col = other;
 
-
-                    UICamera = other.transform.GetComponentsInChildren<Camera>()[0].gameObject;
-                    isClue = true;
-            }
-            if (Input.GetKey(KeyCode.Q))       //OVRInput.Get(OVRInput.Button.PrimaryHandTrigger)   //단서보기(왼쪽 컨트롤러)
-            {
-                isClue = true;
-            }*/
-            if (Input.GetKeyUp(KeyCode.Q))
-            {
-                Debug.Log("땜");
-                if (isClue)
-                {
-                    Debug.Log("isClue는 true");
-                    isClue = false;
-
-                    Player.GetComponentsInChildren<Camera>()[1].enabled = true;
-                    Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
-
-                    UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
-                    Destroy(Clue);
-
-                  }
-                else
-                {
-                    Debug.Log("isClue는 false");
-                    isClue = true;
-                    UICamera = other.transform.GetComponentInChildren<Camera>().gameObject;
-                    //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
-
-                    UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
-                    Player.GetComponentsInChildren<Camera>()[1].enabled = false;
-                    Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
-                    Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
-
-                     Clue = Instantiate(ClueCanvas, other.transform.GetComponentInChildren<Camera>().transform);
-                    //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
-                    Clue.SetActive(true);               //단서 글 뜨게
-                    Clue.GetComponentInChildren<Text>().text = other.transform.GetComponentInChildren<ClueUI>().ClueString;
-
-                }
-
-            }
 
         }
     }
@@ -209,9 +193,14 @@ public class R_Hand : MonoBehaviour
             Player.GetComponent<PlayerController>().CylinderWarning.Pause();
             other.transform.GetComponent<Break>().isBreak = true;
         }
-        
 
-      
+        if (other.transform.tag == "Clue")
+        {
+            col = other;
+
+
+        }
+
     }
 }
 
