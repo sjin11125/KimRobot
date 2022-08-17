@@ -53,7 +53,10 @@ public class PlayerController : MonoBehaviour
     public AudioSource Neon;          //네온 켜지는 사운드
     public AudioSource GlassBroken;          //실린더 깨지는 사운드
     public AudioSource CylinderWarning;          //실린더 경고 사운드
+    public AudioSource ScreenDoor;
+
     public GameObject gameExit;
+
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -144,6 +147,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Star"))
         {
             //크리스탈 효과음 넣기
+            collision.transform.GetComponent<AudioSource>().Play();
+        }
+
+        if (collision.gameObject.CompareTag("ScreenDoor"))
+        {
+            ScreenDoor.Play();
         }
     }
         public void Grab()

@@ -24,6 +24,7 @@ TagManager:
   - LineCollider
   - Tatoo
   - Star
+  - ScreenDoor
   layers:
   - Default
   - TransparentFX
