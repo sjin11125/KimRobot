@@ -44685,7 +44685,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4758553650917433986, guid: b30ab8eaaf5415b45a5e0c83c7dc314f, type: 3}
   m_PrefabInstance: {fileID: 639932760}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &1179105082
+--- !u!81 &1179105085
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45251,7 +45251,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6872319176445024607, guid: a60a03dfbd2e3cd49a7cf1f09934b5a6, type: 3}
   m_PrefabInstance: {fileID: 586805767}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &1195442260
+--- !u!81 &1195442263
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -70337,7 +70337,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5527103150375817163, guid: b30ab8eaaf5415b45a5e0c83c7dc314f, type: 3}
   m_PrefabInstance: {fileID: 639932760}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &1874406291
+--- !u!81 &1874406294
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72904,7 +72904,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2918688338519139497, guid: b30ab8eaaf5415b45a5e0c83c7dc314f, type: 3}
   m_PrefabInstance: {fileID: 639932760}
   m_PrefabAsset: {fileID: 0}
---- !u!81 &1936066266
+--- !u!81 &1936066269
 AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78142,7 +78142,7 @@ MonoBehaviour:
   glow: {fileID: 2100000, guid: aed068dae51ecbf4ca7af8a98fe20ad2, type: 2}
   doorOpen: 0
   switchDown: {fileID: 2125317411}
-  player: {fileID: 0}
+  player: {fileID: 487137959}
 --- !u!1001 &2107440401
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     Animator StartAnimation;            //시작 애니메이션
     Transform[] Trs;
 
+    public GameObject ScreenWall;         //스크린벽
     //오디오
     public AudioSource walkAudio;           //발사운드
     public AudioSource GunColor;           //총 온오프 사운드
@@ -138,12 +139,10 @@ public class PlayerController : MonoBehaviour
             gameRestart.SetActive(true);
             Time.timeScale = 0;
         }
-        if (transform.position.x<-20)
+        if (transform.position.x< ScreenWall.transform.position.x)
         {
             BGM.Pause();
             ScreenInto.Play();
-
-    
         }
         else 
         {
@@ -151,8 +150,20 @@ public class PlayerController : MonoBehaviour
             ScreenInto.Pause();
     
         }
-    }
-    void OnCollisionEnter(Collision collision)
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
+        {
+            if (gameRestart.activeSelf)
+            {
+                SceneManager.LoadScene("title");
+            }
+            if (gameExit.activeSelf)
+            {
+                Application.Quit();
+            }
+
+        }
+        }
+        void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
@@ -204,7 +215,7 @@ public class PlayerController : MonoBehaviour
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
 
         }
-        if (Input.GetMouseButtonDown(0))              
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))              
         {
             if (gameRestart.activeSelf)
             {
