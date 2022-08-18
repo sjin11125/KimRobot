@@ -48,6 +48,8 @@ public class ShootLaser : MonoBehaviour
             {
                 Cube.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
             }
+
+            PlayerController.GunShoot.Play();
         }
 
         if (Input.GetMouseButtonDown(0) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
@@ -57,7 +59,6 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButton(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
         {
-            PlayerController.GunShoot.Play();
             if (Red.activeSelf && Green.activeSelf)
             {
                 pivot.transform.position = GunPivot.transform.position;

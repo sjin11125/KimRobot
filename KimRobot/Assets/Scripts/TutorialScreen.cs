@@ -8,16 +8,17 @@ public class TutorialScreen : MonoBehaviour
     public Text TutoText;
     public GameObject Next, Undo;
     public int index=0;
+    public GameObject Gun, Key;
 
     string[] Tutorialtext = { "당신은 지금 기억속에 갇혀 있습니다.",
     "소중한 기억을 찾아 이곳을 빠져나가세요.",
     "제한시간 안에 탈출하지 못하면 당신은 이곳을 영원히 빠져나갈 수 없습니다.",
     "남은시간은 당신의 왼쪽 손목에 있습니다.",
     "이곳엔 당신을 도와줄 특별한 도구가 있습니다.",
-    "이 총에 원석을 장착하게 되면 레이저건을 쏠 수 있습니다.",
+    "이 총에 원석을 장착하게 되면 레이저건을 쏠 수 있습니다.",         //총그림
     "빨강, 초록은 반사되는 성질, 그리고 두 색이 섞인 노란색은 특별한 능력이 있으며",
-    "해당 조작키를 통해 원하는 색을 발사할 수 있습니다.",
-    "책상 옆에 있는 총과 원석을 집어보세요.",
+    "해당 조작키를 통해 원하는 색을 발사할 수 있습니다.",            //조작키
+    "방 어딘가에 있는 총과 원석을 찾아보세요.",
     "이제 이 총으로 잠겨있는 스크린창을 활성화 시킬 수 있습니다.",
     "당신의 기억 속에서 가장 소중한 사람은 누구인가요?(힌트 : 순서를 바꿔도 말이 된다)",//레이저 쏘기 연인
     "이제 당신은 소중한 사람과의 기억을 들여다 볼 수 있습니다.",
@@ -30,9 +31,22 @@ public class TutorialScreen : MonoBehaviour
     "기억들이 사라지기 전에, 서둘러 이곳을 빠져나가십시오."};
     private void Update()
     {
-        TutoText.text = Tutorialtext[index]; 
-        if (index>= Tutorialtext.Length)
+        TutoText.text = Tutorialtext[index];
+
+        if (index==5)
+            Gun.SetActive(true);
+        else
+            Gun.SetActive(false);
+        
+        if (index==7)
+            Key.SetActive(true);
+        else
+            Key.SetActive(false);
+        
+        
+        if (index== Tutorialtext.Length-1)
         {
+            //index = Tutorialtext.Length - 1;
             Next.SetActive(false);
         }
         if (index==0)
