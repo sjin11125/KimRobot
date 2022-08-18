@@ -9,7 +9,8 @@ public class R_Hand : MonoBehaviour
     public GameObject Gun;
     public GameObject UICamera;
     public GameObject ClueCanvas;
-
+    public GameObject UICameraParent;
+    public GameObject CenterCamera;
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
     Collision col;
@@ -30,7 +31,8 @@ public class R_Hand : MonoBehaviour
     private void Update()
     {
 
-        if (Input.GetKeyUp(KeyCode.Q) && col != null)
+        if ((Input.GetKeyUp(KeyCode.Q) && col != null) ||
+            ((OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger, OVRInput.Controller.LTouch)) && col != null))
         {
             if (isClue)
             {
@@ -40,7 +42,12 @@ public class R_Hand : MonoBehaviour
 
                 Player.GetComponentsInChildren<Camera>()[1].enabled = true;
                 Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
+                UICamera.transform.SetParent(UICameraParent.transform);         //카메라 부모 다시 설정
+                //UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
 
+                UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = false;
+
+                CenterCamera.SetActive(true);
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
 
                 Destroy(Clue);
@@ -51,17 +58,25 @@ public class R_Hand : MonoBehaviour
                 Debug.Log("isClue는 false");
                 isClue = true;
                 UICamera = col.transform.GetComponentInChildren<Camera>().gameObject;
+                //Player.transform.position = PosReset.position;
                 //UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
 
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
-                Player.GetComponentsInChildren<Camera>()[1].enabled = false;
+
                 Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
                 Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
 
-                Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+                // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+
+                UICameraParent = UICamera.transform.parent.gameObject;      //카메라 부모 받아옴
+                //UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
+                UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = true;
+
+
+                CenterCamera.SetActive(false);                      //CentereyeAnchor 비활성화 
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
-                Clue.SetActive(true);               //단서 글 뜨게
-                Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
+                //Clue.SetActive(true);               //단서 글 뜨게
+                //Clue.GetComponentInChildren<Text>().text = col.transform.GetComponentInChildren<ClueUI>().ClueString;
 
             }
 
@@ -76,7 +91,11 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "Clue")
         {
-            col = null;
+            if (isClue == false)
+            {
+
+                col = null;
+            }
             //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = false;
         }
     }
@@ -87,15 +106,10 @@ public class R_Hand : MonoBehaviour
     }*/
     private void OnCollisionStay(Collision other)
     {
-        if (other.transform.tag == "Player" || other.transform.tag == "Gun")
-        {
-            return;
-        }
         if (other.transform.tag == "GunBefore")
         {
-            if (Input.GetMouseButtonDown(1)|| OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
+            if (Input.GetMouseButtonDown(1) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
             {
-                Player.GetComponent<PlayerController>().Clue.Play();
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
                 /*other.gameObject.layer = LayerMask.NameToLayer("Hand");         //충돌되지않게 레이어 바꾸기
@@ -108,35 +122,39 @@ public class R_Hand : MonoBehaviour
             }
 
         }
+        if (other.transform.tag == "Player" || other.transform.tag == "Gun")
+        {
+            return;
+        }
 
         if (other.transform.tag == "RedPrism")
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
-                Player.GetComponent<PlayerController>().Clue.Play();
                 Player.GetComponent<PlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("빨간색 프리즘 얻음");
-              
-                    Destroy(other.transform.gameObject);
-                
+
+                Destroy(other.transform.gameObject);
+
             }
 
         }
         if (other.transform.tag == "BluePrism")
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
                 Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("초록색 프리즘 얻음");
-                Player.GetComponent<PlayerController>().Clue.Play();
+
                 Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
                 Destroy(other.transform.gameObject);
+
             }
         }
         if (other.transform.tag == "Photo1" ||
@@ -175,7 +193,7 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "GunBefore")
         {
-            if (OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
@@ -200,8 +218,21 @@ public class R_Hand : MonoBehaviour
         if (other.transform.tag == "Clue")
         {
             col = other;
-
-
+        }
+        if (other.transform.tag == "Exit")
+        {
+            Debug.Log("나가기");
+            Application.Quit();
+        }
+        if (other.transform.tag == "Next")
+        {
+            Player.GetComponent<PlayerController>().Clue.Play();            //효과음 재생
+            other.transform.parent.GetComponent<TutorialScreen>().NextText();
+        }
+        if (other.transform.tag == "Undo")
+        {
+            Player.GetComponent<PlayerController>().Clue.Play();            //효과음 재생
+            other.transform.parent.GetComponent<TutorialScreen>().UndoText();
         }
 
     }
