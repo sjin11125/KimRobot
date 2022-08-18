@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
     public GameObject gameRestart;
     public GameObject timer;
 
+    bool screenin;
+
     List<string> Inventory = new List<string>(); 
     void Start()
     {
@@ -139,13 +141,15 @@ public class PlayerController : MonoBehaviour
             gameRestart.SetActive(true);
             Time.timeScale = 0;
         }
-        if (transform.position.x< ScreenWall.transform.position.x)
+        if ((transform.position.x< ScreenWall.transform.position.x)&&screenin==false)
         {
+            screenin = true;
             BGM.Pause();
             ScreenInto.Play();
         }
-        else 
+        else if ((transform.position.x > ScreenWall.transform.position.x) && screenin == true)
         {
+            screenin = false;
             BGM.Play();
             ScreenInto.Pause();
     
@@ -340,7 +344,7 @@ public class PlayerController : MonoBehaviour
             Jump.Play();
             isJump = true;
             Rigidbody rigi=transform.GetComponent<Rigidbody>();
-            rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
+            rigi.AddForce(Vector3.up*8,ForceMode.Impulse);
         }
 
         if (Input.GetKeyUp(KeyCode.A)|| Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.S)|| Input.GetKeyUp(KeyCode.D))

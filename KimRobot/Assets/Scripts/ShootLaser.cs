@@ -57,6 +57,7 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButton(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
         {
+            PlayerController.GunShoot.Play();
             if (Red.activeSelf && Green.activeSelf)
             {
                 pivot.transform.position = GunPivot.transform.position;
