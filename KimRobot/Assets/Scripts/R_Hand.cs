@@ -42,14 +42,15 @@ public class R_Hand : MonoBehaviour
                 Debug.Log("isClue는 true");
                 isClue = false;
 
-                Player.GetComponentsInChildren<Camera>()[1].enabled = true;
+                CenterCamera.SetActive(true);
+                Player.GetComponentsInChildren<Camera>()[1].enabled = false;
                 Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
                 UICamera.transform.SetParent(UICameraParent.transform);         //카메라 부모 다시 설정
                 //UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
 
                 UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = false;
 
-                CenterCamera.SetActive(true);
+               
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
 
                 Destroy(Clue);
