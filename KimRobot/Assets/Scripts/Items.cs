@@ -173,27 +173,27 @@ public class Items : MonoBehaviour
                 number = numbers[i].GetComponent<Item>().letter;
             }
         }
-
         if (number == "4")
         {
             count = ShootLaser.count;
             StarOne.SetActive(false);
             numberOne.SetActive(true);
             StarTwo.GetComponent<Renderer>().material = redMat;
+            
         }
-        else if (number == "1")
+        if (number == "1")
         {
             StarZero.SetActive(true);
             numberZero.SetActive(false);
             StarOne.GetComponent<Renderer>().material = normalMat;
         }
-        else if (number == "2")
+        if (number == "2")
         {
             StarZero.SetActive(true);
             numberZero.SetActive(false);
             StarOne.GetComponent<Renderer>().material = normalMat;
         }
-        else if (number == "0")
+         if (number == "0")
         {
             StarZero.SetActive(true);
             numberZero.SetActive(false);

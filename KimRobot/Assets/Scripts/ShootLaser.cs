@@ -35,7 +35,7 @@ public class ShootLaser : MonoBehaviour
         //TestScript.colliderPos[0] = GunPivot.transform.position;
         Destroy(GameObject.Find("Laser Beam"));
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)||OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger))
         {
             colliderExit = true;
             if (pivot.transform.childCount > 0)
