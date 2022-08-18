@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource GlassBroken;          //실린더 깨지는 사운드
     public AudioSource CylinderWarning;          //실린더 경고 사운드
     public AudioSource ScreenDoor;
+    public AudioSource ScreenInto;
+    public AudioSource BGM;
 
     public GameObject gameExit;
     public GameObject gameRestart;
@@ -85,13 +87,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //플레이어 이동(컨트롤러)
+        PlayerMove();                   //플레이어 이동(컨트롤러)
 
         //---------------PC버전---------------------------------
 
         //Grab();                         //우클릭 잡기
         isStartDone = true;
-        PlayerMove_Keyboard();
+        //PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;
@@ -136,6 +138,19 @@ public class PlayerController : MonoBehaviour
             gameRestart.SetActive(true);
             Time.timeScale = 0;
         }
+        if (transform.position.x<-20)
+        {
+            BGM.Pause();
+            ScreenInto.Play();
+
+    
+        }
+        else 
+        {
+            BGM.Play();
+            ScreenInto.Pause();
+    
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -155,6 +170,10 @@ public class PlayerController : MonoBehaviour
         {
             //크리스탈 효과음 넣기
             collision.transform.GetComponent<AudioSource>().Play();
+            if (collision.transform.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log("소리 재생중");
+            }
         }
 
         if (collision.gameObject.CompareTag("ScreenDoor"))
@@ -235,7 +254,6 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // 이동
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
-            Debug.Log(pos);
             var absX =Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 

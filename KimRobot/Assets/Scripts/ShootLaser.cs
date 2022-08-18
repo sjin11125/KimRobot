@@ -55,7 +55,7 @@ public class ShootLaser : MonoBehaviour
             count++;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
         {
             if (Red.activeSelf && Green.activeSelf)
             {
