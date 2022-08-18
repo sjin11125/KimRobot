@@ -53,6 +53,7 @@ public class VRPlayerController : MonoBehaviour
     public AudioSource Neon;          //네온 켜지는 사운드
     public AudioSource GlassBroken;          //실린더 깨지는 사운드
     public AudioSource CylinderWarning;          //실린더 경고 사운드
+    public AudioSource ScreenInfo;          //실린더 경고 사운드
     public GameObject gameExit;
 
     List<string> Inventory = new List<string>();
@@ -204,7 +205,7 @@ public class VRPlayerController : MonoBehaviour
             var absX = Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 
-            // isWalk = true;
+             isWalk = true;
 
             if (absX > absY)
             {

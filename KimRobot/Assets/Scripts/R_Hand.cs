@@ -143,23 +143,23 @@ public class R_Hand : MonoBehaviour
                     Destroy(other.transform.gameObject);
                 
             }
-            if (other.transform.tag == "BluePrism")
+           
+        }
+        if (other.transform.tag == "BluePrism")
+        {
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
-                if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
-                {
 
-                    Player.GetComponent<VRPlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+                Player.GetComponent<VRPlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
 
-                    //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-                    Debug.Log("초록색 프리즘 얻음");
-                   
-                        Player.GetComponent<VRPlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
-                        Destroy(other.transform.gameObject);
-                    
-                }
+                //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                Debug.Log("초록색 프리즘 얻음");
+
+                Player.GetComponent<VRPlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
+                Destroy(other.transform.gameObject);
+
             }
         }
-       
         if (other.transform.tag == "Photo1" ||
             other.transform.tag == "Photo2" ||
             other.transform.tag == "Photo3")
@@ -221,6 +221,11 @@ public class R_Hand : MonoBehaviour
         if (other.transform.tag == "Clue")
         {
             col = other;
+        }
+        if (other.transform.tag == "Exit")
+        {
+            Debug.Log("나가기");
+            Application.Quit();
         }
         if (other.transform.tag == "Next")
         {

@@ -37,6 +37,7 @@ public class Items : MonoBehaviour
     public bool doorOpen;
 
     public AudioSource switchDown;
+    public VRPlayerController Playercon;
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -126,6 +127,7 @@ public class Items : MonoBehaviour
         {
             if(letter[1] == "연" && letter[0] == "인")
             {
+                Playercon.Screen.Play(); 
                 lockImg.SetActive(false);
                 picture.SetActive(true);
                 letterItemParents.SetActive(false);
@@ -135,6 +137,7 @@ public class Items : MonoBehaviour
             }
             else if (letter[0] == "연" && letter[1] == "인")
             {
+                Playercon.Screen.Play();
                 lockImg.SetActive(false);
                 picture.SetActive(true);
                 letterItemParents.SetActive(false);

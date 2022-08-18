@@ -55,7 +55,7 @@ public class ShootLaser : MonoBehaviour
             {
                 pivot.transform.position = GunPivot.transform.position;
                 pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
+                beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Yellow");
             }
             else
             {

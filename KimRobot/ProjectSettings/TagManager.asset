@@ -27,6 +27,8 @@ TagManager:
   - Undo
   - ScreenDoor
   - Star
+  - GreenPrism
+  - Exit
   layers:
   - Default
   - TransparentFX
