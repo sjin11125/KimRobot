@@ -21,7 +21,6 @@ public class ShootLaser : MonoBehaviour
 
     public static bool colliderExit;
 
-    public static int count;
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
@@ -48,12 +47,6 @@ public class ShootLaser : MonoBehaviour
             {
                 Cube.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
             }
-        }
-
-
-        if (Input.GetMouseButtonDown(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
-        {
-            count++;
         }
 
         if (Input.GetMouseButton(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
