@@ -14,6 +14,7 @@ public class R_Hand : MonoBehaviour
     public GameObject CenterCamera;
     public Transform PosReset;
 
+
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
     Collision col;
