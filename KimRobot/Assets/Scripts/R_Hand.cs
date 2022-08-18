@@ -87,9 +87,13 @@ public class R_Hand : MonoBehaviour
     }*/
     private void OnCollisionStay(Collision other)
     {
+        if (other.transform.tag == "Player" || other.transform.tag == "Gun")
+        {
+            return;
+        }
         if (other.transform.tag == "GunBefore")
         {
-            if (Input.GetMouseButtonDown(1))       //우클릭 혹은 오른쪽 컨트롤러 
+            if (Input.GetMouseButtonDown(1)|| OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
             {
                 Player.GetComponent<PlayerController>().Clue.Play();
                 Debug.Log("총 닿인다");
@@ -103,10 +107,6 @@ public class R_Hand : MonoBehaviour
                 Gun.SetActive(true);
             }
 
-        }
-        if (other.transform.tag == "Player" || other.transform.tag == "Gun")
-        {
-            return;
         }
 
         if (other.transform.tag == "RedPrism")
@@ -127,14 +127,17 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "BluePrism")
         {
-            Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
+            {
 
-            //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
-            Debug.Log("초록색 프리즘 얻음");
-            Player.GetComponent<PlayerController>().Clue.Play();
-                  Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+
+                //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
+                Debug.Log("초록색 프리즘 얻음");
+                Player.GetComponent<PlayerController>().Clue.Play();
+                Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
                 Destroy(other.transform.gameObject);
-            
+            }
         }
         if (other.transform.tag == "Photo1" ||
             other.transform.tag == "Photo2" ||
