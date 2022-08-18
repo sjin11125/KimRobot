@@ -13,7 +13,7 @@ public class Cube : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -2.549996f)
+        if (transform.position.y < -2.549997f)
         {
             transform.position = new Vector3(transform.position.x, -2.5f, transform.position.z);
         }

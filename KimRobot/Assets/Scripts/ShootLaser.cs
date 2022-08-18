@@ -21,6 +21,7 @@ public class ShootLaser : MonoBehaviour
 
     public static bool colliderExit;
 
+    public static int count;
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
@@ -51,7 +52,7 @@ public class ShootLaser : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-           
+            count++;
         }
 
         if (Input.GetMouseButton(0))
