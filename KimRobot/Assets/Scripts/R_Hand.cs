@@ -11,11 +11,9 @@ public class R_Hand : MonoBehaviour
     public GameObject ClueCanvas;
     public GameObject UICameraParent;
     public GameObject CenterCamera;
-<<<<<<< Updated upstream
-=======
-    public Transform PosReset;
+    public GameObject TrackingCamera;
 
->>>>>>> Stashed changes
+    public Transform PosReset;
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
     Collision col;
@@ -73,7 +71,7 @@ public class R_Hand : MonoBehaviour
                 // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
 
                 UICameraParent = UICamera.transform.parent.gameObject;      //카메라 부모 받아옴
-                //UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
+                UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
                 UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = true;
 
 
