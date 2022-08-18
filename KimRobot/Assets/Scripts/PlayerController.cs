@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -56,7 +57,8 @@ public class PlayerController : MonoBehaviour
     public AudioSource ScreenDoor;
 
     public GameObject gameExit;
-
+    public GameObject gameRestart;
+    public GameObject timer;
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -129,7 +131,11 @@ public class PlayerController : MonoBehaviour
             walkAudio.Pause();
         }
 
-        
+        if (timer.GetComponent<Timer>().minute == 0 && timer.GetComponent<Timer>().second == 0)
+        {
+            gameRestart.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -142,6 +148,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "doorFrame")
         {
             gameExit.SetActive(true);
+            Time.timeScale = 0;
         }
 
         if (collision.gameObject.CompareTag("Star"))
@@ -155,7 +162,8 @@ public class PlayerController : MonoBehaviour
             ScreenDoor.Play();
         }
     }
-        public void Grab()
+
+    public void Grab()
     {
         Debug.DrawLine(ray.origin, ray.GetPoint(10f), Color.green);
         
@@ -177,21 +185,34 @@ public class PlayerController : MonoBehaviour
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
 
         }
-        if (Input.GetMouseButtonDown(0)&&isGun==false)              //총을 아직 획득 안했을 때
+        if (Input.GetMouseButtonDown(0))              
         {
-            if (Physics.Raycast(ray, out hit))
+            if (gameRestart.activeSelf)
             {
-                Debug.DrawLine(hit.point, hit.normal, Color.green);
-                if (hit.transform.tag == "Gun")                 //총을 집으면
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            if (gameExit.activeSelf)
+            {
+                Application.Quit();
+            }
+
+            if (!isGun)//총을 아직 획득 안했을 때
+            {
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("총집음");
-                    isGun = true;
-                    //hit.transform.localPosition = new Vector3(0, 0, 0);
-                    Gun.transform.gameObject.SetActive(true);
+                    Debug.DrawLine(hit.point, hit.normal, Color.green);
+                    if (hit.transform.tag == "Gun")                 //총을 집으면
+                    {
+                        Debug.Log("총집음");
+                        isGun = true;
+                        //hit.transform.localPosition = new Vector3(0, 0, 0);
+                        Gun.transform.gameObject.SetActive(true);
+                    }
                 }
             }
         }
-        }
+    }
+
     public void PlayerMove()
     {
        // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
