@@ -11,6 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GunAvataTest.unity
     guid: b2a4b718e8dda3b468be3c1a4b59513a
+  - enabled: 1
+    path: Assets/Scenes/intro.unity
+    guid: 67657a605c2c6e5429c50b5ceb911343
+  - enabled: 1
+    path: Assets/Scenes/MainGame.unity
+    guid: 1369587ebebf20347ae8e9561737c1b6
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6b466ecb828fa0341a229ec2a6488d00, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 806eece2e04656c46a844ae472e3953a, type: 2}
