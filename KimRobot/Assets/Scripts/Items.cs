@@ -83,27 +83,27 @@ public class Items : MonoBehaviour
                         {
                             NumberInput();
                         }
-                        else
-                        {
-                            switchDown.Play();
-                            //여기에 차단기 내려가는듯한 효과음넣기
-                            for (int i = 0; i < room.Length; i++)
-                            {
-                                room[i].GetComponent<Renderer>().material = transparent;
-                            }
-                            doorFrame.GetComponent<Renderer>().material = glow;
-                            hallway.SetActive(false);
-                            doorFrame.GetComponent<BoxCollider>().enabled = true;
-                            door.SetActive(false);
-                            star.SetActive(true); //별 켜기
-                            //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
-                            numberItemParents.SetActive(false);
-                            Quiz.SetActive(false);                           
-                        }
                     }
                 }
+            }          
+        }
+
+        if (doorOpen)
+        {
+            switchDown.Play();
+            //여기에 차단기 내려가는듯한 효과음넣기
+            for (int i = 0; i < room.Length; i++)
+            {
+                room[i].GetComponent<Renderer>().material = transparent;
             }
-           
+            doorFrame.GetComponent<Renderer>().material = glow;
+            hallway.SetActive(false);
+            doorFrame.GetComponent<BoxCollider>().enabled = true;
+            door.SetActive(false);
+            star.SetActive(true); //별 켜기
+                                  //건물을 투명화, 문 테두리를 형광, 문을 엑티브 폴스
+            numberItemParents.SetActive(false);
+            Quiz.SetActive(false);
         }
     }
 
