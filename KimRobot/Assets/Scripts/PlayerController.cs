@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public Transform Gun;
     public bool isStart = false;
     public bool isStartDone = false;
+    public GameObject StartCamera;         //시작카메라
     public GameObject StartPos;         //시작지점
     Animator StartAnimation;            //시작 애니메이션
     Transform[] Trs;
@@ -73,7 +74,8 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator StartAnimationCo()
     {
-        Trs[3].gameObject.SetActive(false);
+        Debug.Log("스타트 "+Trs[3].gameObject.name);
+           Trs[3].gameObject.SetActive(false);
         StartAnimation.SetTrigger("WakeUp");
         yield return new WaitForSeconds(6f);
         transform.position = StartPos.transform.position;

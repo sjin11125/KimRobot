@@ -212,9 +212,9 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Cylinder")
         {
-            Player.GetComponent<VRPlayerController>().GlassBroken.Play();
-            Player.GetComponent<VRPlayerController>().isStart = true;
-            Player.GetComponent<VRPlayerController>().CylinderWarning.Pause();
+            Player.GetComponent<PlayerController>().GlassBroken.Play();
+            Player.GetComponent<PlayerController>().isStart = true;
+            Player.GetComponent<PlayerController>().CylinderWarning.Pause();
             other.transform.GetComponent<Break>().isBreak = true;
         }
 
@@ -229,10 +229,12 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Next")
         {
+            Player.GetComponent<VRPlayerController>().Clue.Play();            //효과음 재생
             other.transform.parent.GetComponent<TutorialScreen>().NextText();
         }
         if (other.transform.tag == "Undo")
         {
+            Player.GetComponent<VRPlayerController>().Clue.Play();            //효과음 재생
             other.transform.parent.GetComponent<TutorialScreen>().UndoText();
         }
 

@@ -50,14 +50,18 @@ public class VRRig : MonoBehaviour
         head.Map();
         leftHand.Map();
         rightHand.Map();
-       // rightHand.PrintPosition();
-        if (playerController.isWalk)                    //°È°íÀÖ³Ä
+        // rightHand.PrintPosition();
+        if (playerController!=null)
         {
-            animator.SetBool("IsWalk",true);
+            if (playerController.isWalk)                    //°È°íÀÖ³Ä
+            {
+                animator.SetBool("IsWalk", true);
+            }
+            else
+            {
+                animator.SetBool("IsWalk", false);
+            }
         }
-        else
-        {
-            animator.SetBool("IsWalk", false);
-        }
+  
     }
 }

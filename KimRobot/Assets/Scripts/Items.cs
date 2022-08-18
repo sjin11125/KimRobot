@@ -104,6 +104,11 @@ public class Items : MonoBehaviour
 
                             switchDown.Play();
                             //여기에 차단기 내려가는듯한 효과음넣기
+                            if(OVRInput.GetDown(OVRInput.Button.Three))
+                            {
+                                Debug.Log("나감");
+                                Application.Quit();
+                            }
                         }
                     }
                 }
