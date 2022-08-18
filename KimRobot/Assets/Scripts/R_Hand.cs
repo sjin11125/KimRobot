@@ -11,10 +11,14 @@ public class R_Hand : MonoBehaviour
     public GameObject ClueCanvas;
     public GameObject UICameraParent;
     public GameObject CenterCamera;
+<<<<<<< Updated upstream
+=======
+    public Transform PosReset;
+
+>>>>>>> Stashed changes
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
     Collision col;
-
 
     private void Start()
     {
