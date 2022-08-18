@@ -212,9 +212,9 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Cylinder")
         {
-            Player.GetComponent<PlayerController>().GlassBroken.Play();
-            Player.GetComponent<PlayerController>().isStart = true;
-            Player.GetComponent<PlayerController>().CylinderWarning.Pause();
+            Player.GetComponent<StartScript>().GlassBroken.Play();
+            Player.GetComponent<StartScript>().isStart = true;
+            Player.GetComponent<StartScript>().CylinderWarning.Pause();
             other.transform.GetComponent<Break>().isBreak = true;
         }
 
