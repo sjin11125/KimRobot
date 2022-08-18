@@ -17,16 +17,17 @@ public class ShootLaser : MonoBehaviour
     public GameObject GunPivot;
 
     public GameObject Player;
-    VRPlayerController PlayerController;
+    PlayerController PlayerController;
 
     public static bool colliderExit;
 
+    public static int count;
     private void Start()
     {
         Red = transform.GetChild(0).gameObject;
         Green = transform.GetChild(1).gameObject;
         Cube = GameObject.FindWithTag("Cube");
-        PlayerController = Player.GetComponent<VRPlayerController>();
+        PlayerController = Player.GetComponent<PlayerController>();
     }
 
     void Update()
@@ -34,7 +35,7 @@ public class ShootLaser : MonoBehaviour
         //TestScript.colliderPos[0] = GunPivot.transform.position;
         Destroy(GameObject.Find("Laser Beam"));
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)||OVRInput.GetUp(OVRInput.Button.SecondaryIndexTrigger))
         {
             colliderExit = true;
             if (pivot.transform.childCount > 0)
@@ -47,6 +48,13 @@ public class ShootLaser : MonoBehaviour
             {
                 Cube.transform.GetChild(i).GetComponent<BoxCollider>().enabled = false;
             }
+
+            PlayerController.GunShoot.Play();
+        }
+
+        if (Input.GetMouseButtonDown(0) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+        {
+            count++;
         }
 
         if (Input.GetMouseButton(0)|| OVRInput.Get(OVRInput.Button.SecondaryIndexTrigger))
@@ -55,7 +63,7 @@ public class ShootLaser : MonoBehaviour
             {
                 pivot.transform.position = GunPivot.transform.position;
                 pivot.transform.rotation = this.transform.rotation;
-                beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Yellow");
+                beam = new LaserBeam(pivot.transform.position, gameObject.transform.forward, material, "Yellow");
             }
             else
             {
@@ -94,12 +102,10 @@ public class ShootLaser : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown("z")|| OVRInput.GetDown(OVRInput.Button.One))
+        if (Input.GetKeyDown("z")||OVRInput.GetDown(OVRInput.Button.One))
         {
-            Debug.Log("B");
             if (PlayerController.Prism[1]==true)            //레드 프리즘을 얻었는가
             {
-                Debug.Log("Red okay");
                 PlayerController.GunColor.Play();               //효과음 재생
                 if (Red.activeSelf)
                 {
@@ -115,8 +121,7 @@ public class ShootLaser : MonoBehaviour
         }
         if (Input.GetKeyDown("x")|| OVRInput.GetDown(OVRInput.Button.Two))
         {
-            Debug.Log("A");
-            if (PlayerController.Prism[0] == true)            //초록 프리즘을 얻었는가
+            if (PlayerController.Prism[1] == true)            //초록 프리즘을 얻었는가
             {
                 PlayerController.GunColor.Play();               //효과음 재생
                 if (Green.activeSelf)

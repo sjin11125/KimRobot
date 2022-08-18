@@ -8,16 +8,15 @@ public class R_Hand : MonoBehaviour
     public GameObject Player;
     public GameObject Gun;
     public GameObject UICamera;
-    public GameObject UICameraParent;
     public GameObject ClueCanvas;
-    public GameObject TrackingCamera;
+    public GameObject UICameraParent;
     public GameObject CenterCamera;
-    public Transform PosReset;
+    public GameObject TrackingCamera;
 
+    public Transform PosReset;
     bool isClue = false;        //단서를 보고 있나
     GameObject Clue;
     Collision col;
-
 
     private void Start()
     {
@@ -43,16 +42,17 @@ public class R_Hand : MonoBehaviour
                 Debug.Log("isClue는 true");
                 isClue = false;
 
-                Player.GetComponentsInChildren<Camera>()[1].enabled = true;
-                Player.GetComponent<VRPlayerController>().enabled = true;        //플레이어 움직일수잇게
+                CenterCamera.SetActive(true);
+                Player.GetComponentsInChildren<Camera>()[1].enabled = false;
+                Player.GetComponent<PlayerController>().enabled = true;        //플레이어 움직일수잇게
                 UICamera.transform.SetParent(UICameraParent.transform);         //카메라 부모 다시 설정
                 //UICamera.GetComponentsInChildren<Transform>()[1].transform.gameObject.SetActive(false);     //단서끄기
 
                 UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = false;
 
-                CenterCamera.SetActive(true);
+               
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = false;
-                
+
                 Destroy(Clue);
 
             }
@@ -66,15 +66,15 @@ public class R_Hand : MonoBehaviour
 
                 UICamera.GetComponentsInChildren<Camera>()[0].enabled = true;
 
-                Player.GetComponent<VRPlayerController>().Book.Play();            //효과음 재생
-                Player.GetComponent<VRPlayerController>().enabled = false;        //플레이어 못 움직이게
+                Player.GetComponent<PlayerController>().Book.Play();            //효과음 재생
+                Player.GetComponent<PlayerController>().enabled = false;        //플레이어 못 움직이게
 
-               // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
+                // Clue = Instantiate(ClueCanvas, col.transform.GetComponentInChildren<Camera>().transform);
 
                 UICameraParent = UICamera.transform.parent.gameObject;      //카메라 부모 받아옴
                 UICamera.transform.SetParent(TrackingCamera.transform);     //카메라 부모 재설정
                 UICamera.GetComponentsInChildren<Transform>()[1].GetComponent<Canvas>().enabled = true;
-                
+
 
                 CenterCamera.SetActive(false);                      //CentereyeAnchor 비활성화 
                 //ClueCanvas.transform.SetParent(other.transform.GetComponentInChildren<Camera>().transform);
@@ -94,7 +94,7 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "Clue")
         {
-            if (isClue==false)
+            if (isClue == false)
             {
 
                 col = null;
@@ -111,7 +111,7 @@ public class R_Hand : MonoBehaviour
     {
         if (other.transform.tag == "GunBefore")
         {
-            if (Input.GetMouseButtonDown(1)|| OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger)|| OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
+            if (Input.GetMouseButtonDown(1) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger))       //우클릭 혹은 오른쪽 컨트롤러 
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
@@ -129,33 +129,33 @@ public class R_Hand : MonoBehaviour
         {
             return;
         }
-      
-            if (other.transform.tag == "RedPrism")
+
+        if (other.transform.tag == "RedPrism")
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
-                Player.GetComponent<VRPlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[1] = true;          //빨간색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("빨간색 프리즘 얻음");
-            
-                    Destroy(other.transform.gameObject);
-                
+
+                Destroy(other.transform.gameObject);
+
             }
-           
+
         }
         if (other.transform.tag == "BluePrism")
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger) || Input.GetMouseButtonDown(1))         //우클릭 혹은 왼쪽 컨트롤러
             {
 
-                Player.GetComponent<VRPlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[0] = true;          //초록색 프리즘 얻었다
 
                 //other.transform.GetComponentInChildren<SkinnedMeshRenderer>().enabled = true;
                 Debug.Log("초록색 프리즘 얻음");
 
-                Player.GetComponent<VRPlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
+                Player.GetComponent<PlayerController>().Prism[2] = true;          //노란색 프리즘 얻었다
                 Destroy(other.transform.gameObject);
 
             }
@@ -165,11 +165,11 @@ public class R_Hand : MonoBehaviour
             other.transform.tag == "Photo3")
         {
             Debug.Log("문이열리네여");
-            Player.GetComponent<VRPlayerController>().Door.Play();            //효과음 재생
+            Player.GetComponent<PlayerController>().Door.Play();            //효과음 재생
             other.transform.GetComponent<Screen>().OpenDoor();          //문열어
         }
 
-        if (other.transform.tag == "Clue"&&col==null)
+        if (other.transform.tag == "Clue" && col == null)
         {
             col = other;
 
@@ -196,7 +196,7 @@ public class R_Hand : MonoBehaviour
 
         if (other.transform.tag == "GunBefore")
         {
-            if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger)|| OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
+            if (OVRInput.GetDown(OVRInput.Button.SecondaryHandTrigger) || OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
             {
                 Debug.Log("총 닿인다");
                 Destroy(other.transform.gameObject);
@@ -212,9 +212,9 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Cylinder")
         {
-            Player.GetComponent<PlayerController>().GlassBroken.Play();
-            Player.GetComponent<PlayerController>().isStart = true;
-            Player.GetComponent<PlayerController>().CylinderWarning.Pause();
+            Player.GetComponent<StartScript>().GlassBroken.Play();
+            Player.GetComponent<StartScript>().isStart = true;
+            Player.GetComponent<StartScript>().CylinderWarning.Pause();
             other.transform.GetComponent<Break>().isBreak = true;
         }
 
@@ -229,12 +229,12 @@ public class R_Hand : MonoBehaviour
         }
         if (other.transform.tag == "Next")
         {
-            Player.GetComponent<VRPlayerController>().Clue.Play();            //효과음 재생
+            Player.GetComponent<PlayerController>().Clue.Play();            //효과음 재생
             other.transform.parent.GetComponent<TutorialScreen>().NextText();
         }
         if (other.transform.tag == "Undo")
         {
-            Player.GetComponent<VRPlayerController>().Clue.Play();            //효과음 재생
+            Player.GetComponent<PlayerController>().Clue.Play();            //효과음 재생
             other.transform.parent.GetComponent<TutorialScreen>().UndoText();
         }
 

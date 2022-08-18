@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:KimRobot/Assets/Scenes/intro.unity.meta
 guid: 67657a605c2c6e5429c50b5ceb911343
+========
+guid: 1369587ebebf20347ae8e9561737c1b6
+>>>>>>>> Vvicky:KimRobot/Assets/Scenes/MainGame.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

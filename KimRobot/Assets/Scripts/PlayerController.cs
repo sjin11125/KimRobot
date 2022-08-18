@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,11 +35,11 @@ public class PlayerController : MonoBehaviour
     public Transform Gun;
     public bool isStart = false;
     public bool isStartDone = false;
-    public GameObject StartCamera;         //시작카메라
     public GameObject StartPos;         //시작지점
     Animator StartAnimation;            //시작 애니메이션
     Transform[] Trs;
 
+    public GameObject ScreenWall;         //스크린벽
     //오디오
     public AudioSource walkAudio;           //발사운드
     public AudioSource GunColor;           //총 온오프 사운드
@@ -55,9 +56,14 @@ public class PlayerController : MonoBehaviour
     public AudioSource GlassBroken;          //실린더 깨지는 사운드
     public AudioSource CylinderWarning;          //실린더 경고 사운드
     public AudioSource ScreenDoor;
+    public AudioSource ScreenInto;
+    public AudioSource BGM;
 
     public GameObject gameExit;
+    public GameObject gameRestart;
+    public GameObject timer;
 
+    bool screenin;
 
     List<string> Inventory = new List<string>(); 
     void Start()
@@ -69,13 +75,12 @@ public class PlayerController : MonoBehaviour
 
         isStart = false;
         StartAnimation = GetComponent<Animator>();
-       
+        BGM.Play();
 
     }
     IEnumerator StartAnimationCo()
     {
-        Debug.Log("스타트 "+Trs[3].gameObject.name);
-           Trs[3].gameObject.SetActive(false);
+        Trs[3].gameObject.SetActive(false);
         StartAnimation.SetTrigger("WakeUp");
         yield return new WaitForSeconds(6f);
         transform.position = StartPos.transform.position;
@@ -85,24 +90,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //PlayerMove();                   //플레이어 이동(컨트롤러)
+        PlayerMove();                   //플레이어 이동(컨트롤러)
 
         //---------------PC버전---------------------------------
 
         //Grab();                         //우클릭 잡기
-        //isStartDone = true;
+        isStartDone = true;
         //PlayerMove_Keyboard();
         if (isQuiz)                     //퀴즈 풀었을 때
         {
             isQuiz = false;
 
         }
-        if (isStart)
+        /*if (isStart)
         {
             isStart = false;
             StartCoroutine(StartAnimationCo());
 
-        }
+        }*/
        /* if (isTatoo)
         {
             isTatoo = false;
@@ -131,9 +136,38 @@ public class PlayerController : MonoBehaviour
             walkAudio.Pause();
         }
 
-        
-    }
-    void OnCollisionEnter(Collision collision)
+        if (timer.GetComponent<Timer>().minute == 0 && timer.GetComponent<Timer>().second == 0)
+        {
+            gameRestart.SetActive(true);
+            Time.timeScale = 0;
+        }
+        if ((transform.position.x< ScreenWall.transform.position.x)&&screenin==false)
+        {
+            screenin = true;
+            BGM.Pause();
+            ScreenInto.Play();
+        }
+        else if ((transform.position.x > ScreenWall.transform.position.x) && screenin == true)
+        {
+            screenin = false;
+            BGM.Play();
+            ScreenInto.Pause();
+    
+        }
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))
+        {
+            if (gameRestart.activeSelf)
+            {
+                SceneManager.LoadScene("title");
+            }
+            if (gameExit.activeSelf)
+            {
+                Application.Quit();
+            }
+
+        }
+        }
+        void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Wall"))
         {
@@ -144,12 +178,17 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.name == "doorFrame")
         {
             gameExit.SetActive(true);
+            Time.timeScale = 0;
         }
 
         if (collision.gameObject.CompareTag("Star"))
         {
             //크리스탈 효과음 넣기
             collision.transform.GetComponent<AudioSource>().Play();
+            if (collision.transform.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log("소리 재생중");
+            }
         }
 
         if (collision.gameObject.CompareTag("ScreenDoor"))
@@ -157,7 +196,8 @@ public class PlayerController : MonoBehaviour
             ScreenDoor.Play();
         }
     }
-        public void Grab()
+
+    public void Grab()
     {
         Debug.DrawLine(ray.origin, ray.GetPoint(10f), Color.green);
         
@@ -179,21 +219,34 @@ public class PlayerController : MonoBehaviour
             Camera.transform.localPosition = new Vector3(Camera.transform.localPosition.x, Camera.transform.localPosition.y, -0.17f);
 
         }
-        if (Input.GetMouseButtonDown(0)&&isGun==false)              //총을 아직 획득 안했을 때
+        if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))              
         {
-            if (Physics.Raycast(ray, out hit))
+            if (gameRestart.activeSelf)
             {
-                Debug.DrawLine(hit.point, hit.normal, Color.green);
-                if (hit.transform.tag == "Gun")                 //총을 집으면
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
+            if (gameExit.activeSelf)
+            {
+                Application.Quit();
+            }
+
+            if (!isGun)//총을 아직 획득 안했을 때
+            {
+                if (Physics.Raycast(ray, out hit))
                 {
-                    Debug.Log("총집음");
-                    isGun = true;
-                    //hit.transform.localPosition = new Vector3(0, 0, 0);
-                    Gun.transform.gameObject.SetActive(true);
+                    Debug.DrawLine(hit.point, hit.normal, Color.green);
+                    if (hit.transform.tag == "Gun")                 //총을 집으면
+                    {
+                        Debug.Log("총집음");
+                        isGun = true;
+                        //hit.transform.localPosition = new Vector3(0, 0, 0);
+                        Gun.transform.gameObject.SetActive(true);
+                    }
                 }
             }
         }
-        }
+    }
+
     public void PlayerMove()
     {
        // Vector2 mov2d = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
@@ -216,11 +269,10 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch) != new Vector2(0, 0))     // 이동
         {
             Vector2 pos = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick,OVRInput.Controller.LTouch);
-            Debug.Log(pos);
             var absX =Mathf.Abs(pos.x);
             var absY = Mathf.Abs(pos.y);
 
-           // isWalk = true;
+            isWalk = true;
 
             if (absX>absY)
             {
@@ -292,7 +344,7 @@ public class PlayerController : MonoBehaviour
             Jump.Play();
             isJump = true;
             Rigidbody rigi=transform.GetComponent<Rigidbody>();
-            rigi.AddForce(Vector3.up*5,ForceMode.Impulse);
+            rigi.AddForce(Vector3.up*8,ForceMode.Impulse);
         }
 
         if (Input.GetKeyUp(KeyCode.A)|| Input.GetKeyUp(KeyCode.W)|| Input.GetKeyUp(KeyCode.S)|| Input.GetKeyUp(KeyCode.D))
