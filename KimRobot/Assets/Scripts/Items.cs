@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Items : MonoBehaviour
 {
@@ -19,25 +18,23 @@ public class Items : MonoBehaviour
     public GameObject StarTwo;
     public GameObject numberTwo;
     public Material redMat;
+    Material normalMat;
+    int count;
 
     public GameObject lockImg;
-    public GameObject picture;//»çÁøÀÖ´Â ½ºÅ©¸° ¿ÀºêÁ§Æ® ³Ö±â
+    public GameObject picture;//ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ö±ï¿½
 
+    public GameObject hallway;
     public GameObject door;
     public GameObject doorFrame;
     public GameObject star;
-
     public GameObject[] room;
     public Material transparent;
     public Material glow;
-
-    public GameObject timer;
-    public GameObject gameRestart;
-
     public bool doorOpen;
-
     public AudioSource switchDown;
     public VRPlayerController Playercon;
+
     private void Start()
     {
         letters = new GameObject[letterItemParents.transform.childCount];
@@ -54,19 +51,15 @@ public class Items : MonoBehaviour
         doorFrame.GetComponent<BoxCollider>().enabled = false;
         numberItemParents.SetActive(false);
         Quiz.SetActive(false);
+        normalMat = StarZero.GetComponent<Renderer>().material;
     }
     public void Update()
     {
-        if (timer.GetComponent<Timer>().minute == 0 && timer.GetComponent<Timer>().second == 0)
-        {
-            gameRestart.SetActive(true);
-        }      
-
-        if (lockImg.activeSelf)//½ºÅ©¸°ÀÌ Àá°ÜÀÖÀ»¶§
+        if (lockImg.activeSelf)//ï¿½ï¿½Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             LetterInput();
         }
-        else//½ºÅ©¸° Àá±Ý ÇØÁ¦ÀÏ¶§
+        else//ï¿½ï¿½Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½
         {
             if (!numberZero.activeSelf)
             {
@@ -74,13 +67,13 @@ public class Items : MonoBehaviour
             }
             else
             {
-                if (!numberOne.activeSelf)
+                if (!numberOne.activeSelf && count < ShootLaser.count)
                 {
                     NumberOneInput();
                 }
                 else
                 {
-                    if (!numberTwo.activeSelf)
+                    if (!numberTwo.activeSelf && count < ShootLaser.count)
                     {
                         NumberTwoInput();
                     }
@@ -92,23 +85,25 @@ public class Items : MonoBehaviour
                         }
                         else
                         {
+                            switchDown.Play();
+                            //ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½Ü±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½ï¿½ï¿½ È¿ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
                             for (int i = 0; i < room.Length; i++)
                             {
                                 room[i].GetComponent<Renderer>().material = transparent;
                             }
                             doorFrame.GetComponent<Renderer>().material = glow;
+                            hallway.SetActive(false);
                             doorFrame.GetComponent<BoxCollider>().enabled = true;
                             door.SetActive(false);
-                            star.SetActive(true); //º° ÄÑ±â
-                            //°Ç¹°À» Åõ¸íÈ­, ¹® Å×µÎ¸®¸¦ Çü±¤, ¹®À» ¿¢Æ¼ºê Æú½º
+                            star.SetActive(true); //ï¿½ï¿½ ï¿½Ñ±ï¿½
+                            //ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­, ï¿½ï¿½ ï¿½×µÎ¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+
 
                             switchDown.Play();
-                            //¿©±â¿¡ Â÷´Ü±â ³»·Á°¡´ÂµíÇÑ È¿°úÀ½³Ö±â
-                            if(OVRInput.GetDown(OVRInput.Button.Three))
-                            {
-                                Debug.Log("³ª°¨");
-                                Application.Quit();
-                            }
+                     
+
+                            numberItemParents.SetActive(false);
+                            Quiz.SetActive(false);           
                         }
                     }
                 }
@@ -130,7 +125,7 @@ public class Items : MonoBehaviour
 
         if (letter.Count == 2)
         {
-            if(letter[1] == "¿¬" && letter[0] == "ÀÎ")
+            if(letter[1] == "ï¿½ï¿½" && letter[0] == "ï¿½ï¿½")
             {
                 Playercon.Screen.Play(); 
                 lockImg.SetActive(false);
@@ -140,7 +135,7 @@ public class Items : MonoBehaviour
                 Quiz.SetActive(true);
                 StarZero.GetComponent<Renderer>().material = redMat;
             }
-            else if (letter[0] == "¿¬" && letter[1] == "ÀÎ")
+            else if (letter[0] == "ï¿½ï¿½" && letter[1] == "ï¿½ï¿½")
             {
                 Playercon.Screen.Play();
                 lockImg.SetActive(false);
@@ -166,6 +161,7 @@ public class Items : MonoBehaviour
 
         if (number == "4")
         {
+            count = ShootLaser.count;
             StarZero.SetActive(false);
             numberZero.SetActive(true);
             StarOne.GetComponent<Renderer>().material = redMat;
@@ -183,11 +179,30 @@ public class Items : MonoBehaviour
             }
         }
 
-        if (number == "3")
+        if (number == "4")
         {
+            count = ShootLaser.count;
             StarOne.SetActive(false);
             numberOne.SetActive(true);
             StarTwo.GetComponent<Renderer>().material = redMat;
+        }
+        else if (number == "1")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
+        }
+        else if (number == "2")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
+        }
+        else if (number == "0")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
         }
     }
 
@@ -207,6 +222,33 @@ public class Items : MonoBehaviour
             StarTwo.SetActive(false);
             numberTwo.SetActive(true);
         }
+        else if(number == "1")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
+            StarOne.SetActive(true);
+            numberOne.SetActive(false);
+            StarTwo.GetComponent<Renderer>().material = normalMat;
+        }
+        else if (number == "4")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
+            StarOne.SetActive(true);
+            numberOne.SetActive(false);
+            StarTwo.GetComponent<Renderer>().material = normalMat;
+        }
+        else if (number == "0")
+        {
+            StarZero.SetActive(true);
+            numberZero.SetActive(false);
+            StarOne.GetComponent<Renderer>().material = normalMat;
+            StarOne.SetActive(true);
+            numberOne.SetActive(false);
+            StarTwo.GetComponent<Renderer>().material = normalMat;
+        }
     }
 
     public void NumberInput()
@@ -222,24 +264,14 @@ public class Items : MonoBehaviour
 
         if (number.Count == 2)
         {
-            if (number[1] == "2" && number[0] == "1")
+            if (number[1] == "4" && number[0] == "1")
             {
                 doorOpen = true;
             }
-            else if(number[0] == "2" && number[1] == "1")
+            else if(number[0] == "1" && number[1] == "4")
             {
                 doorOpen = true;
             }
         }
     } 
-
-    public void OnReTry()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
-
-    public void OnQuit()
-    {
-        Application.Quit();
-    }
 }
