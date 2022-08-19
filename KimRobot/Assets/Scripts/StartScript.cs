@@ -49,11 +49,7 @@ public class StartScript : MonoBehaviour
             SceneManager.LoadScene("MainGame");
             StopCoroutine(StartAnimationCo());
             //Trs[3].gameObject.SetActive(true);
-            if (GetComponent<StartScript>() != null)
-            {
-
-                GetComponent<StartScript>().StartPos();
-            }
+       
         }
     }
     public void StartPos()

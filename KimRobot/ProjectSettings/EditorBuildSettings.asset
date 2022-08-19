@@ -5,6 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/title.unity
+    guid: c43ce2338582583469d0f2f64bfe667b
+  - enabled: 1
+    path: Assets/Scenes/intro.unity
+    guid: c7236b7b403df0c439b0e2d5a660c4df
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -12,11 +18,14 @@ EditorBuildSettings:
     path: Assets/Scenes/GunAvataTest.unity
     guid: b2a4b718e8dda3b468be3c1a4b59513a
   - enabled: 1
-    path: Assets/Scenes/intro.unity
-    guid: 67657a605c2c6e5429c50b5ceb911343
-  - enabled: 1
     path: Assets/Scenes/MainGame.unity
-    guid: 1369587ebebf20347ae8e9561737c1b6
+    guid: 2d5cccb699952794990e7e8a8be27537
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 6b466ecb828fa0341a229ec2a6488d00, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 806eece2e04656c46a844ae472e3953a, type: 2}
