@@ -306,7 +306,9 @@ public class PlayerController : MonoBehaviour
         if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && isJump == false)                   //점프
         {
             Jump.Play();
-            rigi.AddForce(Vector3.up * 5, ForceMode.Impulse);
+
+            isJump = true;
+            rigi.AddForce(Vector3.up * 7, ForceMode.Impulse);
         }
        
         if (Input.GetMouseButtonUp(1))

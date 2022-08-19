@@ -12,10 +12,10 @@ public class Screen : MonoBehaviour
     public GameObject[] LockObj;
     public GameObject PhotoObj;
 
-    VRPlayerController PlayerController;
+    PlayerController PlayerController;
     private void Start()
     {
-        PlayerController = Player.GetComponent<VRPlayerController>();
+        PlayerController = Player.GetComponent<PlayerController>();
     }
 
     bool isIn = false;
@@ -64,7 +64,7 @@ public class Screen : MonoBehaviour
                 PhotoObj.SetActive(true);
             //스크린 활성화
         }
-        if (isIn&&(Player.transform.position.x > -9.72))      //밖으로 나왓나
+        if (isIn&&(Player.transform.position.x > -9))      //밖으로 나왓나
         {
             isIn = false;
             CloseDoor();

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -10,11 +11,14 @@ public class Timer : MonoBehaviour
 
     public TextMesh TimerText;
     public GameObject Player;
-    VRPlayerController PlayerController;
+    PlayerController PlayerController;
+    public GameObject GameOver;
+    public GameObject GameEnd;
+    public GameObject GameRetry;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerController = Player.GetComponent<VRPlayerController>();
+        PlayerController = Player.GetComponent<PlayerController>();
         StartCoroutine(Time());
     }
 
@@ -36,6 +40,14 @@ public class Timer : MonoBehaviour
         {
             PlayerController.TimerSound.Play();
             PlayerController.TimerSound2.Play();
+        }
+        if (minute==0&&second==0)
+        {
+            GameOver.SetActive(true);
+            GameEnd.SetActive(false);
+            GameRetry.SetActive(true);
+            PlayerController.enabled = false;
+            
         }
     }
     IEnumerator Time()

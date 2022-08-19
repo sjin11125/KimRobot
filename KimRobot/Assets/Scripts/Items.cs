@@ -33,6 +33,7 @@ public class Items : MonoBehaviour
     public Material glow;
     public bool doorOpen;
     public AudioSource switchDown;
+    public GameObject switchDownObj;
     public PlayerController player;
 
     private void Start()
@@ -90,7 +91,7 @@ public class Items : MonoBehaviour
 
         if (doorOpen)
         {
-            switchDown.Play();
+            switchDownObj.SetActive(true);
             //여기에 차단기 내려가는듯한 효과음넣기
             for (int i = 0; i < room.Length; i++)
             {
