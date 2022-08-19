@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartScript : MonoBehaviour
 {
     public GameObject PlayerObj;
-    public VRPlayerController Player;
+    public PlayerController Player;
     public GameObject StartPlayer;
 
 

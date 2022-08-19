@@ -135,7 +135,7 @@ public class LaserBeam
         }
         else if(hitInfo.collider.gameObject.tag == "Tatoo")
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<VRPlayerController>().isTatoo = true;
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().isTatoo = true;
             laserIndices.Add(hitInfo.point);
             UpdateLaser();
         }

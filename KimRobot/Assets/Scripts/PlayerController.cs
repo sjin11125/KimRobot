@@ -145,13 +145,13 @@ public class PlayerController : MonoBehaviour
         {
             screenin = true;
             BGM.Pause();
-            ScreenInto.Play();
+            ScreenDoor.Play();
         }
         else if ((transform.position.x > ScreenWall.transform.position.x) && screenin == true)
         {
             screenin = false;
             BGM.Play();
-            ScreenInto.Pause();
+            ScreenDoor.Pause();
     
         }
         if (OVRInput.GetDown(OVRInput.Button.PrimaryHandTrigger))

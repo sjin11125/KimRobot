@@ -69,6 +69,10 @@ public class ShootLaser : MonoBehaviour
             {
                 if (Red.activeSelf)
                 {
+                    if (GunPivot==null)
+                    {
+                        Debug.Log("건피봇 널");
+                    }
                     beam = new LaserBeam(GunPivot.transform.position, gameObject.transform.forward, material, "Red");                  
                 }
                 else if (Green.activeSelf)
@@ -121,7 +125,7 @@ public class ShootLaser : MonoBehaviour
         }
         if (Input.GetKeyDown("x")|| OVRInput.GetDown(OVRInput.Button.Two))
         {
-            if (PlayerController.Prism[1] == true)            //초록 프리즘을 얻었는가
+            if (PlayerController.Prism[0] == true)            //초록 프리즘을 얻었는가
             {
                 PlayerController.GunColor.Play();               //효과음 재생
                 if (Green.activeSelf)
